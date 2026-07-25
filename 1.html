@@ -10,7 +10,7 @@
     --bg2:#0d1015;
     --line:#eef1f5;
     --line-dim:#5a6472;
-    /* Mantendo a sua paleta original avermelhada elegante */
+    /* Paleta original mantida */
     --gold:#9D111B;
     --gold-dim:#790D15;
   }
@@ -182,61 +182,68 @@
 
     <svg id="suit-svg" viewBox="0 0 400 450" xmlns="http://www.w3.org/2000/svg">
       
-      <!-- ================= DETALHES INTERNOS (Costuras, Cinto) ================= -->
+      <!-- ================= DETALHES INTERNOS (Camisa, Calça) ================= -->
       <g class="suit-part">
-        <!-- Pences (Costuras frontais para caimento Slim) -->
-        <path class="draw dim" d="M145,190 Q150,260 145,350"/>
-        <path class="draw dim" d="M255,190 Q250,260 255,350"/>
-        
-        <!-- Cinto e Fivela (Visto pois o terno está aberto) -->
-        <path class="draw dim" d="M168,325 L232,325"/>
-        <path class="draw dim" d="M168,338 L232,338"/>
-        <rect class="draw gold" x="190" y="321" width="20" height="21" rx="2"/>
-        
         <!-- Gola da Camisa -->
-        <path class="draw" d="M175,65 L200,90 L225,65"/>
-      </g>
-
-      <!-- ================= ESTRUTURA DO TERNO ================= -->
-      <g class="suit-part">
-        <!-- Ombros e Silhueta Externa (Cintura afunilada) -->
-        <path class="draw" id="outlineL" d="M 180,60 L 140,65 L 100,85 C 110,160 120,260 115,410"/>
-        <path class="draw" id="outlineR" d="M 220,60 L 260,65 L 300,85 C 290,160 280,260 285,410"/>
-
-        <!-- Linha Interna do Braço -->
-        <path class="draw" d="M 115,145 C 105,250 90,390 90,410"/>
-        <path class="draw" d="M 285,145 C 295,250 310,390 310,410"/>
-
-        <!-- Bordas Internas do Blazer (Retas, indicando que está aberto) -->
-        <path class="draw" d="M 170,70 L 165,240 L 168,410"/>
-        <path class="draw" d="M 230,70 L 235,240 L 232,410"/>
-
-        <!-- Peak Lapels (Lapelas pontudas e anguladas) -->
-        <path class="draw" d="M 170,70 L 145,155 L 115,140 L 165,240"/>
-        <path class="draw" d="M 230,70 L 255,155 L 285,140 L 235,240"/>
+        <path class="draw" d="M165,50 L200,90 L235,50"/>
         
-        <!-- Bainha Inferior -->
-        <path class="draw" d="M 115,410 L 168,410"/>
-        <path class="draw" d="M 285,410 L 232,410"/>
+        <!-- Linhas da Calça (Visíveis porque o terno está aberto embaixo) -->
+        <path class="draw dim" d="M200,335 L200,380"/> <!-- Braguilha -->
+        <path class="draw dim" d="M200,380 L175,450"/> <!-- Costura interna esq -->
+        <path class="draw dim" d="M200,380 L225,450"/> <!-- Costura interna dir -->
+        <path class="draw dim" d="M150,355 L150,450"/> <!-- Vinco esq -->
+        <path class="draw dim" d="M250,355 L250,450"/> <!-- Vinco dir -->
       </g>
 
-      <!-- ================= ACESSÓRIOS (Gravata, Bolsos) ================= -->
+      <!-- ================= ESTRUTURA DO BLAZER (Baseada na imagem_aa2d27.png) ================= -->
       <g class="suit-part">
-        <!-- Gravata Slim -->
-        <path class="draw gold" d="M 193,90 L 207,90 L 205,105 L 195,105 Z"/>
-        <path class="draw gold" d="M 195,105 L 205,105 L 209,290 L 200,315 L 191,290 Z"/>
+        <!-- Ombros e Braços (Mãos nos bolsos, silhueta "V") -->
+        <path class="draw" id="outlineL" d="M 165,50 L 115,65 C 80,85 55,180 65,260 C 70,300 85,340 100,350"/>
+        <path class="draw" id="outlineR" d="M 235,50 L 285,65 C 320,85 345,180 335,260 C 330,300 315,340 300,350"/>
+        
+        <!-- Braço Interno -->
+        <path class="draw" d="M 100,350 C 110,300 135,240 140,165"/>
+        <path class="draw" d="M 300,350 C 290,300 265,240 260,165"/>
+        
+        <!-- Vinco de dobra do Cotovelo -->
+        <path class="draw dim" d="M 130,240 Q 140,245 145,240"/>
+        <path class="draw dim" d="M 270,240 Q 260,245 255,240"/>
 
-        <!-- Bolso do Peito com Lenço (Pocket Square) -->
-        <path class="draw dim" d="M 125,170 L 150,165"/>
-        <path class="draw gold" d="M 130,168 L 135,152 L 142,165"/>
+        <!-- Lapelas (Tipo Notch / Entalhe clássico) -->
+        <!-- O lado esquerdo sobrepõe o direito para abotoar -->
+        <path class="draw" d="M 165,50 L 140,120 L 120,115 L 145,160 L 200,260"/>
+        <path class="draw" d="M 235,50 L 260,120 L 280,115 L 255,160 L 200,260"/>
 
-        <!-- Bolsos com Aba na Cintura -->
-        <path class="draw dim" d="M 118,290 L 155,295 L 155,305 L 115,300 Z"/>
-        <path class="draw dim" d="M 282,290 L 245,295 L 245,305 L 285,300 Z"/>
+        <!-- Bordas frontais do Blazer (Abrindo para as mãos nos bolsos) -->
+        <path class="draw" d="M 200,260 C 190,310 160,370 115,370 L 100,350"/>
+        <path class="draw" d="M 200,260 C 210,310 240,370 285,370 L 300,350"/>
+
+        <!-- Vincos de Tensão (O famoso "X" no botão de um terno slim) -->
+        <path class="draw dim" d="M 200,260 Q 170,240 155,225"/>
+        <path class="draw dim" d="M 200,260 Q 230,240 245,225"/>
+        <path class="draw dim" d="M 200,260 Q 185,280 175,310"/>
+        <path class="draw dim" d="M 200,260 Q 215,280 225,310"/>
+      </g>
+
+      <!-- ================= ACESSÓRIOS E DETALHES ================= -->
+      <g class="suit-part">
+        <!-- O Botão Fechado -->
+        <circle cx="200" cy="260" r="3" class="draw gold"/>
+
+        <!-- Gravata (Some antes do botão) -->
+        <path class="draw gold" d="M 193,88 L 207,88 L 205,108 L 195,108 Z"/>
+        <path class="draw gold" d="M 195,108 L 205,108 L 210,240 L 200,255 L 190,240 Z"/>
+
+        <!-- Bolso do peito com Lenço (Pocket Square) -->
+        <path class="draw dim" d="M 120,150 L 145,145"/>
+        <path class="draw gold" d="M 125,148 L 128,137 L 140,135 L 142,146"/>
+
+        <!-- Bolsos Flap (Abas) -->
+        <path class="draw dim" d="M 95,265 L 135,260 L 135,275 L 95,280 Z"/>
+        <path class="draw dim" d="M 305,265 L 265,260 L 265,275 L 305,280 Z"/>
       </g>
 
       <!-- ================= O MONOGRAMA "H" ================= -->
-      <!-- Estas linhas nascem após o terno desaparecer -->
       <path class="draw h-shape gold" id="hBarL" d="M 165,100 L 165,360"/>
       <path class="draw h-shape gold" id="hBarR" d="M 235,100 L 235,360"/>
       <path class="draw h-shape gold" id="crossbar" d="M 165,230 L 235,230"/>
@@ -360,10 +367,9 @@
 
   // ---------------- TIMELINE DE ANIMAÇÃO ----------------
   
-  // 1. Desenha as linhas mestras (Ombros, braços, blazer aberto)
+  // 1. Desenha as linhas mestras
   schedule(function(){ 
     allPaths.forEach(function(p, i) {
-      // Cria um efeito em cascata sutil para o desenho
       setTimeout(function(){ trigger(p); }, i * 60);
     });
   }, 400);
