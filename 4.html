@@ -1,0 +1,400 @@
+        .timeline { position: relative; padding-left: 28px; margin-top: 30px; }
+        .timeline::before {
+            content: ''; position: absolute; left: 7px; top: 10px; bottom: 10px; width: 1px;
+            background: linear-gradient(to bottom, var(--red-main), rgba(193,18,31,0.05));
+        }
+        .timeline-item { position: relative; margin-bottom: 35px; }
+        .timeline-item::before {
+            content: ''; position: absolute; left: -24px; top: 6px; width: 7px; height: 7px;
+            background: var(--bg-deep); border: 1px solid var(--red-main); transform: rotate(45deg);
+            box-shadow: 0 0 10px rgba(193,18,31,0.5);
+        }
+        .timeline-item h4 { font-family: var(--font-body); color: #fff; font-size: 15px; margin-bottom: 8px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+        .timeline-item p { font-size: 14px; color: var(--white-sec); line-height: 1.6; font-weight: 300; }
+
+        /* === 3. COPY AGRESSIVA E PROFUNDA === */
+        .story-section p { font-size: 15px; color: var(--white-sec); margin-bottom: 24px; line-height: 1.7; font-weight: 300; }
+        .story-section p strong { color: #fff; font-weight: 500; }
+        
+        .highlight-box {
+            background: transparent; border-left: 2px solid var(--red-main);
+            padding: 20px 24px; margin: 40px 0;
+            font-style: italic; color: #d1d1d1; font-size: 16px; line-height: 1.6; font-weight: 300;
+            position: relative;
+        }
+
+        .target-list { list-style: none; padding: 0; margin-top: 32px; border-top: 1px solid var(--border-subtle); padding-top: 32px; }
+        .target-list li { position: relative; padding-left: 28px; margin-bottom: 20px; font-size: 14px; color: var(--white-sec); line-height: 1.6; font-weight: 300; }
+        .target-list li::before {
+            content: ''; position: absolute; left: 0; top: 8px; width: 12px; height: 1px; background: var(--red-main);
+        }
+
+        /* === 4. MÓDULOS MINIMALISTAS === */
+        .card {
+            background: transparent;
+            border: 1px solid var(--border-subtle);
+            padding: 32px 24px; margin-bottom: 16px;
+            position: relative; overflow: hidden; transition: border-color 0.4s ease;
+        }
+        .card:hover { border-color: rgba(193,18,31,0.4); }
+        .card h3 { font-family: var(--font-body); font-size: 17px; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; margin-bottom: 12px; display: flex; flex-direction: column; align-items: flex-start; color: #fff; }
+        .card p { font-size: 14px; color: var(--white-sec); line-height: 1.6; margin-bottom: 20px; font-weight: 300; }
+        .card-insight { font-size: 12px; color: #777; border-top: 1px solid var(--border-subtle); padding-top: 16px; text-transform: uppercase; letter-spacing: 0.5px; }
+
+        /* === 5. BASE CIENTÍFICA === */
+        .science-box {
+            text-align: center; padding: 50px 24px;
+            background: #060606;
+            border: 1px solid var(--border-subtle); position: relative;
+        }
+        .science-box p { font-size: 14px; color: var(--white-sec); line-height: 1.7; font-weight: 300; margin-top: 16px; }
+
+        /* === 6. FRASE DE IMPACTO === */
+        .emotional-quote { text-align: center; padding: 20px 0; margin: 40px 0; }
+        .emotional-quote h2 { font-size: 46px; line-height: 1; color: #fff; margin-bottom: 16px; }
+        .emotional-quote p { font-size: 14px; color: var(--white-sec); font-weight: 400; text-transform: uppercase; letter-spacing: 2px; }
+
+        /* === 7. OFERTA PRINCIPAL === */
+        .offer-box {
+            background: #080808; border: 1px solid var(--red-main);
+            padding: 48px 24px; text-align: center; position: relative;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+        .offer-box::before {
+            content: 'ACESSO RESTRITO LIBERADO'; position: absolute; top: -10px; left: 50%; transform: translateX(-50%);
+            background: var(--bg-deep); border: 1px solid var(--red-main); color: var(--red-main); font-size: 10px; font-weight: 600;
+            padding: 4px 16px; letter-spacing: 2px; text-transform: uppercase;
+        }
+        .price-container { margin-bottom: 32px; display: flex; flex-direction: column; gap: 8px; }
+        .price-old { font-size: 14px; text-decoration: line-through; color: #555; text-transform: uppercase; letter-spacing: 1px;}
+        .price-new { font-size: 56px; color: #fff; font-family: var(--font-heading); line-height: 1; }
+        
+        .timer-wrapper { margin-top: 32px; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+        .timer-label { font-size: 11px; color: #666; text-transform: uppercase; letter-spacing: 2px; }
+        .timer-boxes { display: flex; align-items: center; gap: 12px; }
+        .timer-box {
+            background: transparent; border-bottom: 1px solid var(--red-main);
+            padding: 8px 12px; font-family: var(--font-heading); font-size: 28px; color: #fff;
+        }
+        .timer-sep { color: #444; font-size: 20px; font-weight: 300; }
+
+        /* GARANTIA MINIMALISTA */
+        .guarantee { margin-top: 40px; padding-top: 32px; border-top: 1px solid var(--border-subtle); text-align: left;}
+        .guarantee h3 { font-size: 16px; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+        .guarantee p { font-size: 13px; color: var(--white-sec); line-height: 1.6; font-weight: 300; }
+
+        /* === 8. FAQ === */
+        .faq-item { border-bottom: 1px solid var(--border-subtle); }
+        .faq-question {
+            width: 100%; text-align: left; background: none; border: none;
+            padding: 24px 0; font-size: 14px; font-family: var(--font-body); text-transform: uppercase; letter-spacing: 0.5px;
+            color: #ccc; font-weight: 500; cursor: pointer;
+            display: flex; justify-content: space-between; align-items: center; outline: none;
+        }
+        .faq-icon { color: var(--red-main); font-size: 18px; transition: transform 0.4s ease; font-weight: 300; }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.5s ease; font-size: 14px; color: var(--white-sec); line-height: 1.7; font-weight: 300; }
+        .faq-answer p { padding-bottom: 24px; }
+        .faq-item.active .faq-answer { max-height: 250px; }
+        .faq-item.active .faq-icon { transform: rotate(45deg); }
+
+        /* === 9. FOOTER INSTITUCIONAL === */
+        .footer { text-align: center; padding: 40px 0 20px; border-top: 1px solid var(--border-subtle); margin-top: 80px; }
+        .footer p { font-size: 11px; color: #444; line-height: 1.6; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
+        .footer a { color: #666; text-decoration: none; transition: color 0.3s; }
+        .footer a:hover { color: var(--white-main); }
+
+        /* === STICKY CTA MINIMALISTA === */
+        .sticky-cta {
+            position: fixed; bottom: 0; left: 0; width: 100%;
+            background: rgba(3, 3, 3, 0.95); backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(193, 18, 31, 0.1); padding: 16px 24px;
+            z-index: 100; transform: translateY(100%); transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .sticky-cta.visible { transform: translateY(0); }
+        .sticky-container { max-width: 450px; margin: 0 auto; }
+
+        @media (min-width: 501px) {
+            .wrapper { max-width: 500px; }
+            .sticky-cta {
+                left: 50%; transform: translate(-50%, 100%); max-width: 500px;
+                border-left: 1px solid var(--border-subtle); border-right: 1px solid var(--border-subtle);
+            }
+            .sticky-cta.visible { transform: translate(-50%, 0); }
+        }
+    </style>
+    <!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '4635192300140692');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=4635192300140692&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+</head>
+<body>
+
+    <div class="top-bar">
+        <div class="pulse-dot"></div> ATENÇÃO: Vagas com desconto liberadas
+    </div>
+
+    <div class="ambient-bg"><div class="ambient-glow"></div></div>
+    <div class="particles-container">
+        <div class="particle p1">◆</div>
+        <div class="particle p2">+</div>
+        <div class="particle p3">▲</div>
+        <div class="particle p4">●</div>
+        <div class="particle p5">◆</div>
+        <div class="particle p6">+</div>
+    </div>
+    <div class="cinematic-grain"></div>
+
+    <div class="wrapper">
+        
+        <section class="hero scroll-reveal active">
+            <h1>
+                <span class="white">Código</span>
+                <span class="red">da Atração</span>
+            </h1>
+            <p class="subheadline">A anatomia silenciosa do desejo. Decodifique os sinais que elas tentam esconder, assuma o controle da dinâmica e torne-se a única opção viável.</p>
+            
+            <a href="#oferta" class="btn">
+                Desbloquear Acesso
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </a>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <section class="scroll-reveal delay-1">
+            <h2 class="section-title" style="font-size: 32px; text-align: left;">A Arquitetura da <br><span>Transformação</span></h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h4>Fase 1: Desconstrução</h4>
+                    <p>Você elimina instantaneamente a necessidade de validação. Sua linguagem corporal passa a comunicar alto valor antes mesmo da primeira palavra.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>Fase 2: Calibração</h4>
+                    <p>O subtexto se torna claro. Você aprende a ler microexpressões e descobre exatamente quando recuar para gerar falta, e quando avançar com precisão cirúrgica.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>Fase 3: Magnetismo</h4>
+                    <p>O esforço desaparece. A criação de tensão se torna instintiva, gerando conversas profundas e uma química impossível de ser ignorada.</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <section class="story-section scroll-reveal">
+            <h2 class="section-title">A verdade brutal: <br><span>O desejo não se negocia</span></h2>
+            <p>A imensa maioria dos homens falha miseravelmente porque tenta <strong>convencer</strong> uma mulher a sentir atração. Eles usam a lógica. Eles sufocam com mensagens. Demonstram interesse e disponibilidade quando deveriam demonstrar mistério.</p>
+            <p>O resultado? Você vira apenas mais um na tela do celular dela, caminhando a passos largos para a zona de amizade.</p>
+            
+            <div class="highlight-box">
+                "A atração não é uma escolha consciente. É uma resposta biológica autônoma a estímulos específicos. Quem domina o estímulo, controla a resposta."
+            </div>
+            
+            <p>O <strong>Código da Atração</strong> não é sobre frases feitas ou joguinhos manipulativos. É sobre entender a engenharia por trás do desejo feminino e alinhar a sua presença para que ela invista na interação.</p>
+
+            <ul class="target-list scroll-reveal">
+                <li>Pare de tentar manter o assunto vivo e aprenda a usar o silêncio a seu favor.</li>
+                <li>Identifique a janela exata de oportunidade antes que ela se feche para sempre.</li>
+                <li>Construa uma presença masculina polarizadora, autêntica e impossível de ler de primeira.</li>
+                <li>Corte investimentos de tempo em interações sem futuro e foque naquelas que já estão ganhas.</li>
+            </ul>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <section class="features scroll-reveal">
+            <h2 class="section-title">O que você vai <br><span>Dominar</span></h2>
+            
+            <div class="card">
+                <h3>
+                    <svg class="svg-icon" viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+                    Módulo 1: Arquitetura de Valor
+                </h3>
+                <p>Como blindar seu jogo interno e eliminar o comportamento carente que sabota suas chances logo nos 5 minutos iniciais da interação.</p>
+                <div class="card-insight">O erro fatal de postura que destrói sua autoridade instantaneamente.</div>
+            </div>
+            
+            <div class="card">
+                <h3>
+                    <svg class="svg-icon" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                    Módulo 2: Decodificação
+                </h3>
+                <p>O mapeamento definitivo para ler quando ela está interessada de verdade, quando está jogando e o momento exato de escalar a situação.</p>
+                <div class="card-insight">A "Regra do Contato Visual" que altera todo o balanço de poder.</div>
+            </div>
+            
+            <div class="card">
+                <h3>
+                    <svg class="svg-icon" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                    Módulo 3: Tensão e Polaridade
+                </h3>
+                <p>A transição exata de uma conversa monótona (lógica) para uma interação visceral (emocional), criando uma conexão magnética em minutos.</p>
+                <div class="card-insight">Estruturas precisas para gerar tensão por mensagem sem soar desesperado.</div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <section class="science-box scroll-reveal">
+            <svg class="svg-icon" style="width:40px; height:40px; margin-bottom: 20px;" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path><path d="M2 12h20"></path></svg>
+            <h2 class="section-title" style="font-size: 32px; margin-bottom: 16px;">Engenharia <br><span>Comportamental</span></h2>
+            <p>O desejo não ocorre por acaso. Ele responde a gatilhos evolutivos enraizados no subconsciente. Ao decifrar esse código, você deixa de "tentar a sorte" e passa a operar com previsibilidade cirúrgica.</p>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <section class="emotional-quote scroll-reveal">
+            <h2>O Jogo é Real.</h2>
+            <p>A única diferença é que a partir de hoje, você dita as regras.</p>
+        </section>
+
+        <section class="offer-box scroll-reveal" id="oferta">
+            <div class="price-container">
+                <span class="price-old">De R$ 47,90 por</span>
+                <span class="price-new">R$ 14,70</span>
+            </div>
+
+            <a href="https://pay.kirvano.com/cd4f62e3-2352-47aa-b0e0-e863d11d05e2" class="btn">
+                Confirmar Minha Vaga
+            </a>
+
+            <div class="timer-wrapper">
+                <div class="timer-label">Acesso prioritário expira em:</div>
+                <div class="timer-boxes">
+                    <div class="timer-box" id="t-hours">02</div><span class="timer-sep">:</span>
+                    <div class="timer-box" id="t-minutes">14</div><span class="timer-sep">:</span>
+                    <div class="timer-box" id="t-seconds">39</div>
+                </div>
+            </div>
+
+            <div class="guarantee">
+                <h3>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--red-main)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                    Garantia Blindada
+                </h3>
+                <p>Você tem <strong>7 dias</strong> para colocar o método à prova. Se você aplicar a engenharia ensinada e achar que não transformou a sua dinâmica social, solicite o reembolso. O risco financeiro é integralmente nosso.</p>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <section class="faq scroll-reveal">
+            <h2 class="section-title">Dúvidas <br><span>Frequentes</span></h2>
+            
+            <div class="faq-item">
+                <button class="faq-question">O acesso é imediato? <span class="faq-icon">+</span></button>
+                <div class="faq-answer"><p>Absolutamente. Após a confirmação do pagamento via Pix ou Cartão, suas credenciais de acesso são enviadas automaticamente para o seu e-mail.</p></div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">Qual o formato do conteúdo? <span class="faq-icon">+</span></button>
+                <div class="faq-answer"><p>É um guia prático 100% digital. Projetado para consumo anônimo e ágil no seu celular, tablet ou computador.</p></div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">Funciona para perfis introvertidos? <span class="faq-icon">+</span></button>
+                <div class="faq-answer"><p>O método não obriga você a encenar extroversão. Ele ensina a usar a sua natureza observadora para construir mistério e tensão silenciosa — a arma mais forte dos introvertidos.</p></div>
+            </div>
+        </section>
+
+        <footer class="footer scroll-reveal">
+            <p>Homem De Presença © 2024. Todos os direitos reservados.</p>
+            <p>Este site não faz parte do site do Facebook ou da Meta Platforms, Inc. Além disso, este site NÃO é endossado pelo Facebook de nenhuma maneira.</p>
+            <p><a href="https://HomemDePresenca.github.io/TermosdeUso">Termos de Uso</a> | <a href="https://HomemDePresenca.github.io/PoliticadePrivacidade">Política de Privacidade</a></p>
+        </footer>
+
+    </div>
+
+    <div class="sticky-cta" id="stickyCta">
+        <div class="sticky-container">
+            <a href="#oferta" class="btn" style="padding: 16px; font-size: 14px;">Confirmar Vaga Restrita</a>
+        </div>
+    </div>
+
+    <script>
+        // TIMER LOGIC
+        function initCountdown() {
+            const hBox = document.getElementById('t-hours');
+            const mBox = document.getElementById('t-minutes');
+            const sBox = document.getElementById('t-seconds');
+            const storageKey = 'codigo_atracao_timer_pro';
+            const duration = 2 * 60 * 60 * 1000 + 14 * 60 * 1000 + 39 * 1000;
+
+            let targetTime = localStorage.getItem(storageKey);
+            if (!targetTime || new Date().getTime() > parseInt(targetTime, 10)) {
+                targetTime = new Date().getTime() + duration;
+                localStorage.setItem(storageKey, targetTime);
+            } else { targetTime = parseInt(targetTime, 10); }
+
+            function updateTimer() {
+                let diff = targetTime - new Date().getTime();
+                if (diff <= 0) {
+                    targetTime = new Date().getTime() + duration;
+                    localStorage.setItem(storageKey, targetTime);
+                    diff = duration;
+                }
+                const hours = Math.floor(diff / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+                const format = (num) => String(num).padStart(2, '0');
+
+                if(hBox) hBox.textContent = format(hours);
+                if(mBox) mBox.textContent = format(minutes);
+                if(sBox) sBox.textContent = format(seconds);
+            }
+            updateTimer(); setInterval(updateTimer, 1000);
+        }
+
+        // SCROLL REVEAL (Mais responsivo)
+        const revealElements = document.querySelectorAll('.scroll-reveal');
+        const revealOnScroll = () => {
+            const windowHeight = window.innerHeight;
+            const revealPoint = 50;
+            revealElements.forEach(el => {
+                const revealTop = el.getBoundingClientRect().top;
+                if (revealTop < windowHeight - revealPoint) {
+                    el.classList.add('active');
+                }
+            });
+        };
+
+        // STICKY CTA
+        const stickyCta = document.getElementById('stickyCta');
+        const offerSection = document.getElementById('oferta');
+        const handleStickyVisibility = () => {
+            const offerTop = offerSection.getBoundingClientRect().top;
+            if (window.scrollY > 500 && offerTop > window.innerHeight) {
+                stickyCta.classList.add('visible');
+            } else {
+                stickyCta.classList.remove('visible');
+            }
+        };
+
+        // FAQ ACCORDION
+        const faqItems = document.querySelectorAll('.faq-item');
+        faqItems.forEach(item => {
+            const btn = item.querySelector('.faq-question');
+            btn.addEventListener('click', () => {
+                const isActive = item.classList.contains('active');
+                faqItems.forEach(i => i.classList.remove('active'));
+                if (!isActive) item.classList.add('active');
+            });
+        });
+
+        // INIT
+        window.addEventListener('scroll', () => { revealOnScroll(); handleStickyVisibility(); });
+        window.addEventListener('load', () => { initCountdown(); revealOnScroll(); });
+    </script>
+</body>
+</html>
