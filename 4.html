@@ -1,3 +1,186 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Código da Atração | A Ciência do Desejo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* RESET & BASE STYLES */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        :root {
+            --bg-deep: #030303;
+            --bg-card: #080808;
+            --red-main: #C1121F;
+            --red-dusk: #7A0A12;
+            --red-glow: #E63946;
+            --white-main: #F5F5F5;
+            --white-sec: #8A8A8A;
+            --font-heading: 'Bebas Neue', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --border-subtle: rgba(255, 255, 255, 0.04);
+        }
+
+        html {
+            scroll-behavior: smooth;
+            background-color: var(--bg-deep);
+            color: var(--white-main);
+            font-family: var(--font-body);
+            overflow-x: hidden;
+        }
+
+        body {
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            padding-top: 40px; 
+        }
+
+        /* VINHETA & PROFUNDIDADE */
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: -1;
+            background: radial-gradient(circle at center, transparent 20%, rgba(0,0,0,0.95) 100%);
+        }
+
+        /* BACKGROUND VIVO MINIMALISTA */
+        .ambient-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -3;
+            background: radial-gradient(circle at 50% 10%, #0d0203 0%, var(--bg-deep) 70%);
+        }
+
+        .ambient-glow {
+            position: absolute;
+            top: -15%; left: 50%;
+            width: 120vw; height: 50vh;
+            background: radial-gradient(ellipse, rgba(193, 18, 31, 0.05) 0%, transparent 70%);
+            pointer-events: none;
+            animation: drift 20s ease-in-out infinite alternate;
+        }
+
+        @keyframes drift {
+            0% { transform: translate(-50%, 0) scale(1); }
+            100% { transform: translate(-48%, 2%) scale(1.05); }
+        }
+
+        /* PARTÍCULAS GEOMÉTRICAS MINIMALISTAS */
+        .particles-container { position: fixed; inset: 0; z-index: -2; overflow: hidden; pointer-events: none; }
+        .particle {
+            position: absolute; color: var(--red-main); opacity: 0;
+            font-family: monospace; font-size: 10px;
+            animation: floatSymbol infinite linear;
+        }
+        .p1 { left: 15%; animation-duration: 25s; font-size: 12px; animation-delay: 0s; }
+        .p2 { left: 85%; animation-duration: 30s; font-size: 14px; animation-delay: 4s; }
+        .p3 { left: 45%; animation-duration: 28s; font-size: 10px; animation-delay: 8s; opacity: 0.05;}
+        .p4 { left: 75%; animation-duration: 35s; font-size: 12px; animation-delay: 2s; }
+        .p5 { left: 20%; animation-duration: 32s; font-size: 14px; animation-delay: 12s; }
+        .p6 { left: 60%; animation-duration: 22s; font-size: 10px; animation-delay: 6s; }
+
+        @keyframes floatSymbol {
+            0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }
+            20% { opacity: 0.07; }
+            80% { opacity: 0.07; }
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+        }
+
+        .cinematic-grain {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1; opacity: 0.03; pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* LAYOUT GERAL */
+        .wrapper {
+            max-width: 500px; margin: 0 auto; padding: 0 24px 120px 24px; position: relative;
+        }
+
+        h1, h2, h3 { font-family: var(--font-heading); text-transform: uppercase; letter-spacing: 1.5px; }
+
+        .section-divider {
+            width: 1px; height: 60px; margin: 60px auto;
+            background: linear-gradient(to bottom, transparent, rgba(193,18,31,.4), transparent);
+        }
+
+        .section-title { font-size: 38px; text-align: center; margin-bottom: 24px; color: var(--white-main); line-height: 1.1; }
+        .section-title span { color: var(--red-main); }
+        .text-center { text-align: center; }
+
+        /* SVG ICONS */
+        .svg-icon {
+            stroke: var(--red-main);
+            stroke-width: 1.5;
+            fill: none;
+            width: 28px;
+            height: 28px;
+            margin-bottom: 12px;
+        }
+
+        /* ANIMAÇÕES */
+        .scroll-reveal { opacity: 0; transform: translateY(25px); transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1); }
+        .scroll-reveal.active { opacity: 1; transform: translateY(0); }
+        .delay-1 { transition-delay: 0.15s; }
+
+        /* === 0. URGENCY BAR === */
+        .top-bar {
+            position: fixed; top: 0; left: 0; width: 100%;
+            background: rgba(10, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(193, 18, 31, 0.2);
+            color: #d1d1d1; text-align: center; font-size: 11px; font-weight: 500;
+            padding: 12px 20px; z-index: 1000; letter-spacing: 1px; text-transform: uppercase;
+            display: flex; justify-content: center; align-items: center; gap: 10px;
+        }
+        .pulse-dot {
+            width: 8px; height: 8px; background-color: var(--red-main); border-radius: 50%;
+            box-shadow: 0 0 8px var(--red-main);
+            animation: pulse-dot 1.5s infinite alternate;
+        }
+        @keyframes pulse-dot { 0% { opacity: 0.4; transform: scale(0.8); } 100% { opacity: 1; transform: scale(1.2); } }
+
+        /* === 1. HERO SECTION === */
+        .hero { padding: 60px 0 20px; text-align: center; }
+        .hero h1 { font-size: 64px; line-height: 0.85; margin-bottom: 24px; letter-spacing: 2px; }
+        .hero h1 span.white { display: block; color: #fff; }
+        .hero h1 span.red { display: block; color: var(--red-main); }
+        
+        .hero .subheadline { 
+            font-size: 15px; color: var(--white-sec); max-width: 360px; 
+            margin: 0 auto 40px; line-height: 1.6; font-weight: 300;
+        }
+
+        /* BOTÃO GLOBAL MINIMALISTA E AGRESSIVO */
+        .btn {
+            display: flex; justify-content: center; align-items: center; gap: 12px;
+            width: 100%; background: var(--red-main);
+            color: #fff; font-size: 16px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px;
+            padding: 22px; border-radius: 4px; border: none; cursor: pointer; text-decoration: none; text-align: center;
+            box-shadow: 0 10px 30px rgba(193, 18, 31, 0.15); position: relative; overflow: hidden; transition: all 0.4s ease;
+        }
+        .btn:hover { background: #d61826; box-shadow: 0 15px 40px rgba(193, 18, 31, 0.25); transform: translateY(-2px); }
+        .btn::before {
+            content: ''; position: absolute; top: 0; left: -150%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transform: skewX(-25deg); animation: shine 4s infinite;
+        }
+        @keyframes shine { 0% { left: -150%; } 20%, 100% { left: 150%; } }
+        .btn:active { transform: scale(0.98); }
+
+        /* === 2. TIMELINE (ARQUITETURA DA TRANSFORMAÇÃO) === */
         .timeline { position: relative; padding-left: 28px; margin-top: 30px; }
         .timeline::before {
             content: ''; position: absolute; left: 7px; top: 10px; bottom: 10px; width: 1px;
