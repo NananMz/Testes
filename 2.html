@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Código da Atração | O Jogo Revelado</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* RESET & BASE STYLES */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        :root {
+            --bg-deep: #050505;
+            --bg-card: #0a0a0a;
+            --red-main: #C1121F;
+            --red-dusk: #8A1018;
+            --red-glow: #E63946;
+            --white-main: #F5F5F5;
+            --white-sec: #A3A3A3;
+            --font-heading: 'Bebas Neue', sans-serif;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            background-color: var(--bg-deep);
+            color: var(--white-main);
+            font-family: var(--font-body);
+            overflow-x: hidden;
+        }
+
+        body {
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            padding-top: 40px; /* Espaço para a topbar */
+        }
+
+        /* VINHETA & PROFUNDIDADE */
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: -1;
+            background: radial-gradient(circle at center, transparent 35%, rgba(0,0,0,.85) 100%);
+        }
+
+        /* BACKGROUND VIVO */
+        .ambient-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -3;
+            background: radial-gradient(circle at 50% 30%, #110507 0%, var(--bg-deep) 80%);
+        }
+
+        .ambient-glow {
+            position: absolute;
+            top: -10%; left: 50%;
+            width: 150vw; height: 60vh;
+            background: radial-gradient(circle, rgba(193, 18, 31, 0.08) 0%, transparent 60%);
+            pointer-events: none;
+            animation: drift 15s ease-in-out infinite alternate;
+        }
+
+        @keyframes drift {
+            0% { transform: translate(-50%, 0) scale(1); }
+            100% { transform: translate(-48%, 5%) scale(1.15); }
+        }
+
+        /* PARTÍCULAS TEMÁTICAS */
+        .particles-container { position: fixed; inset: 0; z-index: -2; overflow: hidden; pointer-events: none; }
+        .particle {
+            position: absolute; color: var(--red-main); opacity: 0;
+            filter: blur(2px) drop-shadow(0 0 8px rgba(193,18,31,0.6));
+            animation: floatSymbol infinite linear;
+        }
+        .p1 { left: 15%; animation-duration: 18s; font-size: 28px; animation-delay: 0s; }
+        .p2 { left: 85%; animation-duration: 24s; font-size: 22px; animation-delay: 4s; }
+        .p3 { left: 45%; animation-duration: 20s; font-size: 34px; animation-delay: 8s; filter: blur(4px); }
+        .p4 { left: 75%; animation-duration: 22s; font-size: 18px; animation-delay: 2s; }
+        .p5 { left: 20%; animation-duration: 26s; font-size: 26px; animation-delay: 12s; }
+        .p6 { left: 60%; animation-duration: 19s; font-size: 20px; animation-delay: 6s; }
+
+        @keyframes floatSymbol {
+            0% { transform: translateY(110vh) rotate(0deg) scale(0.8); opacity: 0; }
+            15% { opacity: 0.15; }
+            85% { opacity: 0.15; }
+            100% { transform: translateY(-10vh) rotate(360deg) scale(1.2); opacity: 0; }
+        }
+
+        .cinematic-grain {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1; opacity: 0.05; pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* LAYOUT GERAL */
+        .wrapper {
+            max-width: 500px; margin: 0 auto; padding: 0 24px 120px 24px; position: relative;
+        }
+
+        h1, h2, h3 { font-family: var(--font-heading); text-transform: uppercase; letter-spacing: 1px; }
+
+        .section-divider {
+            width: 100px; height: 1px; margin: 60px auto;
+            background: linear-gradient(90deg, transparent, rgba(193,18,31,.5), transparent);
+        }
+
+        .section-title { font-size: 36px; text-align: center; margin-bottom: 32px; color: var(--white-main); text-shadow: 0 4px 12px rgba(0,0,0,0.5); }
+        .section-title span { color: var(--red-main); }
+        .text-center { text-align: center; }
+
+        /* ANIMAÇÕES */
+        .scroll-reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
+        .scroll-reveal.active { opacity: 1; transform: translateY(0); }
+        .delay-1 { transition-delay: 0.1s; } .delay-2 { transition-delay: 0.2s; }
+        .delay-3 { transition-delay: 0.3s; } .delay-4 { transition-delay: 0.4s; }
+
+        /* === 0. URGENCY BAR === */
+        .top-bar {
+            position: fixed; top: 0; left: 0; width: 100%;
+            background: var(--red-main);
+            color: #fff; text-align: center; font-size: 13px; font-weight: 600;
+            padding: 10px 20px; z-index: 1000; letter-spacing: 0.5px;
+            box-shadow: 0 2px 15px rgba(193, 18, 31, 0.4);
+            display: flex; justify-content: center; align-items: center; gap: 8px;
+        }
+        .top-bar span { animation: blink 1.5s infinite; }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+
+        /* === 1. HERO SECTION === */
+        .hero { padding: 40px 0 20px; text-align: center; }
+        .hero-cover {
+            width: 85%; margin: 0 auto 32px; border-radius: 12px;
+            box-shadow: 0 0 60px rgba(193,18,31,.2), 0 20px 40px rgba(0,0,0,.8);
+            border: 1px solid rgba(255,255,255,0.05); display: block;
+        }
+        .hero h1 { font-size: 56px; line-height: 0.9; margin-bottom: 16px; }
+        .hero h1 span.white { display: block; background: linear-gradient(180deg, #fff, #999); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero h1 span.red { display: block; color: var(--red-main); text-shadow: 0 0 30px rgba(193, 18, 31, 0.4); }
+        .hero .subheadline { font-size: 16px; color: var(--white-sec); max-width: 340px; margin: 0 auto 32px; line-height: 1.5; }
+
+        /* BOTÃO GLOBAL */
+        .btn {
+            display: block; width: 100%; background: linear-gradient(135deg, var(--red-main) 0%, var(--red-dusk) 100%);
+            color: #fff; font-size: 18px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+            padding: 22px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); cursor: pointer; text-decoration: none; text-align: center;
+            box-shadow: 0 8px 30px rgba(193, 18, 31, 0.3); position: relative; overflow: hidden; transition: 0.3s;
+        }
+        .btn::before {
+            content: ''; position: absolute; top: 0; left: -120%; width: 80%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+            transform: skewX(-20deg); animation: shine 3.5s infinite;
+        }
+        @keyframes shine { 0% { left: -120%; } 20%, 100% { left: 120%; } }
+        .btn:active { transform: scale(0.97); box-shadow: 0 4px 15px rgba(193, 18, 31, 0.2); }
+
+        /* === 2. TIMELINE (BENEFÍCIOS RÁPIDOS) === */
+        .timeline { position: relative; padding-left: 24px; margin-top: 20px; }
+        .timeline::before {
+            content: ''; position: absolute; left: 6px; top: 10px; bottom: 10px; width: 2px;
+            background: linear-gradient(to bottom, var(--red-main), rgba(193,18,31,0.1));
+        }
+        .timeline-item { position: relative; margin-bottom: 30px; padding-left: 20px; }
+        .timeline-item::before {
+            content: ''; position: absolute; left: -22px; top: 4px; width: 12px; height: 12px;
+            background: var(--bg-deep); border: 2px solid var(--red-main); border-radius: 50%;
+            box-shadow: 0 0 10px var(--red-main);
+        }
+        .timeline-item h4 { font-family: var(--font-body); color: var(--white-main); font-size: 16px; margin-bottom: 6px; font-weight: 600; }
+        .timeline-item p { font-size: 14px; color: var(--white-sec); line-height: 1.5; }
+
+        /* === 3. DIAGNÓSTICO DO PROBLEMA === */
+        .story-section p { font-size: 16px; color: var(--white-sec); margin-bottom: 20px; line-height: 1.6; }
+        .story-section p strong { color: var(--white-main); font-weight: 600; }
+        .highlight-box {
+            background: rgba(193, 18, 31, 0.05); border-left: 4px solid var(--red-main);
+            padding: 24px; margin: 30px 0; border-radius: 0 8px 8px 0;
+            font-style: italic; color: #ddd; font-size: 16px; line-height: 1.5;
+            position: relative; backdrop-filter: blur(5px);
+        }
+        .highlight-box::after {
+            content: '"'; position: absolute; top: -10px; right: 20px;
+            font-family: serif; font-size: 60px; color: rgba(193, 18, 31, 0.1); line-height: 1;
+        }
+
+        .target-list { list-style: none; padding: 0; margin-top: 24px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); padding: 24px; border-radius: 12px; }
+        .target-list li { position: relative; padding-left: 32px; margin-bottom: 16px; font-size: 15px; color: var(--white-sec); line-height: 1.5; }
+        .target-list li:last-child { margin-bottom: 0; }
+        .target-list li::before {
+            content: '✖'; position: absolute; left: 0; top: 0; color: var(--red-main); font-size: 14px;
+        }
+
+        /* === 4. ROADMAP / MÓDULOS === */
+        .card {
+            background: linear-gradient(180deg, #141414 0%, #0a0a0a 100%);
+            border: 1px solid rgba(255,255,255,0.04);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,.03), 0 10px 30px rgba(0,0,0,.4);
+            padding: 28px 24px; border-radius: 12px; margin-bottom: 20px;
+            position: relative; overflow: hidden; transition: transform 0.3s ease;
+        }
+        .card:hover { transform: translateY(-5px); border-color: rgba(193,18,31,0.3); }
+        .card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px;
+            background: linear-gradient(90deg, transparent, var(--red-main), transparent); opacity: 0.5;
+        }
+        .card h3 { font-family: var(--font-body); font-size: 19px; text-transform: none; font-weight: 600; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; color: #fff; }
+        .card p { font-size: 15px; color: var(--white-sec); line-height: 1.6; margin-bottom: 16px; }
+        .card-insight { font-size: 13px; color: #888; border-top: 1px dashed rgba(255,255,255,0.1); padding-top: 16px; font-style: italic; }
+
+        /* === 5. BASE CIENTÍFICA === */
+        .science-box {
+            text-align: center; padding: 40px 24px; border-radius: 12px;
+            background: radial-gradient(circle at center, rgba(30,5,5,0.8) 0%, rgba(10,10,10,1) 100%);
+            border: 1px solid rgba(193,18,31,0.2); position: relative; overflow: hidden;
+        }
+        .science-box .icon { font-size: 40px; margin-bottom: 16px; filter: drop-shadow(0 0 10px var(--red-main)); }
+        .science-box p { font-size: 15px; color: var(--white-sec); line-height: 1.6; }
+
+        /* === 5.5 DEPOIMENTOS / COMENTÁRIOS === */
+        .section-head { text-align: center; margin-bottom: 30px; }
+        .eyebrow {
+            display: inline-block; font-family: var(--font-body); font-size: 12px; font-weight: 600;
+            letter-spacing: 2.5px; text-transform: uppercase; color: var(--red-main); margin-bottom: 10px;
+        }
+        .section-head h2 { font-size: 28px; line-height: 1.15; color: var(--white-main); }
+
+        .testimonials-grid { display: grid; grid-template-columns: 1fr; gap: 18px; margin-top: 8px; }
+        .testimonial-card {
+            background: linear-gradient(180deg, #141414 0%, #0a0a0a 100%);
+            border: 1px solid rgba(255,255,255,0.06);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,.03), 0 10px 30px rgba(0,0,0,.4);
+            border-radius: 12px; padding: 26px 22px; position: relative; overflow: hidden;
+        }
+        .testimonial-card::after {
+            content: '"'; position: absolute; top: -18px; right: 16px;
+            font-family: serif; font-size: 70px; color: rgba(193,18,31,0.08); line-height: 1; pointer-events: none;
+        }
+        .avatar {
+            width: 46px; height: 46px; border-radius: 50%; background: #111;
+            border: 1px solid rgba(193,18,31,0.35); display: flex; align-items: center; justify-content: center;
+            margin-bottom: 14px; position: relative; z-index: 1;
+        }
+        .avatar svg { width: 24px; height: 24px; }
+        .name { font-family: var(--font-body); font-size: 15px; font-weight: 600; color: var(--white-main); margin-bottom: 6px; position: relative; z-index: 1; }
+        .stars { display: flex; gap: 3px; margin-bottom: 12px; position: relative; z-index: 1; }
+        .stars svg { width: 15px; height: 15px; }
+        .comment { font-size: 14px; line-height: 1.65; color: var(--white-sec); position: relative; z-index: 1; }
+
+        /* === 6. FRASE EMOCIONAL === */
+        .emotional-quote {
+            text-align: center; padding: 20px; margin: 40px 0;
+        }
+        .emotional-quote h2 {
+            font-size: 42px; line-height: 1.1; color: #fff; text-transform: uppercase;
+            text-shadow: 0 0 20px rgba(255,255,255,0.2); margin-bottom: 16px;
+        }
+        .emotional-quote p { font-size: 16px; color: var(--red-main); font-weight: 500; font-style: italic; }
+
+        /* === 7. OFERTA PRINCIPAL === */
+        .offer-box {
+            background: #0a0a0a; border: 2px solid var(--red-main); border-radius: 16px;
+            padding: 40px 24px; text-align: center; position: relative;
+            box-shadow: 0 0 50px rgba(193,18,31,0.15);
+        }
+        .offer-box::before {
+            content: 'OFERTA LIBERADA'; position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+            background: var(--red-main); color: #fff; font-size: 12px; font-weight: bold;
+            padding: 4px 16px; border-radius: 20px; letter-spacing: 1px;
+        }
+        .price-container { margin-bottom: 24px; display: flex; flex-direction: column; gap: 4px; }
+        .price-old { font-size: 16px; text-decoration: line-through; color: #666; font-weight: 500;}
+        .price-new { font-size: 48px; color: #fff; font-family: var(--font-heading); text-shadow: 0 0 20px rgba(193,18,31,0.5);}
+        
+        .timer-wrapper { margin-top: 24px; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+        .timer-label { font-size: 12px; color: #888; text-transform: uppercase; letter-spacing: 2px; }
+        .timer-boxes { display: flex; align-items: center; gap: 8px; }
+        .timer-box {
+            background: linear-gradient(180deg, #1a1a1a, #0a0a0a); border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 6px; padding: 10px 14px; font-family: var(--font-heading); font-size: 24px;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,.05), 0 4px 12px rgba(0,0,0,0.4);
+        }
+        .timer-sep { color: var(--red-main); font-size: 20px; font-weight: bold; animation: pulse 1s infinite; }
+
+        /* GARANTIA DENTRO DA OFERTA */
+        .guarantee { margin-top: 32px; padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.1); }
+        .guarantee-icon { font-size: 32px; margin-bottom: 12px; }
+        .guarantee h3 { font-size: 20px; margin-bottom: 8px; }
+        .guarantee p { font-size: 13px; color: var(--white-sec); line-height: 1.5; }
+
+        /* === 8. FAQ === */
+        .faq-item { border-bottom: 1px solid rgba(255,255,255,0.08); margin-bottom: 8px; }
+        .faq-question {
+            width: 100%; text-align: left; background: none; border: none;
+            padding: 20px 0; font-size: 16px; font-family: var(--font-body);
+            color: var(--white-main); font-weight: 500; cursor: pointer;
+            display: flex; justify-content: space-between; align-items: center; outline: none;
+        }
+        .faq-icon { color: var(--red-main); font-size: 24px; transition: transform 0.3s; font-weight: 300; }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; font-size: 14px; color: var(--white-sec); line-height: 1.6; }
+        .faq-answer p { padding-bottom: 20px; }
+        .faq-item.active .faq-answer { max-height: 250px; }
+        .faq-item.active .faq-icon { transform: rotate(45deg); }
+
+        /* === 9. FOOTER INSTITUCIONAL === */
+        .footer { text-align: center; padding: 40px 0 20px; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 60px; }
+        .footer p { font-size: 12px; color: #555; line-height: 1.5; margin-bottom: 10px; }
+        .footer a { color: #888; text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.3s; }
+        .footer a:hover { border-color: #888; }
+
+        /* === STICKY CTA === */
+        .sticky-cta {
+            position: fixed; bottom: 0; left: 0; width: 100%;
+            background: rgba(5, 5, 5, 0.95); backdrop-filter: blur(15px);
+            border-top: 1px solid rgba(255, 255, 255, 0.05); padding: 16px 24px;
+            z-index: 100; transform: translateY(100%); transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .sticky-cta.visible { transform: translateY(0); }
+        .sticky-container { max-width: 450px; margin: 0 auto; }
+
+        @media (min-width: 501px) {
+            .wrapper { max-width: 500px; }
+            .sticky-cta {
+                left: 50%; transform: translate(-50%, 100%); max-width: 500px;
+                border-left: 1px solid rgba(255,255,255,0.05); border-right: 1px solid rgba(255,255,255,0.05); border-radius: 16px 16px 0 0;
+            }
+            .sticky-cta.visible { transform: translate(-50%, 0); }
+        }
+    </style>
+    <!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '4635192300140692');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=4635192300140692&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+</head>
+<body>
+
+    <div class="top-bar">
+        <span>🔴</span> ATENÇÃO: ÚLTIMAS VAGAS COM DESCONTO LIBERADAS
+    </div>
+
+    <div class="ambient-bg"><div class="ambient-glow"></div></div>
+    <div class="particles-container">
+        <div class="particle p1">⚥</div>
+        <div class="particle p2">♥</div>
+        <div class="particle p3">♀</div>
+        <div class="particle p4">♂</div>
+        <div class="particle p5">♥</div>
+        <div class="particle p6">⚥</div>
+    </div>
+    <div class="cinematic-grain"></div>
+
+    <div class="wrapper">
+        
+        <section class="hero scroll-reveal active">
+            
+            
+            <h1>
+                <span class="white">Código</span>
+                <span class="red">da Atração</span>
+            </h1>
+            <p class="subheadline">Entenda a mente feminina. Leia os sinais ocultos. Conduza interações com confiança e naturalidade.</p>
+            
+            <a href="#oferta" class="btn">Liberar meu acesso agora</a>
+        </section>
+
+        <section class="scroll-reveal delay-1">
+            <h2 class="section-title" style="font-size: 26px; text-align: left; margin-top: 40px;">Sua transformação <br><span>na prática</span></h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h4>Imediatamente</h4>
+                    <p>Você elimina a postura de validação que sabota suas interações e adota um perfil magnético e seguro.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>Nos primeiros dias</h4>
+                    <p>Passa a ler os micro-sinais corporais dela, sabendo exatamente quando avançar ou recuar.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>O resultado</h4>
+                    <p>Construção de tensão natural. Conversas profundas que geram química sem esforço forçado.</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <section class="story-section scroll-reveal">
+            <h2 class="section-title">Onde você está <span>errando?</span></h2>
+            <p>A maioria dos homens se frustra porque <strong>tenta forçar a atração</strong> ao invés de deixá-la acontecer.</p>
+            <p>Eles mandam mensagens demais. Demonstram interesse cedo demais. E não sabem ler quando a mulher já está dando sinais de que quer algo a mais.</p>
+            
+            <div class="highlight-box">
+                "O segredo não está no que você fala, mas na tensão silenciosa que você constrói antes de dizer qualquer coisa."
+            </div>
+            
+            <p>O <strong>Código da Atração</strong> não é sobre joguinhos baratos. É sobre entender a dinâmica real do desejo feminino, alinhar a sua postura e parar de afastar as pessoas por pura ansiedade.</p>
+
+            <ul class="target-list scroll-reveal">
+                <li>Você tem dificuldade de manter o assunto interessante e acaba caindo na zona de amizade.</li>
+                <li>Você não sabe identificar se ela está afim e acaba perdendo a janela de oportunidade.</li>
+                <li>Você quer construir uma presença masculina mais forte, misteriosa e atraente.</li>
+                <li>Você está cansado de investir tempo e energia em interações que não dão em nada.</li>
+            </ul>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <section class="features scroll-reveal">
+            <h2 class="section-title">O que tem <span>lá dentro</span></h2>
+            
+            <div class="card">
+                <h3>♟️ Módulo 1: O Jogo Interno</h3>
+                <p>Como eliminar a necessidade de validação que sabota suas interações logo nos primeiros 5 minutos.</p>
+                <div class="card-insight">O erro sutil de linguagem corporal que destrói sua autoridade instantaneamente.</div>
+            </div>
+            
+            <div class="card">
+                <h3>👁️ Módulo 2: Leitura de Sinais</h3>
+                <p>O guia definitivo para entender quando ela está interessada, quando está apenas sendo educada e quando você deve avançar.</p>
+                <div class="card-insight">A "Regra dos 3 Segundos" no contato visual que muda todo o contexto.</div>
+            </div>
+            
+            <div class="card">
+                <h3>💬 Módulo 3: Tensão e Conversa</h3>
+                <p>Como transicionar de uma conversa lógica (chata) para uma conversa emocional e envolvente, gerando química natural.</p>
+                <div class="card-insight">Roteiros práticos de como flertar por mensagem sem parecer um desesperado.</div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <section class="science-box scroll-reveal">
+            <div class="icon">🧬</div>
+            <h2 class="section-title" style="font-size: 28px; margin-bottom: 16px;">Não é sorte. <br><span>É ciência.</span></h2>
+            <p>A atração humana não acontece por acidente. Ela obedece a gatilhos biológicos e padrões de comportamento. Quando você decodifica essa linguagem, você para de tentar "convencer" e passa apenas a "estimular" os instintos corretos.</p>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <section class="scroll-reveal">
+            <div class="section-head">
+                <span class="eyebrow">Feedback de clientes</span>
+                <h2>O que quem já usa o método está dizendo</h2>
+            </div>
+            <div class="testimonials-grid">
+
+                <div class="testimonial-card scroll-reveal">
+                    <div class="avatar"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.6" stroke="#A3A3A3" stroke-width="1.6"/><path d="M4.5 19.5c1.6-3.4 4.4-5 7.5-5s5.9 1.6 7.5 5" stroke="#A3A3A3" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+                    <div class="name">Lucas Henrique</div>
+                    <div class="stars">
+                        <svg viewBox="0 0 24 24" fill="#C1121F"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                        <svg viewBox="0 0 24 24" fill="#C1121F"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                        <svg viewBox="0 0 24 24" fill="#C1121F"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                        <svg viewBox="0 0 24 24" fill="#C1121F"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                        <svg viewBox="0 0 24 24" fill="#C1121F"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                    </div>
+                    <p class="comment">Mano, na moral... eu não esperava que fosse tão bom assim kkk. Achei que ia ler uma vez e esquecer, mas várias coisas eu comecei a usar no mesmo dia. O jeito que as pessoas reagem quando vc muda alguns detalhes é bizarro.</p>
+                </div>
+
+                <div class="testimonial-card scroll-reveal delay-1">
+                    <div class="avatar"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.6" stroke="#A3A3A3" stroke-width="1.6"/><path d="M4.5 19.5c1.6-3.4 4.4-5 7.5-5s5.9 1.6 7.5 5" stroke="#A3A3A3" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+                    <div class="name">Rafael Martins</div>
+                    <div class="stars">
+                        <svg viewBox="0 0 24 24" fill="#C1121F"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                        <svg viewBox="0 0 24 24" fill="#C1121F"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                        <svg viewBox="0 0 24 24" fill="#C1121F"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                        <svg viewBox="0 0 24 24" fill="#C1121F"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                        <svg viewBox="0 0 24 24" fill="#C1121F"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                    </div>
+                    <p class="comment">Acabei de terminar e precisava falar isso. O conteúdo é muito mais completo do que eu imaginava. Não fica enrolando, é direto ao ponto. Já percebi diferença até nas minhas conversas, passei a pensar antes de responder.</p>
+                </div>
+
+                <div class="testimonial-card scroll-reveal delay-2">
+                    <div class="avatar"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.6" stroke="#A3A3A3" stroke-width="1.6"/><path d="M4.5 19.5c1.6-3.4 4.4-5 7.5-5s5.9 1.6 7.5 5" stroke="#A3A3A3" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+                    <div class="name">Gabriel Costa</div>
+                    <div class="stars">
+                        <svg viewBox="0 0 24 24" fill="#C1121F"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                        <svg viewBox="0 0 24 24" fill="#C1121F"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                        <svg viewBox="0 0 24 24" fill="#C1121F"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                        <svg viewBox="0 0 24 24" fill="#C1121F"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                        <svg viewBox="0 0 24 24" fill="none"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z" stroke="#C1121F" stroke-width="1.4" stroke-linejoin="round"/></svg>
+                    </div>
+                    <p class="comment">Confesso que comprei meio no impulso, sem expectativa nenhuma. No fim das contas foi uma das melhores compras que fiz esse ano. Tem muita coisa que eu fazia sem perceber e hoje consigo enxergar completamente diferente.</p>
+                </div>
+
+                <div class="testimonial-card scroll-reveal delay-3">
+                    <div class="avatar"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.6" stroke="#A3A3A3" stroke-width="1.6"/><path d="M4.5 19.5c1.6-3.4 4.4-5 7.5-5s5.9 1.6 7.5 5" stroke="#A3A3A3" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+                    <div class="name">Matheus Oliveira</div>
+                    <div class="stars">
+                        <svg viewBox="0 0 24 24" fill="#C1121F"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                        <svg viewBox="0 0 24 24" fill="#C1121F"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                        <svg viewBox="0 0 24 24" fill="#C1121F"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                        <svg viewBox="0 0 24 24" fill="#C1121F"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                        <svg viewBox="0 0 24 24" fill="#C1121F"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                    </div>
+                    <p class="comment">Tô aplicando faz umas semanas e realmente funciona, mas tem que fazer a sua parte né kkk. O mais doido é que vc começa a perceber comportamentos das pessoas que antes passavam batido. Gostei demais.</p>
+                </div>
+
+                <div class="testimonial-card scroll-reveal delay-4">
+                    <div class="avatar"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.6" stroke="#A3A3A3" stroke-width="1.6"/><path d="M4.5 19.5c1.6-3.4 4.4-5 7.5-5s5.9 1.6 7.5 5" stroke="#A3A3A3" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+                    <div class="name">João Pedro Almeida</div>
+                    <div class="stars">
+                        <svg viewBox="0 0 24 24" fill="#C1121F"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                        <svg viewBox="0 0 24 24" fill="#C1121F"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                        <svg viewBox="0 0 24 24" fill="#C1121F"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                        <svg viewBox="0 0 24 24" fill="#C1121F"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                        <svg viewBox="0 0 24 24" fill="none"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z" stroke="#C1121F" stroke-width="1.4" stroke-linejoin="round"/></svg>
+                    </div>
+                    <p class="comment">Sério, eu achei que seria aqueles conteúdos que só aumentam texto pra parecer grande. Que nada. É tudo muito fácil de entender e dá vontade de continuar lendo. Já até indiquei pra um amigo meu.</p>
+                </div>
+
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <section class="emotional-quote scroll-reveal">
+            <h2>O jogo sempre existiu.</h2>
+            <p>A única diferença é que agora você conhece as regras.</p>
+        </section>
+
+        <section class="offer-box scroll-reveal" id="oferta">
+            <div class="price-container">
+                <span class="price-old">Valor Normal: R$ 47,90</span>
+                <span class="price-new">R$ 14,70</span>
+            </div>
+
+            <a href="https://pay.kirvano.com/cd4f62e3-2352-47aa-b0e0-e863d11d05e2" class="btn">Garantir meu acesso exclusivo</a>
+
+            <div class="timer-wrapper">
+                <div class="timer-label">Acesso promocional encerra em:</div>
+                <div class="timer-boxes">
+                    <div class="timer-box" id="t-hours">02</div><span class="timer-sep">:</span>
+                    <div class="timer-box" id="t-minutes">14</div><span class="timer-sep">:</span>
+                    <div class="timer-box" id="t-seconds">39</div>
+                </div>
+            </div>
+
+            <div class="guarantee">
+                <div class="guarantee-icon">🛡️</div>
+                <h3>Risco Absolutamente Zero</h3>
+                <p>Você tem <strong>7 dias inteiros</strong> para acessar o conteúdo. Se você ler, aplicar e achar que não fez diferença na sua forma de enxergar o jogo, basta me mandar um e-mail. Devolvo 100% do seu dinheiro, sem perguntas.</p>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <section class="faq scroll-reveal">
+            <h2 class="section-title">Dúvidas <span>Frequentes</span></h2>
+            
+            <div class="faq-item">
+                <button class="faq-question">O acesso é imediato? <span class="faq-icon">+</span></button>
+                <div class="faq-answer"><p>Sim. Assim que o pagamento for confirmado (Pix ou Cartão é na hora), você receberá o link de acesso no seu e-mail cadastrado.</p></div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">É um livro físico ou digital? <span class="faq-icon">+</span></button>
+                <div class="faq-answer"><p>É um GUIA 100% digital. Você pode ler no celular, tablet ou computador, de forma totalmente anônima e discreta.</p></div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">Funciona se eu for tímido? <span class="faq-icon">+</span></button>
+                <div class="faq-answer"><p>Sim. O foco principal não é transformar você em um extrovertido forçado, mas sim usar a sua natureza ao seu favor, criando um ar misterioso e focado.</p></div>
+            </div>
+        </section>
+
+        <footer class="footer scroll-reveal">
+            <p><strong>Homem De Presença</strong> © 2024. Todos os direitos reservados.</p>
+            <p>Este site não faz parte do site do Facebook ou da Meta Platforms, Inc. Além disso, este site NÃO é endossado pelo Facebook de nenhuma maneira.</p>
+            <p><a href="https://HomemDePresenca.github.io/TermosdeUso">Termos de Uso</a> | <a href="https://HomemDePresenca.github.io/PoliticadePrivacidade">Política de Privacidade</a></p>
+        </footer>
+
+    </div>
+
+    <div class="sticky-cta" id="stickyCta">
+        <div class="sticky-container">
+            <a href="#oferta" class="btn" style="padding: 16px; font-size: 16px;">Liberar Acesso</a>
+        </div>
+    </div>
+
+    <script>
+        // TIMER LOGIC
+        function initCountdown() {
+            const hBox = document.getElementById('t-hours');
+            const mBox = document.getElementById('t-minutes');
+            const sBox = document.getElementById('t-seconds');
+            const storageKey = 'codigo_atracao_timer_v4';
+            const duration = 2 * 60 * 60 * 1000 + 14 * 60 * 1000 + 39 * 1000;
+
+            let targetTime = localStorage.getItem(storageKey);
+            if (!targetTime || new Date().getTime() > parseInt(targetTime, 10)) {
+                targetTime = new Date().getTime() + duration;
+                localStorage.setItem(storageKey, targetTime);
+            } else { targetTime = parseInt(targetTime, 10); }
+
+            function updateTimer() {
+                let diff = targetTime - new Date().getTime();
+                if (diff <= 0) {
+                    targetTime = new Date().getTime() + duration;
+                    localStorage.setItem(storageKey, targetTime);
+                    diff = duration;
+                }
+                const hours = Math.floor(diff / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+                const format = (num) => String(num).padStart(2, '0');
+
+                if(hBox) hBox.textContent = format(hours);
+                if(mBox) mBox.textContent = format(minutes);
+                if(sBox) sBox.textContent = format(seconds);
+            }
+            updateTimer(); setInterval(updateTimer, 1000);
+        }
+
+        // SCROLL REVEAL (Mais responsivo)
+        const revealElements = document.querySelectorAll('.scroll-reveal');
+        const revealOnScroll = () => {
+            const windowHeight = window.innerHeight;
+            const revealPoint = 50;
+            revealElements.forEach(el => {
+                const revealTop = el.getBoundingClientRect().top;
+                if (revealTop < windowHeight - revealPoint) {
+                    el.classList.add('active');
+                }
+            });
+        };
+
+        // STICKY CTA
+        const stickyCta = document.getElementById('stickyCta');
+        const offerSection = document.getElementById('oferta');
+        const handleStickyVisibility = () => {
+            // Mostrar depois de rolar a hero, esconder quando chegar na oferta principal
+            const offerTop = offerSection.getBoundingClientRect().top;
+            if (window.scrollY > 600 && offerTop > window.innerHeight) {
+                stickyCta.classList.add('visible');
+            } else {
+                stickyCta.classList.remove('visible');
+            }
+        };
+
+        // FAQ ACCORDION
+        const faqItems = document.querySelectorAll('.faq-item');
+        faqItems.forEach(item => {
+            const btn = item.querySelector('.faq-question');
+            btn.addEventListener('click', () => {
+                const isActive = item.classList.contains('active');
+                faqItems.forEach(i => i.classList.remove('active'));
+                if (!isActive) item.classList.add('active');
+            });
+        });
+
+        // INIT
+        window.addEventListener('scroll', () => { revealOnScroll(); handleStickyVisibility(); });
+        window.addEventListener('load', () => { initCountdown(); revealOnScroll(); });
+    </script>
+</body>
+</html>
+  
