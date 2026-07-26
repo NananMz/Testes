@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Homem de Presença</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,128 +11,134 @@
 
 <style>
 /* ==========================================================================
-   1. TOKENS — paleta e tipografia (ver notas no final do arquivo)
+   1. TOKENS E RESET — Página Completa
    ========================================================================== */
-:root{
-  --ink:        #0a0a0d;
-  --ink-2:      #121319;
-  --chalk:      #eeece5;
-  --chalk-dim:  rgba(238,236,229,.40);
-  --brass:      #A1111B;
-  --brass-dim:  rgba(201,163,95,.45);
+:root {
+  --bg: #0a0c10;
+  --bg2: #0d1015;
+  --line: #1c2028;
+  --text-main: #e8e8e8;
+  --text-dim: #a7adb6;
+  --red-main: #9D111B;
+  --red-dim: #790D15;
+  
+  /* Tokens específicos da nova animação */
+  --ink: #0a0c10;
+  --ink-2: #0d1015;
+  --chalk: #eeece5;
+  --chalk-dim: rgba(238,236,229,.40);
+  --brass: #A1111B;
+  --brass-dim: rgba(201,163,95,.45);
   --paper-grid: rgba(238,236,229,.045);
 }
 
-*,*::before,*::after{ box-sizing:border-box; }
-html,body{ margin:0; padding:0; }
-body{
-  background:var(--ink);
-  -webkit-font-smoothing:antialiased;
-  text-rendering:optimizeLegibility;
-  overflow-x:hidden;
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; height: 100%; }
+body {
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  color: var(--text-main);
 }
+body.lock { overflow: hidden; height: 100vh; }
 
 /* ==========================================================================
-   2. INTRO — overlay de tela cheia
+   2. INTRO — Nova Animação
    ========================================================================== */
-#intro{
-  position:fixed; inset:0; z-index:9999;
-  background:var(--ink);
-  display:flex; flex-direction:column; align-items:center; justify-content:center;
-  overflow:hidden;
-  padding:24px;
-  user-select:none;
-  transition:opacity .7s ease, transform .7s ease;
+#intro {
+  position: fixed; inset: 0; z-index: 9999;
+  background: radial-gradient(ellipse at 50% 40%, #12151b 0%, #0a0c10 70%);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  overflow: hidden;
+  padding: 24px;
+  user-select: none;
+  transition: opacity .7s ease, transform .7s ease;
 }
-#intro::before{ /* papel de molde, grade sutil */
-  content:""; position:absolute; inset:0;
-  background-image:
-    linear-gradient(var(--paper-grid) 1px, transparent 1px),
-    linear-gradient(90deg, var(--paper-grid) 1px, transparent 1px);
-  background-size:38px 38px;
-  pointer-events:none;
+#intro::before {
+  content: ""; position: absolute; inset: 0;
+  background-image: linear-gradient(var(--paper-grid) 1px, transparent 1px),
+                    linear-gradient(90deg, var(--paper-grid) 1px, transparent 1px);
+  background-size: 38px 38px;
+  pointer-events: none;
 }
-#intro::after{ /* vinheta */
-  content:""; position:absolute; inset:0;
-  background:radial-gradient(ellipse at center, transparent 42%, rgba(0,0,0,.55) 100%);
-  pointer-events:none;
-}
-
-.stage-perspective{
-  position:relative;
-  perspective:1000px;
-  display:flex; justify-content:center;
-}
-.burst{
-  position:absolute; left:50%; top:50%; width:40px; height:40px; margin:-20px 0 0 -20px;
-  border-radius:50%; border:1.5px solid var(--brass-dim); opacity:0;
-}
-#intro.stage-spin .burst{ animation:burst-ring .7s cubic-bezier(.25,.8,.35,1) forwards; }
-@keyframes burst-ring{
-  0%{ transform:scale(.3); opacity:.9; }
-  100%{ transform:scale(9); opacity:0; }
+#intro::after {
+  content: ""; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at center, transparent 42%, rgba(0,0,0,.55) 100%);
+  pointer-events: none;
 }
 
-#figure-wrap{
-  position:relative;
-  width:min(66vw, 58vh, 360px);
-  transform-style:preserve-3d;
-  transform:rotateY(100deg) scale(.6);
-  opacity:0;
-  transition:transform .8s cubic-bezier(.16,1,.3,1), opacity .5s ease-out;
+.stage-perspective {
+  position: relative;
+  perspective: 1000px;
+  display: flex; justify-content: center;
 }
-#intro.stage-spin #figure-wrap{ transform:rotateY(0deg) scale(1); opacity:1; }
-
-#figure-svg{ display:block; width:100%; height:auto; overflow:visible; }
-#figure-svg *{ transform-box:fill-box; transform-origin:center; }
-#figure-svg line, #figure-svg path, #figure-svg circle{ fill:none; }
-#figure-svg text{ fill:var(--chalk-dim); font-family:ui-monospace,Menlo,Consolas,monospace; font-size:11px; letter-spacing:2px; }
-
-.scanline{
-  position:absolute; left:8%; right:8%; top:20%; height:2px;
-  background:linear-gradient(90deg, transparent, var(--brass), transparent);
-  opacity:0; box-shadow:0 0 12px 1px var(--brass-dim);
+.burst {
+  position: absolute; left: 50%; top: 50%; width: 40px; height: 40px; margin: -20px 0 0 -20px;
+  border-radius: 50%; border: 1.5px solid var(--brass-dim); opacity: 0;
 }
-#intro.stage-hold .scanline{ animation:scan-sweep .8s ease-in-out forwards; }
-@keyframes scan-sweep{
-  0%{ transform:translateY(0); opacity:0; }
-  15%{ opacity:1; }
-  85%{ opacity:1; }
-  100%{ transform:translateY(340px); opacity:0; }
+#intro.stage-spin .burst { animation: burst-ring .7s cubic-bezier(.25,.8,.35,1) forwards; }
+@keyframes burst-ring {
+  0% { transform: scale(.3); opacity: .9; }
+  100% { transform: scale(9); opacity: 0; }
 }
 
-/* --- traços do terno: "desenhados" via stroke-dashoffset (definido via JS) --- */
-#figure-svg .draw, #figure-svg .fade-detail{
-  transition:stroke-dashoffset .7s ease-out, opacity .5s ease;
+#figure-wrap {
+  position: relative;
+  width: min(66vw, 58vh, 360px);
+  transform-style: preserve-3d;
+  transform: rotateY(100deg) scale(.6);
+  opacity: 0;
+  transition: transform .8s cubic-bezier(.16,1,.3,1), opacity .5s ease-out;
 }
-#figure-svg .side-seam, #figure-svg .measure-line{
-  transition:stroke-dashoffset .7s ease-out, stroke-width .6s ease, stroke .6s ease, transform .6s ease, opacity .5s ease;
+#intro.stage-spin #figure-wrap { transform: rotateY(0deg) scale(1); opacity: 1; }
+
+#figure-svg { display: block; width: 100%; height: auto; overflow: visible; }
+#figure-svg * { transform-box: fill-box; transform-origin: center; }
+#figure-svg line, #figure-svg path, #figure-svg circle { fill: none; }
+#figure-svg text { fill: var(--chalk-dim); font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 11px; letter-spacing: 2px; }
+
+.scanline {
+  position: absolute; left: 8%; right: 8%; top: 20%; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--brass), transparent);
+  opacity: 0; box-shadow: 0 0 12px 1px var(--brass-dim);
+}
+#intro.stage-hold .scanline { animation: scan-sweep .8s ease-in-out forwards; }
+@keyframes scan-sweep {
+  0% { transform: translateY(0); opacity: 0; }
+  15% { opacity: 1; }
+  85% { opacity: 1; }
+  100% { transform: translateY(340px); opacity: 0; }
 }
 
-.collar{ stroke:var(--chalk); stroke-width:2.5; stroke-linecap:round; }
-.shoulder-slope{ stroke:var(--chalk); stroke-width:2.6; stroke-linecap:round; }
-.side-seam{ stroke:var(--chalk); stroke-width:3; stroke-linecap:round; }
-.tie-shape{ stroke:var(--chalk); stroke-width:2.2; stroke-linejoin:round; stroke-linecap:round; }
-.lapel-notch{ stroke:var(--chalk); stroke-width:2.4; stroke-linecap:round; }
-.measure-line{ stroke:var(--chalk); stroke-width:1.5; stroke-linecap:round; }
-.fold-line{ stroke:var(--chalk-dim); stroke-width:1.2; stroke-dasharray:9,5,2,5; }
-.measure-tick{ stroke:var(--chalk-dim); stroke-width:1.5; }
-.pocket{ stroke:var(--chalk); stroke-width:2; stroke-linecap:round; }
-.button{ stroke:var(--chalk); stroke-width:2; }
-#figure-svg .fade-detail{ opacity:0; }
+#figure-svg .draw, #figure-svg .fade-detail {
+  transition: stroke-dashoffset .7s ease-out, opacity .5s ease;
+}
+#figure-svg .side-seam, #figure-svg .measure-line {
+  transition: stroke-dashoffset .7s ease-out, stroke-width .6s ease, stroke .6s ease, transform .6s ease, opacity .5s ease;
+}
 
-/* atraso escalonado do "desenho a caneta" — ordem de um alfaiate real
-   (precisa da MESMA especificidade da regra que define `transition` acima,
-   já que essa regra usa #figure-svg + classe; sem isso, o delay:0 implícito
-   do shorthand vence e todo mundo anima junto, sem escalonamento) */
-#figure-svg .collar{ transition-delay:0s; }
-#figure-svg .measure-line{ transition-delay:.04s; }
-#figure-svg .shoulder-slope{ transition-delay:.1s; }
-#figure-svg .tie-shape{ transition-delay:.14s; }
-#figure-svg .side-seam{ transition-delay:.2s; }
-#figure-svg .lapel-notch{ transition-delay:.3s; }
+.collar { stroke: var(--chalk); stroke-width: 2.5; stroke-linecap: round; }
+.shoulder-slope { stroke: var(--chalk); stroke-width: 2.6; stroke-linecap: round; }
+.side-seam { stroke: var(--chalk); stroke-width: 3; stroke-linecap: round; }
+.tie-shape { stroke: var(--chalk); stroke-width: 2.2; stroke-linejoin: round; stroke-linecap: round; }
+.lapel-notch { stroke: var(--chalk); stroke-width: 2.4; stroke-linecap: round; }
+.measure-line { stroke: var(--chalk); stroke-width: 1.5; stroke-linecap: round; }
+.fold-line { stroke: var(--chalk-dim); stroke-width: 1.2; stroke-dasharray: 9,5,2,5; }
+.measure-tick { stroke: var(--chalk-dim); stroke-width: 1.5; }
+.pocket { stroke: var(--chalk); stroke-width: 2; stroke-linecap: round; }
+.button { stroke: var(--chalk); stroke-width: 2; }
+#figure-svg .fade-detail { opacity: 0; }
 
-#intro.stage-details .fade-detail{ opacity:1; }
+#figure-svg .collar { transition-delay: 0s; }
+#figure-svg .measure-line { transition-delay: .04s; }
+#figure-svg .shoulder-slope { transition-delay: .1s; }
+#figure-svg .tie-shape { transition-delay: .14s; }
+#figure-svg .side-seam { transition-delay: .2s; }
+#figure-svg .lapel-notch { transition-delay: .3s; }
+
+#intro.stage-details .fade-detail { opacity: 1; }
 
 #intro.stage-formH .fold-line,
 #intro.stage-formH .fold-label,
@@ -143,107 +149,152 @@ body{
 #intro.stage-formH .tie-shape,
 #intro.stage-formH .lapel-notch,
 #intro.stage-formH .pocket,
-#intro.stage-formH .button{ opacity:0; }
-#intro.stage-formH .side-seam{ stroke-width:16; }
-#intro.stage-formH .measure-line{ stroke-width:14; stroke:var(--brass); transform:translateY(313px); }
+#intro.stage-formH .button { opacity: 0; }
+#intro.stage-formH .side-seam { stroke-width: 16; }
+#intro.stage-formH .measure-line { stroke-width: 14; stroke: var(--brass); transform: translateY(313px); }
 
-#intro.stage-separate .side-seam-left{ transform:translateX(-80px); opacity:0; }
-#intro.stage-separate .side-seam-right{ transform:translateX(80px); opacity:0; }
-#intro.stage-separate .measure-line{ opacity:0; }
-
-/* ==========================================================================
-   3. WORDMARK
-   ========================================================================== */
-.wordmark{
-  margin-top:clamp(20px, 4vh, 44px);
-  display:flex; flex-wrap:wrap; justify-content:center; align-items:baseline;
-  gap:.4em;
-  text-align:center;
-}
-.wm-unit{
-  opacity:0; transform:translateY(14px);
-  transition:opacity .6s ease, transform .6s ease;
-  font-family:'Big Shoulders Display','Arial Narrow',Arial,sans-serif;
-  font-weight:800; letter-spacing:.02em; color:var(--chalk);
-  font-size:clamp(30px, min(8vw, 9vh), 68px);
-  line-height:.95; text-transform:uppercase;
-}
-.wm-unit:nth-child(1){ transition-delay:0s; }
-.wm-unit:nth-child(2){ transition-delay:.1s; }
-.wm-unit:nth-child(3){ transition-delay:.2s; }
-.wm-de{ font-size:clamp(15px, min(3.6vw, 4vh), 32px); font-weight:600; }
-.wm-h{ color:var(--brass); }
-
-.wm-rule{
-  display:block; width:120px; max-width:36vw; height:2px; background:var(--brass);
-  margin:16px auto 0; transform:scaleX(0); transition:transform .5s ease;
-}
-
-#intro.stage-word .wm-unit{ opacity:1; transform:translateY(0); }
-#intro.stage-final .wm-rule{ transform:scaleX(1); }
+#intro.stage-separate .side-seam-left { transform: translateX(-80px); opacity: 0; }
+#intro.stage-separate .side-seam-right { transform: translateX(80px); opacity: 0; }
+#intro.stage-separate .measure-line { opacity: 0; }
 
 /* ==========================================================================
-   4. BOTÃO PULAR
+   3. WORDMARK DA INTRO
    ========================================================================== */
-#skip-btn{
-  position:absolute; right:20px; bottom:20px;
-  background:transparent; border:1px solid var(--chalk-dim); color:var(--chalk-dim);
-  font-family:ui-monospace,Menlo,Consolas,monospace; font-size:11px; letter-spacing:.12em;
-  text-transform:uppercase; padding:9px 15px; border-radius:2px; cursor:pointer;
-  opacity:0; pointer-events:none;
-  transition:opacity .5s ease, color .2s ease, border-color .2s ease;
+.wordmark {
+  margin-top: clamp(20px, 4vh, 44px);
+  display: flex; flex-wrap: wrap; justify-content: center; align-items: baseline;
+  gap: .4em;
+  text-align: center;
 }
-#intro.stage-draw #skip-btn{ opacity:1; pointer-events:auto; }
-#skip-btn:hover{ color:var(--chalk); border-color:var(--chalk); }
-#skip-btn:focus-visible{ outline:2px solid var(--brass); outline-offset:2px; }
+.wm-unit {
+  opacity: 0; transform: translateY(14px);
+  transition: opacity .6s ease, transform .6s ease;
+  font-family: 'Big Shoulders Display', 'Arial Narrow', Arial, sans-serif;
+  font-weight: 800; letter-spacing: .02em; color: var(--chalk);
+  font-size: clamp(30px, min(8vw, 9vh), 68px);
+  line-height: .95; text-transform: uppercase;
+}
+.wm-unit:nth-child(1) { transition-delay: 0s; }
+.wm-unit:nth-child(2) { transition-delay: .1s; }
+.wm-unit:nth-child(3) { transition-delay: .2s; }
+.wm-de { font-size: clamp(15px, min(3.6vw, 4vh), 32px); font-weight: 600; }
+.wm-h { color: var(--brass); }
 
-@media (max-height:480px){
-  #skip-btn{ bottom:10px; right:12px; }
+.wm-rule {
+  display: block; width: 120px; max-width: 36vw; height: 2px; background: var(--brass);
+  margin: 16px auto 0; transform: scaleX(0); transition: transform .5s ease;
 }
+
+#intro.stage-word .wm-unit { opacity: 1; transform: translateY(0); }
+#intro.stage-final .wm-rule { transform: scaleX(1); }
 
 /* ==========================================================================
-   5. CONTEÚDO DO SITE (placeholder — troque pelo conteúdo real)
+   4. BOTÃO PULAR INTRO
    ========================================================================== */
-#site{ min-height:100vh; background:var(--ink); color:var(--chalk); display:flex; flex-direction:column; }
-.site-nav{ padding:22px clamp(20px,5vw,64px); }
-.site-nav-inner{ display:flex; justify-content:space-between; align-items:center; max-width:1100px; margin:0 auto; }
-.site-logo{ font-family:'Big Shoulders Display',Arial,sans-serif; font-weight:700; letter-spacing:.06em; font-size:18px; color:var(--chalk); }
-.site-logo-h{ color:var(--brass); }
-.site-links{ display:flex; gap:26px; }
-.site-links a{ color:var(--chalk-dim); text-decoration:none; font-size:12px; letter-spacing:.1em; text-transform:uppercase; font-family:ui-monospace,Menlo,Consolas,monospace; transition:color .2s ease; }
-.site-links a:hover, .site-links a:focus-visible{ color:var(--brass); }
-.site-hero{ flex:1; display:flex; flex-direction:column; justify-content:center; align-items:flex-start; padding:40px clamp(20px,6vw,80px); max-width:900px; }
-.site-eyebrow{ font-family:ui-monospace,Menlo,Consolas,monospace; text-transform:uppercase; letter-spacing:.16em; font-size:12px; color:var(--brass); margin:0 0 18px; }
-.site-hero h1{ font-family:'Big Shoulders Display',Arial,sans-serif; font-weight:800; font-size:clamp(40px,9vw,108px); line-height:.95; margin:0 0 20px; text-transform:uppercase; }
-.site-hero h1 em{ font-style:normal; color:var(--brass); }
-.site-sub{ font-size:clamp(15px,2vw,19px); color:var(--chalk-dim); max-width:46ch; line-height:1.6; margin:0 0 32px; }
-.site-cta{ display:inline-block; border:1px solid var(--brass); color:var(--brass); padding:14px 28px; text-decoration:none; letter-spacing:.08em; text-transform:uppercase; font-size:13px; font-family:ui-monospace,Menlo,Consolas,monospace; transition:background .25s ease, color .25s ease; }
-.site-cta:hover, .site-cta:focus-visible{ background:var(--brass); color:var(--ink); }
+#skip-btn {
+  position: absolute; right: 20px; bottom: 20px;
+  background: transparent; border: 1px solid var(--chalk-dim); color: var(--chalk-dim);
+  font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 11px; letter-spacing: .12em;
+  text-transform: uppercase; padding: 9px 15px; border-radius: 2px; cursor: pointer;
+  opacity: 0; pointer-events: none;
+  transition: opacity .5s ease, color .2s ease, border-color .2s ease;
+  z-index: 100;
+}
+#intro.stage-draw #skip-btn { opacity: 1; pointer-events: auto; }
+#skip-btn:hover { color: var(--chalk); border-color: var(--chalk); }
+#skip-btn:focus-visible { outline: 2px solid var(--brass); outline-offset: 2px; }
 
-/* ==========================================================================
-   6. ACESSIBILIDADE — respeita "prefers-reduced-motion"
-   ========================================================================== */
-@media (prefers-reduced-motion: reduce){
-  *,*::before,*::after{
-    animation-duration:.001ms !important;
-    animation-iteration-count:1 !important;
-    transition-duration:.001ms !important;
+@media (max-height: 480px) {
+  #skip-btn { bottom: 10px; right: 12px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
   }
 }
+
+/* ==========================================================================
+   5. COMPONENTES DO SITE PRINCIPAL
+   ========================================================================== */
+#site-content {
+  background: var(--bg2);
+  min-height: 100vh;
+  color: var(--text-main);
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+#site-content.visible {
+  opacity: 1;
+}
+
+header.site-nav {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 28px 6vw; border-bottom: 1px solid var(--line);
+}
+.logo { font-family: Georgia, serif; letter-spacing: 0.12em; font-size: 18px; }
+.logo .g { color: var(--red-main); }
+nav.links a {
+  color: #c7cbd1; text-decoration: none; margin-left: 32px; font-size: 13px;
+  letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.85;
+}
+nav.links a:hover { color: var(--red-main); }
+
+.hero {
+  max-width: 720px; margin: 14vh auto 0; padding: 0 6vw; text-align: center;
+}
+.hero h1 {
+  font-family: Georgia, serif; font-weight: 400; font-size: clamp(30px, 5vw, 50px);
+  line-height: 1.25; letter-spacing: 0.02em; margin-bottom: 22px;
+}
+.hero h1 span { color: var(--red-main); }
+.hero p { color: var(--text-dim); font-size: 15px; line-height: 1.7; margin-bottom: 34px; }
+
+.btn {
+  display: inline-block; padding: 14px 34px; border: 1px solid var(--red-main);
+  color: var(--red-main); text-decoration: none; letter-spacing: 0.1em; font-size: 13px;
+  text-transform: uppercase; transition: all .3s ease; background: transparent; cursor: pointer;
+}
+.btn:hover { background: var(--red-main); color: #0a0c10; }
+
+.section-divider {
+  width: 100%; height: 1px; background: var(--line); margin: 60px 0;
+}
+
+/* Estilos de blocos adicionais da landing page */
+.content-section {
+  max-width: 800px; margin: 0 auto; padding: 0 6vw 80px; text-align: center;
+}
+.content-section h2 { font-family: Georgia, serif; font-size: 32px; margin-bottom: 20px; }
+.content-section p { color: var(--text-dim); line-height: 1.8; font-size: 16px; }
+
+/* Scroll reveal utility */
+.scroll-reveal {
+  opacity: 0; transform: translateY(30px);
+  transition: opacity .8s ease, transform .8s ease;
+}
+.scroll-reveal.active {
+  opacity: 1; transform: translateY(0);
+}
+
+footer {
+  text-align: center; padding: 40px 20px; font-size: 12px; color: var(--text-dim); border-top: 1px solid var(--line);
+}
+footer a { color: var(--text-dim); text-decoration: underline; }
 </style>
 </head>
-<body>
+<body class="lock">
 
 <!-- ==========================================================================
-     INTRO — some sozinha ao final e libera o site
+     INTRO — NOVA ANIMAÇÃO
      ========================================================================== -->
 <div id="intro" aria-hidden="true">
-
   <div class="stage-perspective">
     <div class="burst"></div>
     <div id="figure-wrap">
       <svg id="figure-svg" viewBox="0 0 600 640" xmlns="http://www.w3.org/2000/svg">
-
         <!-- linha de dobra: eixo de simetria do molde -->
         <line class="fade-detail fold-line" x1="300" y1="95" x2="300" y2="608"/>
         <text class="fade-detail fold-label" x="312" y="350" transform="rotate(90 312 350)">DOBRA</text>
@@ -279,7 +330,6 @@ body{
         <!-- botões -->
         <circle class="fade-detail button" cx="303" cy="350" r="4.5"/>
         <circle class="fade-detail button" cx="303" cy="393" r="4.5"/>
-
       </svg>
       <div class="scanline"></div>
     </div>
@@ -296,34 +346,44 @@ body{
 </div>
 
 <!-- ==========================================================================
-     CONTEÚDO DO SITE — troque tudo dentro de #site pelo conteúdo real
+     CONTEÚDO DO SITE — PÁGINA DE VENDAS
      ========================================================================== -->
-<div id="site">
+<div id="site-content">
   <header class="site-nav">
-    <div class="site-nav-inner">
-      <span class="site-logo"><span class="site-logo-h">H</span>DP</span>
-      <nav class="site-links">
-        <a href="#">Sobre</a>
-        <a href="#">Serviços</a>
-        <a href="#">Contato</a>
-      </nav>
-    </div>
+    <div class="logo">HOMEM DE <span class="g">PRESEN&Ccedil;A</span></div>
+    <nav class="links">
+      <a href="#sobre">Sobre</a>
+      <a href="#estilo">Estilo</a>
+      <a href="#contato">Contato</a>
+    </nav>
   </header>
-  <main class="site-hero">
-    <p class="site-eyebrow">Consultoria de Imagem &amp; Alfaiataria</p>
-    <h1>Homem de <em>Presença</em></h1>
-    <p class="site-sub">O conteúdo real do site entra aqui — esta seção é só um exemplo para você ver a transição funcionando.</p>
-    <a href="#" class="site-cta">Agendar consulta</a>
-  </main>
+
+  <section class="hero">
+    <h1>A eleg&acirc;ncia est&aacute; <br>nos <span>detalhes</span>.</h1>
+    <p>Um guia direto sobre postura, estilo e atitude para o homem que quer ser lembrado antes mesmo de dizer uma palavra.</p>
+    <a class="btn" href="#oferta">Descubra</a>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <section class="content-section scroll-reveal" id="sobre">
+    <h2>Postura e Autoridade</h2>
+    <p>O impacto visual e comportamental define como o mundo interage com você. Aprenda a dominar os códigos da comunicação não-verbal, eliminando atitudes passivas e construindo uma presença magnética e natural.</p>
+  </section>
+
+  <footer>
+    <p>Homem De Presença © 2026. Todos os direitos reservados.</p>
+  </footer>
 </div>
 
-<noscript><style>#intro{display:none!important}</style></noscript>
+<noscript><style>#intro{display:none!important}#site-content{opacity:1!important}</style></noscript>
 
 <script>
 (function(){
-  try{
+  try {
     var intro = document.getElementById('intro');
     var skipBtn = document.getElementById('skip-btn');
+    var mainContent = document.getElementById('site-content');
     var exited = false;
     var timers = [];
 
@@ -333,6 +393,7 @@ body{
     function exitIntro(fast){
       if (exited) return;
       exited = true;
+      document.body.classList.remove('lock'); 
       clearAll();
       intro.style.transition = fast ? 'opacity .35s ease' : 'opacity .7s cubic-bezier(.4,0,.2,1), transform .7s cubic-bezier(.4,0,.2,1)';
       requestAnimationFrame(function(){
@@ -340,9 +401,11 @@ body{
         if (!fast) intro.style.transform = 'scale(1.04)';
         intro.style.pointerEvents = 'none';
       });
+      mainContent.classList.add('visible');
       setTimeout(function(){
         intro.style.display = 'none';
         intro.setAttribute('aria-hidden', 'true');
+        revealOnScroll();
       }, fast ? 400 : 750);
     }
 
@@ -351,17 +414,15 @@ body{
     function setupDraw(){
       drawEls = Array.prototype.slice.call(intro.querySelectorAll('.draw'));
       drawEls.forEach(function(el){
-        try{
+        try {
           var len = el.getTotalLength();
           el.style.strokeDasharray = len;
           el.style.strokeDashoffset = len;
-        }catch(e){ /* se falhar, o traço fica visível normalmente */ }
+        } catch(e) {}
       });
     }
 
     function revealDraw(){
-      // precisa ser feito via JS (inline style): um inline vence a regra de classe
-      // em especificidade, entao a reversao para 0 tem que vir daqui, nao do CSS.
       drawEls.forEach(function(el){ el.style.strokeDashoffset = '0'; });
     }
 
@@ -385,12 +446,28 @@ body{
 
     skipBtn.addEventListener('click', function(){ exitIntro(true); });
 
-    /* rede de segurança: o site NUNCA fica bloqueado, aconteça o que acontecer */
-    setTimeout(function(){ if (!exited) intro.style.display = 'none'; }, 9000);
+    /* Fallback de segurança para desbloquear a tela se algo falhar */
+    setTimeout(function(){ if (!exited) { exitIntro(true); } }, 9000);
 
-  }catch(err){
+    /* Lógica de Scroll Reveal do site */
+    const revealElements = document.querySelectorAll('.scroll-reveal');
+    const revealOnScroll = () => {
+      const windowHeight = window.innerHeight;
+      const revealPoint = 50;
+      revealElements.forEach(el => {
+        const revealTop = el.getBoundingClientRect().top;
+        if (revealTop < windowHeight - revealPoint) { el.classList.add('active'); }
+      });
+    };
+
+    window.addEventListener('scroll', revealOnScroll);
+
+  } catch(err){
     var el = document.getElementById('intro');
     if (el) el.style.display = 'none';
+    document.body.classList.remove('lock');
+    var main = document.getElementById('site-content');
+    if (main) main.classList.add('visible');
   }
 })();
 </script>
