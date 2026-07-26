@@ -1,325 +1,399 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Homem de Presença - Intro Motion Graphic</title>
-  <style>
-    /* =========================================================
-       RESET & VARIÁVEIS GLOBAIS
-       ========================================================= */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Homem de Presença</title>
 
-    :root {
-      --bg-color: #0A0C10;
-      --accent-gold: #D4AF37;
-      --line-white: #E6E8EC;
-      --line-dim: rgba(230, 232, 236, 0.2);
-      --font-family: 'Cinzel', 'Montserrat', 'Helvetica Neue', sans-serif;
-    }
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&display=swap" rel="stylesheet">
 
-    body {
-      background-color: var(--bg-color);
-      color: #FFF;
-      font-family: var(--font-family);
-      overflow-x: hidden;
-      min-height: 100vh;
-    }
+<style>
+/* ==========================================================================
+   1. TOKENS — paleta e tipografia (ver notas no final do arquivo)
+   ========================================================================== */
+:root{
+  --ink:        #0a0a0d;
+  --ink-2:      #121319;
+  --chalk:      #eeece5;
+  --chalk-dim:  rgba(238,236,229,.40);
+  --brass:      #c9a35f;
+  --brass-dim:  rgba(201,163,95,.45);
+  --paper-grid: rgba(238,236,229,.045);
+}
 
-    /* =========================================================
-       CONTAINER DA INTRO (OVERLAY FULLSCREEN)
-       ========================================================= */
-    #intro-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background-color: var(--bg-color);
-      z-index: 9999;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      perspective: 1000px;
-      transition: opacity 1s cubic-bezier(0.77, 0, 0.175, 1), visibility 1s;
-    }
+*,*::before,*::after{ box-sizing:border-box; }
+html,body{ margin:0; padding:0; }
+body{
+  background:var(--ink);
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+}
 
-    /* Fundo técnico em grade (Grid Pattern) */
-    .tech-grid {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background-image: 
-        radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.08) 0%, transparent 70%),
-        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-      background-size: 100% 100%, 40px 40px, 40px 40px;
-      pointer-events: none;
-    }
+/* ==========================================================================
+   2. INTRO — overlay de tela cheia
+   ========================================================================== */
+#intro{
+  position:fixed; inset:0; z-index:9999;
+  background:var(--ink);
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  overflow:hidden;
+  padding:24px;
+  user-select:none;
+  transition:opacity .7s ease, transform .7s ease;
+}
+#intro::before{ /* papel de molde, grade sutil */
+  content:""; position:absolute; inset:0;
+  background-image:
+    linear-gradient(var(--paper-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--paper-grid) 1px, transparent 1px);
+  background-size:38px 38px;
+  pointer-events:none;
+}
+#intro::after{ /* vinheta */
+  content:""; position:absolute; inset:0;
+  background:radial-gradient(ellipse at center, transparent 42%, rgba(0,0,0,.55) 100%);
+  pointer-events:none;
+}
 
-    /* =========================================================
-       PALCO DA ANIMAÇÃO MOTION GRAPHIC
-       ========================================================= */
-    .motion-stage {
-      position: relative;
-      width: 320px;
-      height: 380px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      transform-style: preserve-3d;
-    }
+.stage-perspective{
+  position:relative;
+  perspective:1000px;
+  display:flex; justify-content:center;
+}
+.burst{
+  position:absolute; left:50%; top:50%; width:40px; height:40px; margin:-20px 0 0 -20px;
+  border-radius:50%; border:1.5px solid var(--brass-dim); opacity:0;
+}
+#intro.stage-spin .burst{ animation:burst-ring .7s cubic-bezier(.25,.8,.35,1) forwards; }
+@keyframes burst-ring{
+  0%{ transform:scale(.3); opacity:.9; }
+  100%{ transform:scale(9); opacity:0; }
+}
 
-    /* SVG do Terno e Letra H */
-    .suit-svg {
-      width: 240px;
-      height: 240px;
-      transform-origin: center center;
-      animation: spinEntry 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-      filter: drop-shadow(0 0 12px rgba(212, 175, 55, 0.25));
-    }
+#figure-wrap{
+  position:relative;
+  width:min(66vw, 58vh, 360px);
+  transform-style:preserve-3d;
+  transform:rotateY(100deg) scale(.6);
+  opacity:0;
+  transition:transform .8s cubic-bezier(.16,1,.3,1), opacity .5s ease-out;
+}
+#intro.stage-spin #figure-wrap{ transform:rotateY(0deg) scale(1); opacity:1; }
 
-    /* Configuração padrão de traços técnicos */
-    .tech-line {
-      fill: none;
-      stroke: var(--line-white);
-      stroke-width: 2;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-      stroke-dasharray: 600;
-      stroke-dashoffset: 600;
-      animation: drawLine 1.8s cubic-bezier(0.65, 0, 0.35, 1) forwards 0.4s;
-    }
+#figure-svg{ display:block; width:100%; height:auto; overflow:visible; }
+#figure-svg *{ transform-box:fill-box; transform-origin:center; }
+#figure-svg line, #figure-svg path, #figure-svg circle{ fill:none; }
+#figure-svg text{ fill:var(--chalk-dim); font-family:ui-monospace,Menlo,Consolas,monospace; font-size:11px; letter-spacing:2px; }
 
-    .accent-line {
-      stroke: var(--accent-gold);
-      stroke-width: 2.5;
-    }
+.scanline{
+  position:absolute; left:8%; right:8%; top:20%; height:2px;
+  background:linear-gradient(90deg, transparent, var(--brass), transparent);
+  opacity:0; box-shadow:0 0 12px 1px var(--brass-dim);
+}
+#intro.stage-hold .scanline{ animation:scan-sweep .8s ease-in-out forwards; }
+@keyframes scan-sweep{
+  0%{ transform:translateY(0); opacity:0; }
+  15%{ opacity:1; }
+  85%{ opacity:1; }
+  100%{ transform:translateY(340px); opacity:0; }
+}
 
-    /* Círculo guia técnico ao fundo */
-    .guide-circle {
-      fill: none;
-      stroke: var(--line-dim);
-      stroke-width: 1;
-      stroke-dasharray: 4 4;
-      animation: rotateCircle 20s linear infinite;
-      transform-origin: center;
-    }
+/* --- traços do terno: "desenhados" via stroke-dashoffset (definido via JS) --- */
+#figure-svg .draw, #figure-svg .fade-detail{
+  transition:stroke-dashoffset .7s ease-out, opacity .5s ease;
+}
+#figure-svg .side-seam, #figure-svg .measure-line{
+  transition:stroke-dashoffset .7s ease-out, stroke-width .6s ease, stroke .6s ease, transform .6s ease, opacity .5s ease;
+}
 
-    /* =========================================================
-       TEXTO: HOMEM DE PRESENÇA
-       ========================================================= */
-    .text-container {
-      margin-top: 30px;
-      text-align: center;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: revealText 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards 2.2s;
-    }
+.collar{ stroke:var(--chalk); stroke-width:2.5; stroke-linecap:round; }
+.shoulder-slope{ stroke:var(--chalk); stroke-width:2.6; stroke-linecap:round; }
+.side-seam{ stroke:var(--chalk); stroke-width:3; stroke-linecap:round; }
+.tie-shape{ stroke:var(--chalk); stroke-width:2.2; stroke-linejoin:round; stroke-linecap:round; }
+.lapel-notch{ stroke:var(--chalk); stroke-width:2.4; stroke-linecap:round; }
+.measure-line{ stroke:var(--chalk); stroke-width:1.5; stroke-linecap:round; }
+.fold-line{ stroke:var(--chalk-dim); stroke-width:1.2; stroke-dasharray:9,5,2,5; }
+.measure-tick{ stroke:var(--chalk-dim); stroke-width:1.5; }
+.pocket{ stroke:var(--chalk); stroke-width:2; stroke-linecap:round; }
+.button{ stroke:var(--chalk); stroke-width:2; }
+#figure-svg .fade-detail{ opacity:0; }
 
-    .brand-title {
-      font-size: 1.6rem;
-      font-weight: 700;
-      letter-spacing: 12px;
-      text-transform: uppercase;
-      color: #FFFFFF;
-      text-indent: 12px; /* Compensação do letter-spacing */
-      background: linear-gradient(135deg, #FFFFFF 0%, var(--accent-gold) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
+/* atraso escalonado do "desenho a caneta" — ordem de um alfaiate real
+   (precisa da MESMA especificidade da regra que define `transition` acima,
+   já que essa regra usa #figure-svg + classe; sem isso, o delay:0 implícito
+   do shorthand vence e todo mundo anima junto, sem escalonamento) */
+#figure-svg .collar{ transition-delay:0s; }
+#figure-svg .measure-line{ transition-delay:.04s; }
+#figure-svg .shoulder-slope{ transition-delay:.1s; }
+#figure-svg .tie-shape{ transition-delay:.14s; }
+#figure-svg .side-seam{ transition-delay:.2s; }
+#figure-svg .lapel-notch{ transition-delay:.3s; }
 
-    .brand-subtitle {
-      margin-top: 8px;
-      font-size: 0.7rem;
-      letter-spacing: 6px;
-      text-transform: uppercase;
-      color: var(--accent-gold);
-      opacity: 0.8;
-    }
+#intro.stage-details .fade-detail{ opacity:1; }
 
-    /* =========================================================
-       KEYFRAMES DA ANIMAÇÃO (MOTION GRAPHICS)
-       ========================================================= */
-    
-    /* 1. Giro 3D e Entrada de Impacto */
-    @keyframes spinEntry {
-      0% {
-        transform: rotateY(-180deg) rotateZ(-45deg) scale(0.3);
-        opacity: 0;
-      }
-      60% {
-        transform: rotateY(20deg) rotateZ(5deg) scale(1.05);
-        opacity: 1;
-      }
-      100% {
-        transform: rotateY(0deg) rotateZ(0deg) scale(1);
-        opacity: 1;
-      }
-    }
+#intro.stage-formH .fold-line,
+#intro.stage-formH .fold-label,
+#intro.stage-formH .measure-tick,
+#intro.stage-formH .measure-label,
+#intro.stage-formH .collar,
+#intro.stage-formH .shoulder-slope,
+#intro.stage-formH .tie-shape,
+#intro.stage-formH .lapel-notch,
+#intro.stage-formH .pocket,
+#intro.stage-formH .button{ opacity:0; }
+#intro.stage-formH .side-seam{ stroke-width:16; }
+#intro.stage-formH .measure-line{ stroke-width:14; stroke:var(--brass); transform:translateY(313px); }
 
-    /* 2. Desenho Vetorial Gradual das Linhas */
-    @keyframes drawLine {
-      to {
-        stroke-dashoffset: 0;
-      }
-    }
+#intro.stage-separate .side-seam-left{ transform:translateX(-80px); opacity:0; }
+#intro.stage-separate .side-seam-right{ transform:translateX(80px); opacity:0; }
+#intro.stage-separate .measure-line{ opacity:0; }
 
-    /* 3. Rotação do círculo de precisão técnico */
-    @keyframes rotateCircle {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
+/* ==========================================================================
+   3. WORDMARK
+   ========================================================================== */
+.wordmark{
+  margin-top:clamp(20px, 4vh, 44px);
+  display:flex; flex-wrap:wrap; justify-content:center; align-items:baseline;
+  gap:.4em;
+  text-align:center;
+}
+.wm-unit{
+  opacity:0; transform:translateY(14px);
+  transition:opacity .6s ease, transform .6s ease;
+  font-family:'Big Shoulders Display','Arial Narrow',Arial,sans-serif;
+  font-weight:800; letter-spacing:.02em; color:var(--chalk);
+  font-size:clamp(30px, min(8vw, 9vh), 68px);
+  line-height:.95; text-transform:uppercase;
+}
+.wm-unit:nth-child(1){ transition-delay:0s; }
+.wm-unit:nth-child(2){ transition-delay:.1s; }
+.wm-unit:nth-child(3){ transition-delay:.2s; }
+.wm-de{ font-size:clamp(15px, min(3.6vw, 4vh), 32px); font-weight:600; }
+.wm-h{ color:var(--brass); }
 
-    /* 4. Aparição do Texto com Expansão de Letras */
-    @keyframes revealText {
-      0% {
-        opacity: 0;
-        transform: translateY(25px) scale(0.95);
-        filter: blur(8px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-        filter: blur(0);
-      }
-    }
+.wm-rule{
+  display:block; width:120px; max-width:36vw; height:2px; background:var(--brass);
+  margin:16px auto 0; transform:scaleX(0); transition:transform .5s ease;
+}
 
-    /* 5. Transição do H (Recuo Elegante) */
-    .suit-svg.morph-h {
-      animation: morphH 1.2s cubic-bezier(0.65, 0, 0.35, 1) forwards 1.8s;
-    }
+#intro.stage-word .wm-unit{ opacity:1; transform:translateY(0); }
+#intro.stage-final .wm-rule{ transform:scaleX(1); }
 
-    @keyframes morphH {
-      0% {
-        transform: scale(1) translateY(0);
-      }
-      100% {
-        transform: scale(0.85) translateY(-10px);
-      }
-    }
+/* ==========================================================================
+   4. BOTÃO PULAR
+   ========================================================================== */
+#skip-btn{
+  position:absolute; right:20px; bottom:20px;
+  background:transparent; border:1px solid var(--chalk-dim); color:var(--chalk-dim);
+  font-family:ui-monospace,Menlo,Consolas,monospace; font-size:11px; letter-spacing:.12em;
+  text-transform:uppercase; padding:9px 15px; border-radius:2px; cursor:pointer;
+  opacity:0; pointer-events:none;
+  transition:opacity .5s ease, color .2s ease, border-color .2s ease;
+}
+#intro.stage-draw #skip-btn{ opacity:1; pointer-events:auto; }
+#skip-btn:hover{ color:var(--chalk); border-color:var(--chalk); }
+#skip-btn:focus-visible{ outline:2px solid var(--brass); outline-offset:2px; }
 
-    /* =========================================================
-       CONTEÚDO PRINCIPAL DO SITE (PÓS-INTRO)
-       ========================================================= */
-    #main-content {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 1s ease 0.5s, transform 1s ease 0.5s;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      padding: 20px;
-      text-align: center;
-    }
+@media (max-height:480px){
+  #skip-btn{ bottom:10px; right:12px; }
+}
 
-    body.intro-complete #main-content {
-      opacity: 1;
-      transform: translateY(0);
-    }
+/* ==========================================================================
+   5. CONTEÚDO DO SITE (placeholder — troque pelo conteúdo real)
+   ========================================================================== */
+#site{ min-height:100vh; background:var(--ink); color:var(--chalk); display:flex; flex-direction:column; }
+.site-nav{ padding:22px clamp(20px,5vw,64px); }
+.site-nav-inner{ display:flex; justify-content:space-between; align-items:center; max-width:1100px; margin:0 auto; }
+.site-logo{ font-family:'Big Shoulders Display',Arial,sans-serif; font-weight:700; letter-spacing:.06em; font-size:18px; color:var(--chalk); }
+.site-logo-h{ color:var(--brass); }
+.site-links{ display:flex; gap:26px; }
+.site-links a{ color:var(--chalk-dim); text-decoration:none; font-size:12px; letter-spacing:.1em; text-transform:uppercase; font-family:ui-monospace,Menlo,Consolas,monospace; transition:color .2s ease; }
+.site-links a:hover, .site-links a:focus-visible{ color:var(--brass); }
+.site-hero{ flex:1; display:flex; flex-direction:column; justify-content:center; align-items:flex-start; padding:40px clamp(20px,6vw,80px); max-width:900px; }
+.site-eyebrow{ font-family:ui-monospace,Menlo,Consolas,monospace; text-transform:uppercase; letter-spacing:.16em; font-size:12px; color:var(--brass); margin:0 0 18px; }
+.site-hero h1{ font-family:'Big Shoulders Display',Arial,sans-serif; font-weight:800; font-size:clamp(40px,9vw,108px); line-height:.95; margin:0 0 20px; text-transform:uppercase; }
+.site-hero h1 em{ font-style:normal; color:var(--brass); }
+.site-sub{ font-size:clamp(15px,2vw,19px); color:var(--chalk-dim); max-width:46ch; line-height:1.6; margin:0 0 32px; }
+.site-cta{ display:inline-block; border:1px solid var(--brass); color:var(--brass); padding:14px 28px; text-decoration:none; letter-spacing:.08em; text-transform:uppercase; font-size:13px; font-family:ui-monospace,Menlo,Consolas,monospace; transition:background .25s ease, color .25s ease; }
+.site-cta:hover, .site-cta:focus-visible{ background:var(--brass); color:var(--ink); }
 
-    body.intro-complete #intro-overlay {
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-    }
-
-    .btn-replay {
-      margin-top: 25px;
-      padding: 12px 28px;
-      background: transparent;
-      border: 1px solid var(--accent-gold);
-      color: var(--accent-gold);
-      font-family: inherit;
-      font-size: 0.85rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .btn-replay:hover {
-      background: var(--accent-gold);
-      color: var(--bg-color);
-      box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
-    }
-  </style>
+/* ==========================================================================
+   6. ACESSIBILIDADE — respeita "prefers-reduced-motion"
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{
+    animation-duration:.001ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.001ms !important;
+  }
+}
+</style>
 </head>
 <body>
 
-  <div id="intro-overlay">
-    <div class="tech-grid"></div>
+<!-- ==========================================================================
+     INTRO — some sozinha ao final e libera o site
+     ========================================================================== -->
+<div id="intro" aria-hidden="true">
 
-    <div class="motion-stage">
-      <svg class="suit-svg morph-h" viewBox="0 0 200 200">
-        <circle class="guide-circle" cx="100" cy="100" r="88" />
-        <circle class="guide-circle" cx="100" cy="100" r="60" style="animation-duration: 12s; animation-direction: reverse;" />
+  <div class="stage-perspective">
+    <div class="burst"></div>
+    <div id="figure-wrap">
+      <svg id="figure-svg" viewBox="0 0 600 640" xmlns="http://www.w3.org/2000/svg">
 
-        <g id="suit-group">
-          <path class="tech-line" d="M 55 45 L 55 155 M 55 45 L 80 110 L 55 125" />
-          
-          <path class="tech-line" d="M 145 45 L 145 155 M 145 45 L 120 110 L 145 125" />
+        <!-- linha de dobra: eixo de simetria do molde -->
+        <line class="fade-detail fold-line" x1="300" y1="95" x2="300" y2="608"/>
+        <text class="fade-detail fold-label" x="312" y="350" transform="rotate(90 312 350)">DOBRA</text>
 
-          <path class="tech-line" d="M 75 45 L 100 70 L 125 45" />
+        <!-- medida de ombro a ombro: torna-se a barra do H -->
+        <line class="draw measure-line" x1="150" y1="88" x2="450" y2="88"/>
+        <line class="fade-detail measure-tick" x1="150" y1="80" x2="150" y2="96"/>
+        <line class="fade-detail measure-tick" x1="450" y1="80" x2="450" y2="96"/>
+        <text class="fade-detail measure-label" x="300" y="64" text-anchor="middle">OMBRO A OMBRO — 1:1</text>
 
-          <path class="tech-line accent-line" d="M 55 100 L 145 100" /> <polygon class="tech-line accent-line" points="94,70 106,70 108,80 92,80" /> <path class="tech-line accent-line" d="M 94 80 L 106 80 L 108 135 L 100 145 L 92 135 Z" /> </g>
+        <!-- colarinho -->
+        <line class="draw collar" x1="270" y1="130" x2="248" y2="95"/>
+        <line class="draw collar" x1="330" y1="130" x2="352" y2="95"/>
+
+        <!-- gravata -->
+        <path class="draw tie-shape" d="M288,130 L312,130 L317,162 L300,365 L283,162 Z"/>
+
+        <!-- linha de ombro -->
+        <line class="draw shoulder-slope" x1="270" y1="130" x2="150" y2="195"/>
+        <line class="draw shoulder-slope" x1="330" y1="130" x2="450" y2="195"/>
+
+        <!-- costura lateral: torna-se a haste do H -->
+        <line class="draw side-seam side-seam-left"  x1="150" y1="195" x2="150" y2="610"/>
+        <line class="draw side-seam side-seam-right" x1="450" y1="195" x2="450" y2="610"/>
+
+        <!-- lapela do blazer aberto -->
+        <line class="draw lapel-notch" x1="177" y1="200" x2="252" y2="338"/>
+        <line class="draw lapel-notch" x1="423" y1="200" x2="348" y2="338"/>
+
+        <!-- bolso -->
+        <line class="fade-detail pocket" x1="368" y1="256" x2="401" y2="247"/>
+
+        <!-- botões -->
+        <circle class="fade-detail button" cx="303" cy="350" r="4.5"/>
+        <circle class="fade-detail button" cx="303" cy="393" r="4.5"/>
+
       </svg>
-
-      <div class="text-container">
-        <h1 class="brand-title">Homem de Presença</h1>
-        <p class="brand-subtitle">Elegância &amp; Postura</p>
-      </div>
+      <div class="scanline"></div>
     </div>
   </div>
 
-  <main id="main-content">
-    <h2 style="font-size: 2.5rem; font-weight: 300; letter-spacing: 4px; margin-bottom: 10px;">BEM-VINDO</h2>
-    <p style="color: #A0A5B1; max-width: 500px; line-height: 1.6;">Seu site foi carregado com sucesso após a animação de introdução estilo Motion Graphics.</p>
-    <button class="btn-replay" onclick="replayIntro()">Replay Intro</button>
+  <div class="wordmark" id="wordmark">
+    <span class="wm-unit"><span class="wm-h">H</span>OMEM</span>
+    <span class="wm-unit wm-de">DE</span>
+    <span class="wm-unit">PRESENÇA</span>
+  </div>
+  <span class="wm-rule"></span>
+
+  <button id="skip-btn" type="button">Pular intro →</button>
+</div>
+
+<!-- ==========================================================================
+     CONTEÚDO DO SITE — troque tudo dentro de #site pelo conteúdo real
+     ========================================================================== -->
+<div id="site">
+  <header class="site-nav">
+    <div class="site-nav-inner">
+      <span class="site-logo"><span class="site-logo-h">H</span>DP</span>
+      <nav class="site-links">
+        <a href="#">Sobre</a>
+        <a href="#">Serviços</a>
+        <a href="#">Contato</a>
+      </nav>
+    </div>
+  </header>
+  <main class="site-hero">
+    <p class="site-eyebrow">Consultoria de Imagem &amp; Alfaiataria</p>
+    <h1>Homem de <em>Presença</em></h1>
+    <p class="site-sub">O conteúdo real do site entra aqui — esta seção é só um exemplo para você ver a transição funcionando.</p>
+    <a href="#" class="site-cta">Agendar consulta</a>
   </main>
+</div>
 
-  <script>
-    // Duração total da intro antes de revelar o site (em milissegundos)
-    const INTRO_DURATION = 4200;
+<noscript><style>#intro{display:none!important}</style></noscript>
 
-    function startIntroTimer() {
-      setTimeout(() => {
-        document.body.classList.add('intro-complete');
-      }, INTRO_DURATION);
+<script>
+(function(){
+  try{
+    var intro = document.getElementById('intro');
+    var skipBtn = document.getElementById('skip-btn');
+    var exited = false;
+    var timers = [];
+
+    function schedule(ms, fn){ timers.push(setTimeout(fn, ms)); }
+    function clearAll(){ timers.forEach(clearTimeout); timers = []; }
+
+    function exitIntro(fast){
+      if (exited) return;
+      exited = true;
+      clearAll();
+      intro.style.transition = fast ? 'opacity .35s ease' : 'opacity .7s cubic-bezier(.4,0,.2,1), transform .7s cubic-bezier(.4,0,.2,1)';
+      requestAnimationFrame(function(){
+        intro.style.opacity = '0';
+        if (!fast) intro.style.transform = 'scale(1.04)';
+        intro.style.pointerEvents = 'none';
+      });
+      setTimeout(function(){
+        intro.style.display = 'none';
+        intro.setAttribute('aria-hidden', 'true');
+      }, fast ? 400 : 750);
     }
 
-    // Inicia o temporizador ao carregar a página
-    window.addEventListener('DOMContentLoaded', () => {
-      startIntroTimer();
-    });
+    var drawEls = [];
 
-    // Função para reiniciar a animação ao clicar no botão
-    function replayIntro() {
-      document.body.classList.remove('intro-complete');
-      
-      // Reinicia os elementos SVG para disparar as animações novamente
-      const svg = document.querySelector('.suit-svg');
-      const text = document.querySelector('.text-container');
-      
-      svg.style.animation = 'none';
-      text.style.animation = 'none';
-      
-      // Força o reflow do navegador
-      void svg.offsetWidth;
-      
-      svg.style.animation = '';
-      text.style.animation = '';
-      
-      startIntroTimer();
+    function setupDraw(){
+      drawEls = Array.prototype.slice.call(intro.querySelectorAll('.draw'));
+      drawEls.forEach(function(el){
+        try{
+          var len = el.getTotalLength();
+          el.style.strokeDasharray = len;
+          el.style.strokeDashoffset = len;
+        }catch(e){ /* se falhar, o traço fica visível normalmente */ }
+      });
     }
-  </script>
+
+    function revealDraw(){
+      // precisa ser feito via JS (inline style): um inline vence a regra de classe
+      // em especificidade, entao a reversao para 0 tem que vir daqui, nao do CSS.
+      drawEls.forEach(function(el){ el.style.strokeDashoffset = '0'; });
+    }
+
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (reduce){
+      intro.classList.add('stage-word', 'stage-final');
+      schedule(900, function(){ exitIntro(true); });
+    } else {
+      setupDraw();
+      schedule(20,   function(){ intro.classList.add('stage-spin'); });
+      schedule(550,  function(){ intro.classList.add('stage-draw'); revealDraw(); });
+      schedule(1500, function(){ intro.classList.add('stage-details'); });
+      schedule(2050, function(){ intro.classList.add('stage-hold'); });
+      schedule(2500, function(){ intro.classList.add('stage-formH'); });
+      schedule(3300, function(){ intro.classList.add('stage-separate'); });
+      schedule(3950, function(){ intro.classList.add('stage-word'); });
+      schedule(4550, function(){ intro.classList.add('stage-final'); });
+      schedule(5300, function(){ exitIntro(false); });
+    }
+
+    skipBtn.addEventListener('click', function(){ exitIntro(true); });
+
+    /* rede de segurança: o site NUNCA fica bloqueado, aconteça o que acontecer */
+    setTimeout(function(){ if (!exited) intro.style.display = 'none'; }, 9000);
+
+  }catch(err){
+    var el = document.getElementById('intro');
+    if (el) el.style.display = 'none';
+  }
+})();
+</script>
+
 </body>
 </html>
