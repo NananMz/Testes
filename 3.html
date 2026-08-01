@@ -3,412 +3,570 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Homem de Presença</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&display=swap" rel="stylesheet">
+<title>Modelos de Provas Sociais</title>
 
 <style>
-/* ==========================================================================
-   1. TOKENS — paleta mista (Animação + Site)
-   ========================================================================== */
-:root{
-  /* Tokens da nova animação */
-  --ink:        #0a0c10; /* Ajustado para coincidir com o --bg do site */
-  --ink-2:      #0d1015; /* Ajustado para coincidir com o --bg2 do site */
-  --chalk:      #eeece5;
-  --chalk-dim:  rgba(238,236,229,.40);
-  --brass:      #A1111B;
-  --brass-dim:  rgba(201,163,95,.45);
-  --paper-grid: rgba(238,236,229,.045);
 
-  /* Tokens da página de vendas */
-  --bg: #0a0c10;
-  --bg2: #0d1015;
-  --line: #eef1f5;
-  --line-dim: #5a6472;
-  --gold: #9D111B;
-  --gold-dim: #790D15;
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,Helvetica,sans-serif;
 }
 
-*,*::before,*::after{ box-sizing:border-box; }
-html,body{ margin:0; padding:0; height:100%; }
 body{
-  background:var(--bg);
-  -webkit-font-smoothing:antialiased;
-  text-rendering:optimizeLegibility;
-  overflow-x:hidden;
-  font-family:'Helvetica Neue',Arial,sans-serif;
-}
-body.lock{ overflow:hidden; height:100vh; }
 
-/* ==========================================================================
-   2. INTRO — Nova Animação
-   ========================================================================== */
-#intro{
-  position:fixed; inset:0; z-index:9999;
-  /* Fundo perfeitamente alinhado com o tema da página de vendas */
-  background: radial-gradient(ellipse at 50% 40%, #12151b 0%, #0a0c10 70%);
-  display:flex; flex-direction:column; align-items:center; justify-content:center;
-  overflow:hidden;
-  padding:24px;
-  user-select:none;
-  transition:opacity .7s ease, transform .7s ease;
-}
-#intro::before{ /* papel de molde, grade sutil */
-  content:""; position:absolute; inset:0;
-  background-image:
-    linear-gradient(var(--paper-grid) 1px, transparent 1px),
-    linear-gradient(90deg, var(--paper-grid) 1px, transparent 1px);
-  background-size:38px 38px;
-  pointer-events:none;
-}
-#intro::after{ /* vinheta */
-  content:""; position:absolute; inset:0;
-  background:radial-gradient(ellipse at center, transparent 42%, rgba(0,0,0,.55) 100%);
-  pointer-events:none;
+background:#111;
+color:white;
+padding:60px 30px;
+
 }
 
-.stage-perspective{
-  position:relative;
-  perspective:1000px;
-  display:flex; justify-content:center;
-}
-.burst{
-  position:absolute; left:50%; top:50%; width:40px; height:40px; margin:-20px 0 0 -20px;
-  border-radius:50%; border:1.5px solid var(--brass-dim); opacity:0;
-}
-#intro.stage-spin .burst{ animation:burst-ring .7s cubic-bezier(.25,.8,.35,1) forwards; }
-@keyframes burst-ring{
-  0%{ transform:scale(.3); opacity:.9; }
-  100%{ transform:scale(9); opacity:0; }
+h1{
+
+text-align:center;
+margin-bottom:10px;
+font-size:42px;
+
 }
 
-#figure-wrap{
-  position:relative;
-  width:min(66vw, 58vh, 360px);
-  transform-style:preserve-3d;
-  transform:rotateY(100deg) scale(.6);
-  opacity:0;
-  transition:transform .8s cubic-bezier(.16,1,.3,1), opacity .5s ease-out;
-}
-#intro.stage-spin #figure-wrap{ transform:rotateY(0deg) scale(1); opacity:1; }
+p{
 
-#figure-svg{ display:block; width:100%; height:auto; overflow:visible; }
-#figure-svg *{ transform-box:fill-box; transform-origin:center; }
-#figure-svg line, #figure-svg path, #figure-svg circle{ fill:none; }
-#figure-svg text{ fill:var(--chalk-dim); font-family:ui-monospace,Menlo,Consolas,monospace; font-size:11px; letter-spacing:2px; }
+text-align:center;
+opacity:.8;
+margin-bottom:60px;
 
-.scanline{
-  position:absolute; left:8%; right:8%; top:20%; height:2px;
-  background:linear-gradient(90deg, transparent, var(--brass), transparent);
-  opacity:0; box-shadow:0 0 12px 1px var(--brass-dim);
-}
-#intro.stage-hold .scanline{ animation:scan-sweep .8s ease-in-out forwards; }
-@keyframes scan-sweep{
-  0%{ transform:translateY(0); opacity:0; }
-  15%{ opacity:1; }
-  85%{ opacity:1; }
-  100%{ transform:translateY(340px); opacity:0; }
 }
 
-#figure-svg .draw, #figure-svg .fade-detail{
-  transition:stroke-dashoffset .7s ease-out, opacity .5s ease;
-}
-#figure-svg .side-seam, #figure-svg .measure-line{
-  transition:stroke-dashoffset .7s ease-out, stroke-width .6s ease, stroke .6s ease, transform .6s ease, opacity .5s ease;
-}
+section{
 
-.collar{ stroke:var(--chalk); stroke-width:2.5; stroke-linecap:round; }
-.shoulder-slope{ stroke:var(--chalk); stroke-width:2.6; stroke-linecap:round; }
-.side-seam{ stroke:var(--chalk); stroke-width:3; stroke-linecap:round; }
-.tie-shape{ stroke:var(--chalk); stroke-width:2.2; stroke-linejoin:round; stroke-linecap:round; }
-.lapel-notch{ stroke:var(--chalk); stroke-width:2.4; stroke-linecap:round; }
-.measure-line{ stroke:var(--chalk); stroke-width:1.5; stroke-linecap:round; }
-.fold-line{ stroke:var(--chalk-dim); stroke-width:1.2; stroke-dasharray:9,5,2,5; }
-.measure-tick{ stroke:var(--chalk-dim); stroke-width:1.5; }
-.pocket{ stroke:var(--chalk); stroke-width:2; stroke-linecap:round; }
-.button{ stroke:var(--chalk); stroke-width:2; }
-#figure-svg .fade-detail{ opacity:0; }
+margin-bottom:120px;
 
-#figure-svg .collar{ transition-delay:0s; }
-#figure-svg .measure-line{ transition-delay:.04s; }
-#figure-svg .shoulder-slope{ transition-delay:.1s; }
-#figure-svg .tie-shape{ transition-delay:.14s; }
-#figure-svg .side-seam{ transition-delay:.2s; }
-#figure-svg .lapel-notch{ transition-delay:.3s; }
-
-#intro.stage-details .fade-detail{ opacity:1; }
-
-#intro.stage-formH .fold-line,
-#intro.stage-formH .fold-label,
-#intro.stage-formH .measure-tick,
-#intro.stage-formH .measure-label,
-#intro.stage-formH .collar,
-#intro.stage-formH .shoulder-slope,
-#intro.stage-formH .tie-shape,
-#intro.stage-formH .lapel-notch,
-#intro.stage-formH .pocket,
-#intro.stage-formH .button{ opacity:0; }
-#intro.stage-formH .side-seam{ stroke-width:16; }
-#intro.stage-formH .measure-line{ stroke-width:14; stroke:var(--brass); transform:translateY(313px); }
-
-#intro.stage-separate .side-seam-left{ transform:translateX(-80px); opacity:0; }
-#intro.stage-separate .side-seam-right{ transform:translateX(80px); opacity:0; }
-#intro.stage-separate .measure-line{ opacity:0; }
-
-/* ==========================================================================
-   3. WORDMARK
-   ========================================================================== */
-.wordmark{
-  margin-top:clamp(20px, 4vh, 44px);
-  display:flex; flex-wrap:wrap; justify-content:center; align-items:baseline;
-  gap:.4em;
-  text-align:center;
-}
-.wm-unit{
-  opacity:0; transform:translateY(14px);
-  transition:opacity .6s ease, transform .6s ease;
-  font-family:'Big Shoulders Display','Arial Narrow',Arial,sans-serif;
-  font-weight:800; letter-spacing:.02em; color:var(--chalk);
-  font-size:clamp(30px, min(8vw, 9vh), 68px);
-  line-height:.95; text-transform:uppercase;
-}
-.wm-unit:nth-child(1){ transition-delay:0s; }
-.wm-unit:nth-child(2){ transition-delay:.1s; }
-.wm-unit:nth-child(3){ transition-delay:.2s; }
-.wm-de{ font-size:clamp(15px, min(3.6vw, 4vh), 32px); font-weight:600; }
-.wm-h{ color:var(--brass); }
-
-.wm-rule{
-  display:block; width:120px; max-width:36vw; height:2px; background:var(--brass);
-  margin:16px auto 0; transform:scaleX(0); transition:transform .5s ease;
 }
 
-#intro.stage-word .wm-unit{ opacity:1; transform:translateY(0); }
-#intro.stage-final .wm-rule{ transform:scaleX(1); }
+h2{
 
-/* ==========================================================================
-   4. BOTÃO PULAR
-   ========================================================================== */
-#skip-btn{
-  position:absolute; right:20px; bottom:20px;
-  background:transparent; border:1px solid var(--chalk-dim); color:var(--chalk-dim);
-  font-family:ui-monospace,Menlo,Consolas,monospace; font-size:11px; letter-spacing:.12em;
-  text-transform:uppercase; padding:9px 15px; border-radius:2px; cursor:pointer;
-  opacity:0; pointer-events:none;
-  transition:opacity .5s ease, color .2s ease, border-color .2s ease;
-  z-index:100;
-}
-#intro.stage-draw #skip-btn{ opacity:1; pointer-events:auto; }
-#skip-btn:hover{ color:var(--chalk); border-color:var(--chalk); }
-#skip-btn:focus-visible{ outline:2px solid var(--brass); outline-offset:2px; }
+margin-bottom:40px;
+text-align:center;
+font-size:30px;
 
-@media (max-height:480px){
-  #skip-btn{ bottom:10px; right:12px; }
 }
 
-@media (prefers-reduced-motion: reduce){
-  *,*::before,*::after{
-    animation-duration:.001ms !important;
-    animation-iteration-count:1 !important;
-    transition-duration:.001ms !important;
-  }
+img{
+
+width:100%;
+display:block;
+border-radius:20px;
+
 }
 
-/* ==========================================================================
-   5. CONTEÚDO DA PÁGINA DE VENDAS (MANTIDO DO ORIGINAL)
-   ========================================================================== */
-#site-content{ background:var(--bg2); min-height:100vh; color:#e8e8e8; }
-header.site-nav{
-  display:flex; justify-content:space-between; align-items:center;
-  padding:28px 6vw; border-bottom:1px solid #1c2028;
+.modelo{
+
+max-width:1200px;
+margin:auto;
+
 }
-.logo{ font-family:Georgia,serif; letter-spacing:0.12em; font-size:18px; }
-.logo .g{ color:var(--gold); }
-nav.links a{
-  color:#c7cbd1; text-decoration:none; margin-left:32px; font-size:13px;
-  letter-spacing:0.08em; text-transform:uppercase; opacity:0.85;
+
+/* ============================
+MODELO 1
+============================ */
+
+.cards1{
+
+display:flex;
+justify-content:center;
+align-items:center;
+position:relative;
+height:550px;
+
 }
-nav.links a:hover{ color:var(--gold); }
+
+.cards1 img{
+
+width:290px;
+position:absolute;
+transition:.4s;
+box-shadow:0 20px 50px rgba(0,0,0,.5);
+
+}
+
+.cards1 img:hover{
+
+transform:scale(1.05);
+
+}
+
+.cards1 .left{
+
+left:220px;
+transform:rotate(-14deg);
+
+}
+
+.cards1 .center{
+
+z-index:5;
+width:330px;
+
+}
+
+.cards1 .right{
+
+right:220px;
+transform:rotate(14deg);
+
+}
+
+/* ============================
+MODELO 2
+============================ */
+
+.grid{
+
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:25px;
+
+}
+
+.grid img{
+
+transition:.4s;
+
+}
+
+.grid img:hover{
+
+transform:translateY(-10px);
+
+}
+
+/* ============================
+MODELO 3
+============================ */
+
+.stack{
+
+display:flex;
+justify-content:center;
+position:relative;
+height:420px;
+
+}
+
+.stack img{
+
+width:320px;
+position:absolute;
+transition:.4s;
+
+}
+
+.stack img:nth-child(1){
+
+transform:translateX(-80px) rotate(-8deg);
+
+}
+
+.stack img:nth-child(2){
+
+z-index:5;
+
+}
+
+.stack img:nth-child(3){
+
+transform:translateX(80px) rotate(8deg);
+
+}
+
+.stack img:hover{
+
+transform:scale(1.08);
+
+z-index:99;
+
+}
+
+/* ============================
+MODELO 4
+============================ */
+
+.polaroid{
+
+display:flex;
+justify-content:center;
+gap:50px;
+flex-wrap:wrap;
+
+}
+
+.polaroid div{
+
+background:white;
+padding:12px;
+border-radius:5px;
+width:280px;
+
+}
+
+.polaroid img{
+
+border-radius:0;
+
+}
+
+.polaroid p{
+
+color:black;
+margin-top:12px;
+
+}
+
+/* ============================
+MODELO 5
+============================ */
+
+.phone{
+
+display:flex;
+justify-content:center;
+gap:40px;
+flex-wrap:wrap;
+
+}
+
+.mock{
+
+background:#000;
+padding:12px;
+border-radius:40px;
+width:260px;
+box-shadow:0 0 40px rgba(255,255,255,.15);
+
+}
+
+.mock img{
+
+border-radius:30px;
+
+}
+
+/* ============================
+MODELO 6
+============================ */
+
+.carousel{
+
+display:flex;
+overflow:auto;
+gap:30px;
+padding:20px;
+
+}
+
+.carousel img{
+
+width:320px;
+flex:none;
+
+}
+
+/* ============================
+MODELO 7
+============================ */
+
 .hero{
-  max-width:720px; margin:14vh auto 0; padding:0 6vw; text-align:center;
+
+display:flex;
+justify-content:center;
+align-items:center;
+height:500px;
+position:relative;
+
 }
-.hero h1{
-  font-family:Georgia,serif; font-weight:400; font-size:clamp(30px,5vw,50px);
-  line-height:1.25; letter-spacing:0.02em; margin-bottom:22px;
+
+.hero img{
+
+position:absolute;
+transition:.5s;
+
 }
-.hero h1 span{ color:var(--gold); }
-.hero p{ color:#a7adb6; font-size:15px; line-height:1.7; margin-bottom:34px; }
-.cta{
-  display:inline-block; padding:14px 34px; border:1px solid var(--gold);
-  color:var(--gold); text-decoration:none; letter-spacing:0.1em; font-size:13px;
-  text-transform:uppercase; transition:all .3s ease;
+
+.hero img:nth-child(1){
+
+width:230px;
+left:260px;
+transform:rotate(-18deg);
+opacity:.6;
+
 }
-.cta:hover{ background:var(--gold); color:#0a0c10; }
+
+.hero img:nth-child(2){
+
+width:350px;
+z-index:10;
+
+}
+
+.hero img:nth-child(3){
+
+width:230px;
+right:260px;
+transform:rotate(18deg);
+opacity:.6;
+
+}
+
+/* ============================
+MODELO 8
+============================ */
+
+.perspective{
+
+display:flex;
+justify-content:center;
+align-items:center;
+gap:20px;
+height:520px;
+perspective:1200px;
+
+}
+
+.perspective img{
+
+width:290px;
+transition:.5s;
+
+}
+
+.perspective img:nth-child(1){
+
+transform:rotateY(35deg);
+
+}
+
+.perspective img:nth-child(2){
+
+width:340px;
+
+}
+
+.perspective img:nth-child(3){
+
+transform:rotateY(-35deg);
+
+}
+
+.perspective img:hover{
+
+transform:scale(1.1);
+
+}
+
+@media(max-width:900px){
+
+.cards1,
+.stack,
+.hero{
+
+height:auto;
+display:flex;
+flex-direction:column;
+
+}
+
+.cards1 img,
+.stack img,
+.hero img{
+
+position:relative;
+left:auto;
+right:auto;
+transform:none;
+margin:15px auto;
+width:85%;
+
+}
+
+.perspective{
+
+flex-direction:column;
+height:auto;
+
+}
+
+.perspective img{
+
+transform:none !important;
+width:85%;
+
+}
+
+}
+
 </style>
+
 </head>
-<body class="lock">
 
-<!-- ==========================================================================
-     INTRO — NOVA ANIMAÇÃO
-     ========================================================================== -->
-<div id="intro" aria-hidden="true">
+<body>
 
-  <div class="stage-perspective">
-    <div class="burst"></div>
-    <div id="figure-wrap">
-      <svg id="figure-svg" viewBox="0 0 600 640" xmlns="http://www.w3.org/2000/svg">
+<h1>MODELOS DE PROVAS SOCIAIS</h1>
 
-        <!-- linha de dobra: eixo de simetria do molde -->
-        <line class="fade-detail fold-line" x1="300" y1="95" x2="300" y2="608"/>
-        <text class="fade-detail fold-label" x="312" y="350" transform="rotate(90 312 350)">DOBRA</text>
+<p>Substitua prova1.jpg, prova2.jpg e prova3.jpg pelas suas imagens.</p>
 
-        <!-- medida de ombro a ombro: torna-se a barra do H -->
-        <line class="draw measure-line" x1="150" y1="88" x2="450" y2="88"/>
-        <line class="fade-detail measure-tick" x1="150" y1="80" x2="150" y2="96"/>
-        <line class="fade-detail measure-tick" x1="450" y1="80" x2="450" y2="96"/>
-        <text class="fade-detail measure-label" x="300" y="64" text-anchor="middle">OMBRO A OMBRO — 1:1</text>
+<section>
 
-        <!-- colarinho -->
-        <line class="draw collar" x1="270" y1="130" x2="248" y2="95"/>
-        <line class="draw collar" x1="330" y1="130" x2="352" y2="95"/>
+<h2>MODELO 1 — Sobrepostas</h2>
 
-        <!-- gravata -->
-        <path class="draw tie-shape" d="M288,130 L312,130 L317,162 L300,365 L283,162 Z"/>
+<div class="modelo cards1">
 
-        <!-- linha de ombro -->
-        <line class="draw shoulder-slope" x1="270" y1="130" x2="150" y2="195"/>
-        <line class="draw shoulder-slope" x1="330" y1="130" x2="450" y2="195"/>
+<img src="prova1.jpg" class="left">
+<img src="prova2.jpg" class="center">
+<img src="prova3.jpg" class="right">
 
-        <!-- costura lateral: torna-se a haste do H -->
-        <line class="draw side-seam side-seam-left"  x1="150" y1="195" x2="150" y2="610"/>
-        <line class="draw side-seam side-seam-right" x1="450" y1="195" x2="450" y2="610"/>
-
-        <!-- lapela do blazer aberto -->
-        <line class="draw lapel-notch" x1="177" y1="200" x2="252" y2="338"/>
-        <line class="draw lapel-notch" x1="423" y1="200" x2="348" y2="338"/>
-
-        <!-- bolso -->
-        <line class="fade-detail pocket" x1="368" y1="256" x2="401" y2="247"/>
-
-        <!-- botões -->
-        <circle class="fade-detail button" cx="303" cy="350" r="4.5"/>
-        <circle class="fade-detail button" cx="303" cy="393" r="4.5"/>
-
-      </svg>
-      <div class="scanline"></div>
-    </div>
-  </div>
-
-  <div class="wordmark" id="wordmark">
-    <span class="wm-unit"><span class="wm-h">HOMEM</span></span>
-    <span class="wm-unit wm-de">DE</span>
-    <span class="wm-unit">PRESENÇA</span>
-  </div>
-  <span class="wm-rule"></span>
-
-  <button id="skip-btn" type="button">Pular intro →</button>
 </div>
 
-<!-- ==========================================================================
-     CONTEÚDO DO SITE — PÁGINA DE VENDAS ORIGINAL
-     ========================================================================== -->
-<div id="site-content">
-  <header class="site-nav">
-    <div class="logo">HOMEM DE <span class="g">PRESEN&Ccedil;A</span></div>
-    <nav class="links">
-      <a href="#">Sobre</a>
-      <a href="#">Estilo</a>
-      <a href="#">Contato</a>
-    </nav>
-  </header>
-  <section class="hero">
-    <h1>A eleg&acirc;ncia est&aacute; <br>nos <span>detalhes</span>.</h1>
-    <p>Um guia direto sobre postura, estilo e atitude para o homem que quer ser lembrado
-       antes mesmo de dizer uma palavra.</p>
-    <a class="cta" href="#">Descubra</a>
-  </section>
+</section>
+
+<section>
+
+<h2>MODELO 2 — Grid</h2>
+
+<div class="modelo grid">
+
+<img src="prova1.jpg">
+<img src="prova2.jpg">
+<img src="prova3.jpg">
+<img src="prova1.jpg">
+
 </div>
 
-<noscript><style>#intro{display:none!important}</style></noscript>
+</section>
 
-<script>
-(function(){
-  try{
-    var intro = document.getElementById('intro');
-    var skipBtn = document.getElementById('skip-btn');
-    var exited = false;
-    var timers = [];
+<section>
 
-    function schedule(ms, fn){ timers.push(setTimeout(fn, ms)); }
-    function clearAll(){ timers.forEach(clearTimeout); timers = []; }
+<h2>MODELO 3 — Pilha</h2>
 
-    function exitIntro(fast){
-      if (exited) return;
-      exited = true;
-      document.body.classList.remove('lock'); // Libera o scroll da página de vendas
-      clearAll();
-      intro.style.transition = fast ? 'opacity .35s ease' : 'opacity .7s cubic-bezier(.4,0,.2,1), transform .7s cubic-bezier(.4,0,.2,1)';
-      requestAnimationFrame(function(){
-        intro.style.opacity = '0';
-        if (!fast) intro.style.transform = 'scale(1.04)';
-        intro.style.pointerEvents = 'none';
-      });
-      setTimeout(function(){
-        intro.style.display = 'none';
-        intro.setAttribute('aria-hidden', 'true');
-      }, fast ? 400 : 750);
-    }
+<div class="modelo stack">
 
-    var drawEls = [];
+<img src="prova1.jpg">
+<img src="prova2.jpg">
+<img src="prova3.jpg">
 
-    function setupDraw(){
-      drawEls = Array.prototype.slice.call(intro.querySelectorAll('.draw'));
-      drawEls.forEach(function(el){
-        try{
-          var len = el.getTotalLength();
-          el.style.strokeDasharray = len;
-          el.style.strokeDashoffset = len;
-        }catch(e){ /* se falhar, o traço fica visível normalmente */ }
-      });
-    }
+</div>
 
-    function revealDraw(){
-      drawEls.forEach(function(el){ el.style.strokeDashoffset = '0'; });
-    }
+</section>
 
-    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+<section>
 
-    if (reduce){
-      intro.classList.add('stage-word', 'stage-final');
-      schedule(900, function(){ exitIntro(true); });
-    } else {
-      setupDraw();
-      schedule(20,   function(){ intro.classList.add('stage-spin'); });
-      schedule(550,  function(){ intro.classList.add('stage-draw'); revealDraw(); });
-      schedule(1500, function(){ intro.classList.add('stage-details'); });
-      schedule(2050, function(){ intro.classList.add('stage-hold'); });
-      schedule(2500, function(){ intro.classList.add('stage-formH'); });
-      schedule(3300, function(){ intro.classList.add('stage-separate'); });
-      schedule(3950, function(){ intro.classList.add('stage-word'); });
-      schedule(4550, function(){ intro.classList.add('stage-final'); });
-      schedule(5300, function(){ exitIntro(false); });
-    }
+<h2>MODELO 4 — Polaroid</h2>
 
-    skipBtn.addEventListener('click', function(){ exitIntro(true); });
+<div class="modelo polaroid">
 
-    /* rede de segurança: o site NUNCA fica bloqueado, aconteça o que acontecer */
-    setTimeout(function(){ if (!exited) { intro.style.display = 'none'; document.body.classList.remove('lock'); } }, 9000);
+<div>
 
-  }catch(err){
-    var el = document.getElementById('intro');
-    if (el) el.style.display = 'none';
-    document.body.classList.remove('lock');
-  }
-})();
-</script>
+<img src="prova1.jpg">
+
+<p>★★★★★</p>
+
+</div>
+
+<div>
+
+<img src="prova2.jpg">
+
+<p>★★★★★</p>
+
+</div>
+
+<div>
+
+<img src="prova3.jpg">
+
+<p>★★★★★</p>
+
+</div>
+
+</div>
+
+</section>
+
+<section>
+
+<h2>MODELO 5 — Dentro de Celular</h2>
+
+<div class="modelo phone">
+
+<div class="mock">
+
+<img src="prova1.jpg">
+
+</div>
+
+<div class="mock">
+
+<img src="prova2.jpg">
+
+</div>
+
+<div class="mock">
+
+<img src="prova3.jpg">
+
+</div>
+
+</div>
+
+</section>
+
+<section>
+
+<h2>MODELO 6 — Carrossel</h2>
+
+<div class="modelo carousel">
+
+<img src="prova1.jpg">
+<img src="prova2.jpg">
+<img src="prova3.jpg">
+<img src="prova1.jpg">
+<img src="prova2.jpg">
+
+</div>
+
+</section>
+
+<section>
+
+<h2>MODELO 7 — Destaque Central</h2>
+
+<div class="modelo hero">
+
+<img src="prova1.jpg">
+
+<img src="prova2.jpg">
+
+<img src="prova3.jpg">
+
+</div>
+
+</section>
+
+<section>
+
+<h2>MODELO 8 — Perspectiva 3D</h2>
+
+<div class="modelo perspective">
+
+<img src="prova1.jpg">
+
+<img src="prova2.jpg">
+
+<img src="prova3.jpg">
+
+</div>
+
+</section>
 
 </body>
 </html>
