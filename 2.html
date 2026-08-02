@@ -318,12 +318,20 @@
             width: 70px; height: 18px; background: #111; border-radius: 12px; z-index: 5;
         }
         .carousel-track {
-            display: flex; height: 100%; transition: transform 0.6s cubic-bezier(0.65, 0, 0.35, 1);
-        }
+    display: flex;
+    height: 100%;
+    width: 100%;
+    transition: transform 0.6s cubic-bezier(0.65, 0, 0.35, 1);
+}
         .carousel-slide {
-            min-width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;
-            background: linear-gradient(160deg, #0f0f0f, #050505);
-        }
+    flex: 0 0 100%;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(160deg, #0f0f0f, #050505);
+}
         .carousel-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
         .carousel-placeholder {
             display: flex; flex-direction: column; align-items: center; justify-content: center;
@@ -735,59 +743,56 @@
                  .carousel-slide por <img src="sua-imagem.jpg" alt="...">
                  ========================================== -->
             <section class="proof-carousel scroll-reveal">
-                <span class="eyebrow" style="display:block; font-size:11px; text-transform:uppercase; letter-spacing:2px; color:var(--red-main); margin-bottom:12px; text-align:center; font-weight:600;">Prints Reais • Enviados Pelos Alunos</span>
-                <h2 class="section-title" style="font-size: 30px;">Resultados na <br><span>Prática</span></h2>
+    <span class="eyebrow" style="display:block; font-size:11px; text-transform:uppercase; letter-spacing:2px; color:var(--red-main); margin-bottom:12px; text-align:center; font-weight:600;">
+        Prints Reais • Enviados Pelos Alunos
+    </span>
 
-                <div class="carousel-viewport" id="carouselViewport">
-    <div class="carousel-track" id="carouselTrack">
-        <div class="carousel-slide">
-            <img src="5c23f3ff-713f-44a1-af0b-1d67d9d51ac6.jpg" alt="Print 1" class="carousel-image">
-        </div>
-    </div>
-</div>
-                
-                        <div class="carousel-viewport" id="carouselViewport">
-    <div class="carousel-track" id="carouselTrack">
-        <div class="carousel-slide">
-            <img src="9b4c4748-d0be-478d-82d4-c85324b2b62f.jpg" alt="Print 2" class="carousel-image">
-        </div>
-    </div>
-</div>
-                
-                        <div class="carousel-viewport" id="carouselViewport">
-    <div class="carousel-track" id="carouselTrack">
-        <div class="carousel-slide">
-            <img src="a955d0af-8863-4150-8ee4-7886f0cf58c2.jpg" alt="Print 3" class="carousel-image">
-        </div>
-    </div>
-</div>
-                
-                        <div class="carousel-viewport" id="carouselViewport">
-    <div class="carousel-track" id="carouselTrack">
-        <div class="carousel-slide">
-            <img src="b17e0aa8-e136-41a7-abb3-690820741f13.jpg" alt="Print 4" class="carousel-image">
-        </div>
-    </div>
-</div>
-                
-                        <div class="carousel-viewport" id="carouselViewport">
-    <div class="carousel-track" id="carouselTrack">
-        <div class="carousel-slide">
-            <img src="c83f0017-19ed-4553-99ff-1d3193a0c124.jpg" alt="Print 5" class="carousel-image">
-        </div>
-    </div>
-                        </div>
+    <h2 class="section-title" style="font-size: 30px;">
+        Resultados na <br><span>Prática</span>
+    </h2>
 
-                <div class="carousel-controls">
-                    <button class="carousel-arrow" id="carouselPrev" aria-label="Anterior">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg>
-                    </button>
-                    <div class="carousel-dots" id="carouselDots"></div>
-                    <button class="carousel-arrow" id="carouselNext" aria-label="Próximo">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                    </button>
-                </div>
-            </section>
+    <div class="carousel-viewport" id="carouselViewport">
+        <div class="carousel-track" id="carouselTrack">
+
+            <div class="carousel-slide">
+                <img src="5c23f3ff-713f-44a1-af0b-1d67d9d51ac6.jpg" alt="Print 1">
+            </div>
+
+            <div class="carousel-slide">
+                <img src="9b4c4748-d0be-478d-82d4-c85324b2b62f.jpg" alt="Print 2">
+            </div>
+
+            <div class="carousel-slide">
+                <img src="a955d0af-8863-4150-8ee4-7886f0cf58c2.jpg" alt="Print 3">
+            </div>
+
+            <div class="carousel-slide">
+                <img src="b17e0aa8-e136-41a7-abb3-690820741f13.jpg" alt="Print 4">
+            </div>
+
+            <div class="carousel-slide">
+                <img src="c83f0017-19ed-4553-99ff-1d3193a0c124.jpg" alt="Print 5">
+            </div>
+
+        </div>
+    </div>
+
+    <div class="carousel-controls">
+        <button class="carousel-arrow" id="carouselPrev" aria-label="Anterior">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+        </button>
+
+        <div class="carousel-dots" id="carouselDots"></div>
+
+        <button class="carousel-arrow" id="carouselNext" aria-label="Próximo">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+        </button>
+    </div>
+</section>
 
             <div class="section-divider"></div>
 
