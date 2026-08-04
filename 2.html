@@ -116,10 +116,6 @@
             transition: stroke-dashoffset 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 1s ease, filter 1s ease, stroke 1s ease;
         }
         .draw.accent { stroke: var(--red-main); stroke-width: 2.2; }
-        
-        /* Transition suit parts fading out elegantly */
-        .suit-part { transition: opacity 1.5s ease, filter 1.5s ease, stroke 1.5s ease; }
-        .suit-part.fade { opacity: 0; filter: blur(4px); stroke: transparent; }
 
         #hBarL, #hBarR { transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1); stroke: var(--white-main); stroke-width: 2.5; }
         #hBarL.split { transform: translateX(-90px); }
@@ -308,14 +304,11 @@
            ========================================= */
         .proof-carousel { margin-top: 20px; }
         .carousel-viewport {
-            position: relative; width: 100%; max-width: 260px; margin: 32px auto 0;
-            overflow: hidden; border-radius: 28px; border: 6px solid #111;
-            box-shadow: 0 0 0 1px var(--border-subtle), 0 25px 60px rgba(0,0,0,0.6);
-            aspect-ratio: 9/16; background: #0a0a0a;
-        }
-        .carousel-viewport::before {
-            content: ''; position: absolute; top: 8px; left: 50%; transform: translateX(-50%);
-            width: 70px; height: 18px; background: #111; border-radius: 12px; z-index: 5;
+            position: relative; width: 100%; max-width: 320px; margin: 32px auto 0;
+            overflow: hidden; border-radius: 16px; border: 1px solid var(--border-subtle);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            /* Altura relativa ao card, não à imagem: cada print é exibido inteiro por dentro (object-fit: contain) */
+            aspect-ratio: 4/5; background: #0a0a0a;
         }
         .carousel-track {
             display: flex; height: 100%; transition: transform 0.6s cubic-bezier(0.65, 0, 0.35, 1);
@@ -324,7 +317,9 @@
             min-width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;
             background: linear-gradient(160deg, #0f0f0f, #050505);
         }
-        .carousel-slide img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
+        /* object-fit: contain garante que a imagem inteira apareça, sem cortar conteúdo,
+           mesmo com proporções diferentes entre os prints (retrato ou quase-quadrado) */
+        .carousel-slide img { width: 100%; height: 100%; object-fit: contain; object-position: center; display: block; }
         .carousel-placeholder {
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             gap: 10px; color: var(--white-sec); font-size: 11px; text-transform: uppercase; letter-spacing: 1px; padding: 20px; text-align: center;
@@ -523,34 +518,10 @@
         <div class="intro-stage">
             <span class="bracket tl"></span><span class="bracket tr"></span>
             <span class="bracket bl"></span><span class="bracket br"></span>
-            <span class="hud-label" id="hudLabel">RENDERIZANDO_SILHUETA</span>
+            <span class="hud-label" id="hudLabel">RENDERIZANDO_IDENTIDADE</span>
             <span class="hud-pct" id="hudPct">00%</span>
 
             <svg id="suit-svg" viewBox="0 0 400 420" xmlns="http://www.w3.org/2000/svg">
-                <!-- Terno Elegante / Slim Fit SVG -->
-                <!-- Ombros e costura lateral -->
-                <path class="draw suit-part" id="outlineL" d="M160,45 C120,45 80,70 65,110 L50,380"/>
-                <path class="draw suit-part" id="outlineR" d="M240,45 C280,45 320,70 335,110 L350,380"/>
-                <!-- Bainha inferior -->
-                <path class="draw suit-part" id="hem" d="M50,380 C150,390 250,390 350,380"/>
-                
-                <!-- Lapelas Notch Elegantes -->
-                <path class="draw suit-part" id="lapelL" d="M160,45 L135,140 L160,155 L188,310"/>
-                <path class="draw suit-part" id="lapelR" d="M240,45 L265,140 L240,155 L212,310"/>
-                <path class="draw suit-part" id="collarL" d="M160,45 L185,115"/>
-                <path class="draw suit-part" id="collarR" d="M240,45 L215,115"/>
-                
-                <!-- Lenço de bolso (Pocket Square) -->
-                <path class="draw suit-part accent" id="pocket" d="M280,165 L250,175 L250,160 Z"/>
-
-                <!-- Gravata (Slim) -->
-                <path class="draw suit-part accent" id="tieKnot" d="M190,70 L210,70 L205,95 L195,95 Z"/>
-                <path class="draw suit-part accent" id="tieStrap" d="M195,95 L185,260 L200,280 L215,260 L205,95"/>
-
-                <!-- Abotoamento -->
-                <circle class="suit-part" id="btn1" cx="192" cy="325" r="3" fill="none" stroke="rgba(255,255,255,0.3)"/>
-                <circle class="suit-part" id="btn2" cx="192" cy="355" r="3" fill="none" stroke="rgba(255,255,255,0.3)"/>
-
                 <!-- Barras do H (Ocultas inicialmente e nascem do centro) -->
                 <path class="draw" id="hBarL" d="M160,45 L160,310"/>
                 <path class="draw" id="hBarR" d="M240,45 L240,310"/>
@@ -733,11 +704,14 @@
                  CARROSSEL DE PRINTS / RESULTADOS REAIS
                  As 5 imagens abaixo devem estar na MESMA PASTA
                  do arquivo .html para carregar corretamente:
-                 5c23f3ff-713f-44a1-af0b-1d67d9d51ac6.jpg
-                 9b4c4748-d0be-478d-82d4-c85324b2b62f.jpg
-                 a955d0af-8863-4150-8ee4-7886f0cf58c2.jpg
-                 b17e0aa8-e136-41a7-abb3-690820741f13.jpg
-                 c83f0017-19ed-4553-99ff-1d3193a0c124.jpg
+                 0bc23f3c-ab00-4405-9967-5be27902ab80.jpg  (1080x1482)
+                 2ee73882-2526-46b4-aa9a-134ad42ed243.jpg  (1080x1277)
+                 8d3cb202-2b6a-427f-b864-fe0ebd9ed04a.jpg  (1080x912)
+                 3dbe9cad-b376-4e57-8e28-5803a6aed347.jpg  (1080x940)
+                 d6e8a05b-3f29-4c4a-8f41-826e21253952.jpg  (1069x1600)
+                 As proporções variam entre si; o carrossel usa
+                 object-fit: contain para exibir cada print por
+                 inteiro, sem cortar conteúdo.
                  ========================================== -->
             <section class="proof-carousel scroll-reveal">
                 <span class="eyebrow" style="display:block; font-size:11px; text-transform:uppercase; letter-spacing:2px; color:var(--red-main); margin-bottom:12px; text-align:center; font-weight:600;">Prints Reais • Enviados Pelos Alunos</span>
@@ -746,19 +720,19 @@
                 <div class="carousel-viewport" id="carouselViewport">
                     <div class="carousel-track" id="carouselTrack">
                         <div class="carousel-slide">
-                            <img src="5c23f3ff-713f-44a1-af0b-1d67d9d51ac6.jpg" alt="Print de resultado real 1" loading="lazy">
+                            <img src="0bc23f3c-ab00-4405-9967-5be27902ab80.jpg" alt="Print de resultado real 1" loading="lazy">
                         </div>
                         <div class="carousel-slide">
-                            <img src="9b4c4748-d0be-478d-82d4-c85324b2b62f.jpg" alt="Print de resultado real 2" loading="lazy">
+                            <img src="2ee73882-2526-46b4-aa9a-134ad42ed243.jpg" alt="Print de resultado real 2" loading="lazy">
                         </div>
                         <div class="carousel-slide">
-                            <img src="a955d0af-8863-4150-8ee4-7886f0cf58c2.jpg" alt="Print de resultado real 3" loading="lazy">
+                            <img src="8d3cb202-2b6a-427f-b864-fe0ebd9ed04a.jpg" alt="Print de resultado real 3" loading="lazy">
                         </div>
                         <div class="carousel-slide">
-                            <img src="b17e0aa8-e136-41a7-abb3-690820741f13.jpg" alt="Print de resultado real 4" loading="lazy">
+                            <img src="3dbe9cad-b376-4e57-8e28-5803a6aed347.jpg" alt="Print de resultado real 4" loading="lazy">
                         </div>
                         <div class="carousel-slide">
-                            <img src="c83f0017-19ed-4553-99ff-1d3193a0c124.jpg" alt="Print de resultado real 5" loading="lazy">
+                            <img src="d6e8a05b-3f29-4c4a-8f41-826e21253952.jpg" alt="Print de resultado real 5" loading="lazy">
                         </div>
                     </div>
                 </div>
@@ -1046,20 +1020,11 @@
             var drawEls = Array.prototype.slice.call(document.querySelectorAll('.draw'));
             drawEls.forEach(setupDraw);
 
-            var outlineL=document.getElementById('outlineL'), outlineR=document.getElementById('outlineR'),
-                hem=document.getElementById('hem'), collarL=document.getElementById('collarL'),
-                collarR=document.getElementById('collarR'), lapelL=document.getElementById('lapelL'),
-                lapelR=document.getElementById('lapelR'), pocket=document.getElementById('pocket'), 
-                tieKnot=document.getElementById('tieKnot'), tieStrap=document.getElementById('tieStrap'), 
-                btn1=document.getElementById('btn1'), btn2=document.getElementById('btn2'), 
-                hBarL=document.getElementById('hBarL'), hBarR=document.getElementById('hBarR'), crossbar=document.getElementById('crossbar'),
+            var hBarL=document.getElementById('hBarL'), hBarR=document.getElementById('hBarR'), crossbar=document.getElementById('crossbar'),
                 hudLabel=document.getElementById('hudLabel'), hudPct=document.getElementById('hudPct'),
                 revealText=document.getElementById('revealText'), revealRule=document.getElementById('revealRule'),
                 overlay=document.getElementById('intro-overlay'), skipBtn=document.getElementById('skipBtn'),
                 mainContent = document.getElementById('main-content');
-
-            // Partes do terno que irão dissolver
-            var suitParts = Array.prototype.slice.call(document.querySelectorAll('.suit-part'));
 
             var pctInterval = null;
             function startPct(totalMs){
@@ -1073,13 +1038,7 @@
             }
             function stopPct(){ if(pctInterval) clearInterval(pctInterval); hudPct.textContent='100%'; }
 
-            // Dissolução do terno (Morphing preparatório)
-            function fadeSuit(){
-                suitParts.forEach(function(el){ el.classList.add('fade'); });
-                hudLabel.style.opacity = 0; hudPct.style.opacity = 0;
-            }
-
-            // Letra H é desenhada do centro do terno
+            // Letra H é desenhada do centro do palco
             function drawH(){
                 trigger(hBarL); trigger(hBarR);
                 schedule(function(){ trigger(crossbar); }, 400);
@@ -1112,25 +1071,15 @@
             }
             skipBtn.addEventListener('click', skip);
 
-            // TIMELINE DA ANIMAÇÃO
-            schedule(function(){ trigger(outlineL); trigger(outlineR); }, 400);
-            schedule(function(){ trigger(collarL); trigger(collarR); }, 650);
-            schedule(function(){ trigger(hem); }, 700);
-            schedule(function(){ trigger(lapelL); trigger(lapelR); }, 800);
-            schedule(function(){ trigger(pocket); }, 900);
-            schedule(function(){ trigger(tieKnot); }, 1050);
-            schedule(function(){ trigger(tieStrap); }, 1150);
-            schedule(function(){ btn1.style.opacity = 1; }, 1450);
-            schedule(function(){ btn2.style.opacity = 1; }, 1550);
+            // TIMELINE DA ANIMAÇÃO (simplificada: apenas formação da letra H)
+            schedule(function(){ startPct(1400); }, 0);
+            schedule(function(){ skipBtn.classList.add('show'); }, 700);
 
-            schedule(function(){ startPct(2400); }, 0);
-            schedule(function(){ skipBtn.classList.add('show'); }, 1200);
-
-            schedule(function(){ fadeSuit(); stopPct(); }, 2500);
-            schedule(function(){ drawH(); }, 2600);
-            schedule(function(){ splitH(); }, 4000);
-            schedule(function(){ showText(); }, 4300);
-            schedule(function(){ fadeOutOverlay(); }, 6200);
+            schedule(function(){ drawH(); }, 300);
+            schedule(function(){ stopPct(); }, 1400);
+            schedule(function(){ splitH(); }, 1700);
+            schedule(function(){ showText(); }, 2000);
+            schedule(function(){ fadeOutOverlay(); }, 3800);
         })();
 
         /* =========================================
