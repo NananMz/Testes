@@ -1,572 +1,810 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Modelos de Provas Sociais</title>
-
-<style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,Helvetica,sans-serif;
-}
-
-body{
-
-background:#111;
-color:white;
-padding:60px 30px;
-
-}
-
-h1{
-
-text-align:center;
-margin-bottom:10px;
-font-size:42px;
-
-}
-
-p{
-
-text-align:center;
-opacity:.8;
-margin-bottom:60px;
-
-}
-
-section{
-
-margin-bottom:120px;
-
-}
-
-h2{
-
-margin-bottom:40px;
-text-align:center;
-font-size:30px;
-
-}
-
-img{
-
-width:100%;
-display:block;
-border-radius:20px;
-
-}
-
-.modelo{
-
-max-width:1200px;
-margin:auto;
-
-}
-
-/* ============================
-MODELO 1
-============================ */
-
-.cards1{
-
-display:flex;
-justify-content:center;
-align-items:center;
-position:relative;
-height:550px;
-
-}
-
-.cards1 img{
-
-width:290px;
-position:absolute;
-transition:.4s;
-box-shadow:0 20px 50px rgba(0,0,0,.5);
-
-}
-
-.cards1 img:hover{
-
-transform:scale(1.05);
-
-}
-
-.cards1 .left{
-
-left:220px;
-transform:rotate(-14deg);
-
-}
-
-.cards1 .center{
-
-z-index:5;
-width:330px;
-
-}
-
-.cards1 .right{
-
-right:220px;
-transform:rotate(14deg);
-
-}
-
-/* ============================
-MODELO 2
-============================ */
-
-.grid{
-
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-gap:25px;
-
-}
-
-.grid img{
-
-transition:.4s;
-
-}
-
-.grid img:hover{
-
-transform:translateY(-10px);
-
-}
-
-/* ============================
-MODELO 3
-============================ */
-
-.stack{
-
-display:flex;
-justify-content:center;
-position:relative;
-height:420px;
-
-}
-
-.stack img{
-
-width:320px;
-position:absolute;
-transition:.4s;
-
-}
-
-.stack img:nth-child(1){
-
-transform:translateX(-80px) rotate(-8deg);
-
-}
-
-.stack img:nth-child(2){
-
-z-index:5;
-
-}
-
-.stack img:nth-child(3){
-
-transform:translateX(80px) rotate(8deg);
-
-}
-
-.stack img:hover{
-
-transform:scale(1.08);
-
-z-index:99;
-
-}
-
-/* ============================
-MODELO 4
-============================ */
-
-.polaroid{
-
-display:flex;
-justify-content:center;
-gap:50px;
-flex-wrap:wrap;
-
-}
-
-.polaroid div{
-
-background:white;
-padding:12px;
-border-radius:5px;
-width:280px;
-
-}
-
-.polaroid img{
-
-border-radius:0;
-
-}
-
-.polaroid p{
-
-color:black;
-margin-top:12px;
-
-}
-
-/* ============================
-MODELO 5
-============================ */
-
-.phone{
-
-display:flex;
-justify-content:center;
-gap:40px;
-flex-wrap:wrap;
-
-}
-
-.mock{
-
-background:#000;
-padding:12px;
-border-radius:40px;
-width:260px;
-box-shadow:0 0 40px rgba(255,255,255,.15);
-
-}
-
-.mock img{
-
-border-radius:30px;
-
-}
-
-/* ============================
-MODELO 6
-============================ */
-
-.carousel{
-
-display:flex;
-overflow:auto;
-gap:30px;
-padding:20px;
-
-}
-
-.carousel img{
-
-width:320px;
-flex:none;
-
-}
-
-/* ============================
-MODELO 7
-============================ */
-
-.hero{
-
-display:flex;
-justify-content:center;
-align-items:center;
-height:500px;
-position:relative;
-
-}
-
-.hero img{
-
-position:absolute;
-transition:.5s;
-
-}
-
-.hero img:nth-child(1){
-
-width:230px;
-left:260px;
-transform:rotate(-18deg);
-opacity:.6;
-
-}
-
-.hero img:nth-child(2){
-
-width:350px;
-z-index:10;
-
-}
-
-.hero img:nth-child(3){
-
-width:230px;
-right:260px;
-transform:rotate(18deg);
-opacity:.6;
-
-}
-
-/* ============================
-MODELO 8
-============================ */
-
-.perspective{
-
-display:flex;
-justify-content:center;
-align-items:center;
-gap:20px;
-height:520px;
-perspective:1200px;
-
-}
-
-.perspective img{
-
-width:290px;
-transition:.5s;
-
-}
-
-.perspective img:nth-child(1){
-
-transform:rotateY(35deg);
-
-}
-
-.perspective img:nth-child(2){
-
-width:340px;
-
-}
-
-.perspective img:nth-child(3){
-
-transform:rotateY(-35deg);
-
-}
-
-.perspective img:hover{
-
-transform:scale(1.1);
-
-}
-
-@media(max-width:900px){
-
-.cards1,
-.stack,
-.hero{
-
-height:auto;
-display:flex;
-flex-direction:column;
-
-}
-
-.cards1 img,
-.stack img,
-.hero img{
-
-position:relative;
-left:auto;
-right:auto;
-transform:none;
-margin:15px auto;
-width:85%;
-
-}
-
-.perspective{
-
-flex-direction:column;
-height:auto;
-
-}
-
-.perspective img{
-
-transform:none !important;
-width:85%;
-
-}
-
-}
-
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Método da Conexão Masculina</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* RESET & BASE STYLES */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        :root {
+            --bg-deep: #050505;
+            --bg-card: #0a0a0a;
+            --red-main: #C1121F;
+            --red-dusk: #8A1018;
+            --red-glow: #E63946;
+            --white-main: #F5F5F5;
+            --white-sec: #A3A3A3;
+            --border-subtle: rgba(255, 255, 255, 0.05);
+            --border-highlight: rgba(193, 18, 31, 0.35);
+            --font-heading: 'Bebas Neue', sans-serif;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            background-color: var(--bg-deep);
+            color: var(--white-main);
+            font-family: var(--font-body);
+            overflow-x: hidden;
+        }
+
+        body {
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            padding-top: 50px; /* Espaço para a topbar maior */
+        }
+
+        /* VINHETA & PROFUNDIDADE */
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: -1;
+            background: radial-gradient(circle at center, transparent 35%, rgba(0,0,0,.85) 100%);
+        }
+
+        /* BACKGROUND VIVO */
+        .ambient-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -3;
+            background: radial-gradient(circle at 50% 30%, #110507 0%, var(--bg-deep) 80%);
+        }
+
+        .ambient-glow {
+            position: absolute;
+            top: -10%; left: 50%;
+            width: 150vw; height: 60vh;
+            background: radial-gradient(circle, rgba(193, 18, 31, 0.08) 0%, transparent 60%);
+            pointer-events: none;
+            animation: drift 15s ease-in-out infinite alternate;
+        }
+
+        @keyframes drift {
+            0% { transform: translate(-50%, 0) scale(1); }
+            100% { transform: translate(-48%, 5%) scale(1.15); }
+        }
+
+        /* PARTÍCULAS TEMÁTICAS */
+        .particles-container { position: fixed; inset: 0; z-index: -2; overflow: hidden; pointer-events: none; }
+        .particle {
+            position: absolute; color: var(--red-main); opacity: 0;
+            filter: blur(2px) drop-shadow(0 0 8px rgba(193,18,31,0.6));
+            animation: floatSymbol infinite linear;
+        }
+        .p1 { left: 15%; animation-duration: 18s; font-size: 28px; animation-delay: 0s; }
+        .p2 { left: 85%; animation-duration: 24s; font-size: 22px; animation-delay: 4s; }
+        .p3 { left: 45%; animation-duration: 20s; font-size: 34px; animation-delay: 8s; filter: blur(4px); }
+        .p4 { left: 75%; animation-duration: 22s; font-size: 18px; animation-delay: 2s; }
+        .p5 { left: 20%; animation-duration: 26s; font-size: 26px; animation-delay: 12s; }
+        .p6 { left: 60%; animation-duration: 19s; font-size: 20px; animation-delay: 6s; }
+
+        @keyframes floatSymbol {
+            0% { transform: translateY(110vh) rotate(0deg) scale(0.8); opacity: 0; }
+            15% { opacity: 0.15; }
+            85% { opacity: 0.15; }
+            100% { transform: translateY(-10vh) rotate(360deg) scale(1.2); opacity: 0; }
+        }
+
+        .cinematic-grain {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1; opacity: 0.05; pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* LAYOUT GERAL */
+        .wrapper {
+            max-width: 500px; margin: 0 auto; padding: 0 24px 120px 24px; position: relative;
+        }
+
+        h1, h2, h3 { font-family: var(--font-heading); text-transform: uppercase; letter-spacing: 1px; }
+
+        .section-divider {
+            width: 100px; height: 1px; margin: 60px auto;
+            background: linear-gradient(90deg, transparent, rgba(193,18,31,.5), transparent);
+        }
+
+        .section-title { font-size: 36px; text-align: center; margin-bottom: 32px; color: var(--white-main); text-shadow: 0 4px 12px rgba(0,0,0,0.5); }
+        .section-title span { color: var(--red-main); }
+        .text-center { text-align: center; }
+
+        /* ANIMAÇÕES */
+        .scroll-reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
+        .scroll-reveal.active { opacity: 1; transform: translateY(0); }
+        .delay-1 { transition-delay: 0.1s; } .delay-2 { transition-delay: 0.2s; }
+
+        /* === 0. URGENCY BAR === */
+        .top-bar {
+            position: fixed; top: 0; left: 0; width: 100%;
+            text-align: center; font-size: 16px; font-weight: 800;
+            padding: 14px 20px; z-index: 1000; letter-spacing: 1px;
+            display: flex; justify-content: center; align-items: center; gap: 8px;
+            animation: blinkWarning 0.8s infinite alternate;
+        }
+        @keyframes blinkWarning {
+            0% { background-color: #FF6600; color: #000; box-shadow: 0 2px 15px rgba(255, 102, 0, 0.6); }
+            100% { background-color: #000; color: #FF6600; box-shadow: 0 2px 15px rgba(0, 0, 0, 0.8); }
+        }
+
+        /* SINALIZAÇÃO DE APROVAÇÃO */
+        .purchase-approved {
+            background: rgba(34, 197, 94, 0.15);
+            border: 1px solid #22c55e;
+            color: #4ade80;
+            padding: 12px 20px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 15px;
+            margin: 20px auto 30px auto;
+            max-width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 0 20px rgba(34, 197, 94, 0.1);
+        }
+
+        /* === 1. HERO SECTION === */
+        .hero { padding: 10px 0 20px; text-align: center; }
+        .hero h1 { font-size: 42px; line-height: 1.1; margin-bottom: 16px; }
+        .hero h1 span.white { display: block; background: linear-gradient(180deg, #fff, #999); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero h1 span.red { display: block; color: var(--red-main); text-shadow: 0 0 30px rgba(193, 18, 31, 0.4); font-size: 26px; margin-top: 5px;}
+        .hero .subheadline { font-size: 16px; color: var(--white-sec); max-width: 340px; margin: 0 auto 32px; line-height: 1.5; }
+
+        /* BOTÃO GLOBAL */
+        .btn {
+            display: block; width: 100%; background: linear-gradient(135deg, var(--red-main) 0%, var(--red-dusk) 100%);
+            color: #fff; font-size: 18px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+            padding: 22px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); cursor: pointer; text-decoration: none; text-align: center;
+            box-shadow: 0 8px 30px rgba(193, 18, 31, 0.3); position: relative; overflow: hidden; transition: 0.3s;
+        }
+        .btn::before {
+            content: ''; position: absolute; top: 0; left: -120%; width: 80%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+            transform: skewX(-20deg); animation: shine 3.5s infinite;
+        }
+        @keyframes shine { 0% { left: -120%; } 20%, 100% { left: 120%; } }
+        .btn:active { transform: scale(0.97); box-shadow: 0 4px 15px rgba(193, 18, 31, 0.2); }
+
+        /* DOWNSELL BUTTON */
+        .downsell-btn {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #666;
+            font-size: 13px;
+            text-decoration: underline;
+            cursor: pointer;
+            transition: color 0.3s;
+            line-height: 1.4;
+        }
+        .downsell-btn:hover {
+            color: #aaa;
+        }
+
+        /* === 4. ROADMAP / MÓDULOS === */
+        .card {
+            background: linear-gradient(180deg, #141414 0%, #0a0a0a 100%);
+            border: 1px solid rgba(255,255,255,0.04);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,.03), 0 10px 30px rgba(0,0,0,.4);
+            padding: 28px 24px; border-radius: 12px; margin-bottom: 20px;
+            position: relative; overflow: hidden; transition: transform 0.3s ease;
+        }
+        .card:hover { transform: translateY(-5px); border-color: rgba(193,18,31,0.3); }
+        .card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px;
+            background: linear-gradient(90deg, transparent, var(--red-main), transparent); opacity: 0.5;
+        }
+        .card h3 { font-family: var(--font-body); font-size: 18px; text-transform: none; font-weight: 600; margin-bottom: 16px; display: flex; align-items: center; gap: 10px; color: #fff; }
+        
+        .module-list { list-style: none; padding: 0; }
+        .module-list li { position: relative; padding-left: 24px; margin-bottom: 12px; font-size: 14px; color: var(--white-sec); line-height: 1.5; }
+        .module-list li:last-child { margin-bottom: 0; }
+        .module-list li::before {
+            content: '✓'; position: absolute; left: 0; top: 0; color: var(--red-main); font-weight: bold;
+        }
+
+        /* === 7. OFERTA PRINCIPAL === */
+        .offer-box {
+            background: #0a0a0a; border: 2px solid var(--red-main); border-radius: 16px;
+            padding: 40px 24px; text-align: center; position: relative;
+            box-shadow: 0 0 50px rgba(193,18,31,0.15);
+        }
+        .offer-box::before {
+            content: 'OFERTA ÚNICA'; position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+            background: var(--red-main); color: #fff; font-size: 12px; font-weight: bold;
+            padding: 4px 16px; border-radius: 20px; letter-spacing: 1px;
+        }
+
+        /* PREÇO COMPONENTE */
+        .price-container {
+            margin: 15px 0 25px 0;
+        }
+        .price-label {
+            font-size: 14px;
+            color: var(--white-sec);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .price-value {
+            font-family: var(--font-heading);
+            font-size: 54px;
+            color: var(--white-main);
+            line-height: 1;
+            margin-top: 5px;
+            text-shadow: 0 0 20px rgba(255,255,255,0.1);
+        }
+        .price-value span {
+            color: #22c55e;
+        }
+        
+        /* GARANTIA DENTRO DA OFERTA */
+        .guarantee { margin-top: 32px; padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.1); }
+        .guarantee-icon { font-size: 32px; margin-bottom: 12px; }
+        .guarantee h3 { font-size: 20px; margin-bottom: 8px; }
+        .guarantee p { font-size: 13px; color: var(--white-sec); line-height: 1.5; }
+
+        /* === 8. SEÇÃO FAQ ACORDEÃO === */
+        .faq-section {
+            margin-top: 40px;
+        }
+        .faq-item {
+            background: #0d0d0d;
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 8px;
+            margin-bottom: 12px;
+            overflow: hidden;
+            transition: border-color 0.3s;
+        }
+        .faq-trigger {
+            width: 100%;
+            padding: 18px 20px;
+            background: none;
+            border: none;
+            color: var(--white-main);
+            font-size: 15px;
+            font-weight: 600;
+            text-align: left;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            font-family: var(--font-body);
+        }
+        .faq-icon {
+            font-size: 12px;
+            color: var(--red-main);
+            transition: transform 0.3s ease;
+        }
+        .faq-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease;
+            padding: 0 20px;
+            color: var(--white-sec);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        /* Estados ativos controlados via JS */
+        .faq-item.active {
+            border-color: rgba(193, 18, 31, 0.4);
+            background: #121212;
+        }
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+        }
+        .faq-item.active .faq-content {
+            padding-bottom: 18px;
+        }
+
+        /* === EYEBROW (rótulo pequeno acima dos títulos) === */
+        .eyebrow {
+            display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 2px;
+            color: var(--red-main); margin-bottom: 10px; text-align: center; font-weight: 700;
+        }
+
+        /* === STACK DE VALOR DOS BÔNUS === */
+        .bonus-card {
+            background: linear-gradient(180deg, #171010 0%, #0a0a0a 100%);
+            border: 1px solid rgba(193,18,31,0.25);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,.03), 0 10px 30px rgba(0,0,0,.4);
+            padding: 24px; border-radius: 12px; margin-bottom: 14px;
+            position: relative; overflow: hidden;
+        }
+        .bonus-card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px;
+            background: linear-gradient(90deg, transparent, var(--red-main), transparent); opacity: 0.6;
+        }
+        .bonus-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 10px; }
+        .bonus-tag {
+            font-size: 10px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase;
+            color: var(--red-main); background: rgba(193,18,31,0.12); border: 1px solid rgba(193,18,31,0.3);
+            padding: 3px 9px; border-radius: 20px; white-space: nowrap;
+        }
+        .bonus-card h3 { font-family: var(--font-body); font-size: 17px; font-weight: 700; text-transform: none; color: #fff; margin-bottom: 8px; letter-spacing: 0; line-height: 1.3; }
+        .bonus-card p { font-size: 13.5px; color: var(--white-sec); line-height: 1.55; margin-bottom: 14px; }
+        .bonus-value-row {
+            display: flex; align-items: center; justify-content: space-between;
+            border-top: 1px dashed rgba(255,255,255,0.08); padding-top: 12px;
+        }
+        .bonus-value-old { font-size: 13px; color: #666; text-decoration: line-through; }
+        .bonus-value-free { font-size: 13px; font-weight: 800; color: #4ade80; text-transform: uppercase; letter-spacing: 0.5px; }
+
+        .value-stack-total {
+            margin-top: 22px; padding: 22px; border-radius: 12px;
+            background: rgba(193,18,31,0.06); border: 1px solid rgba(193,18,31,0.3);
+            text-align: center;
+        }
+        .value-stack-total .stack-label { font-size: 12px; color: var(--white-sec); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 6px; }
+        .value-stack-total .stack-old { font-size: 22px; color: #888; text-decoration: line-through; font-family: var(--font-heading); }
+        .value-stack-total .stack-arrow { color: var(--red-main); font-size: 14px; margin: 4px 0; font-weight: 700; }
+        .value-stack-total .stack-new { font-size: 34px; color: #fff; font-family: var(--font-heading); }
+        .value-stack-total .stack-new span { color: #4ade80; }
+
+        /* === ÁREA DE MEMBROS === */
+        .members-preview { margin-top: 8px; text-align: center; }
+        .members-frame {
+            margin-top: 24px; border-radius: 10px; overflow: hidden; border: 1px solid var(--border-subtle);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5); position: relative; background: #0a0a0a;
+        }
+        .members-frame .browser-bar {
+            display: flex; align-items: center; gap: 6px; padding: 12px 14px; background: #111; border-bottom: 1px solid var(--border-subtle);
+        }
+        .browser-bar span { width: 8px; height: 8px; border-radius: 50%; background: #333; }
+        .browser-bar span:nth-child(1) { background: var(--red-main); }
+        .members-frame img { width: 100%; display: block; }
+
+        /* === PARA QUEM É === */
+        .audience-list { list-style: none; padding: 0; margin-top: 22px; display: flex; flex-direction: column; gap: 12px; }
+        .audience-list li {
+            display: flex; align-items: flex-start; gap: 12px; font-size: 14px; color: #d1d1d1; line-height: 1.55; font-weight: 400;
+            background: rgba(255,255,255,0.015); border: 1px solid var(--border-subtle); padding: 15px 16px; border-radius: 8px;
+        }
+        .audience-check {
+            flex-shrink: 0; width: 20px; height: 20px; border-radius: 50%; background: rgba(193,18,31,0.12);
+            display: flex; align-items: center; justify-content: center; margin-top: 1px;
+        }
+        .audience-check svg { width: 11px; height: 11px; stroke: var(--red-main); stroke-width: 3; fill: none; }
+
+        /* === DEPOIMENTOS === */
+        .testimonials-grid { display: flex; flex-direction: column; gap: 14px; margin-top: 24px; }
+        .testimonial-card {
+            background: rgba(255,255,255,0.02); border: 1px solid var(--border-subtle);
+            padding: 20px; border-radius: 10px;
+        }
+        .t-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+        .t-user-info { display: flex; align-items: center; gap: 10px; }
+        .t-avatar {
+            width: 32px; height: 32px; border-radius: 50%; background: #111;
+            display: flex; align-items: center; justify-content: center;
+            border: 1px solid rgba(193, 18, 31, 0.25); flex-shrink: 0;
+        }
+        .t-avatar svg { width: 18px; height: 18px; stroke: #777; stroke-width: 1.5; }
+        .t-name { font-size: 13.5px; font-weight: 600; color: var(--white-main); font-family: var(--font-body); }
+        .t-stars { display: flex; gap: 2px; }
+        .t-stars svg { width: 13px; height: 13px; fill: var(--red-main); }
+        .t-stars svg.empty { fill: none; stroke: var(--red-main); stroke-width: 1.5; }
+        .t-comment { font-size: 13.5px; color: #a1a1a1; line-height: 1.55; font-style: italic; }
+
+        /* === 9. FOOTER INSTITUCIONAL === */
+        .footer { text-align: center; padding: 40px 0 20px; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 60px; }
+        .footer p { font-size: 12px; color: #555; line-height: 1.5; margin-bottom: 10px; }
+        .footer a { color: #888; text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.3s; }
+        .footer a:hover { border-color: #888; }
+    </style>
 
 </head>
-
 <body>
 
-<h1>MODELOS DE PROVAS SOCIAIS</h1>
-
-<p>Substitua prova1.jpg, prova2.jpg e prova3.jpg pelas suas imagens.</p>
-
-<section>
-
-<h2>MODELO 1 — Sobrepostas</h2>
-
-<div class="modelo cards1">
-
-<img src="prova1.jpg" class="left">
-<img src="prova2.jpg" class="center">
-<img src="prova3.jpg" class="right">
-
-</div>
-
-</section>
-
-<section>
-
-<h2>MODELO 2 — Grid</h2>
-
-<div class="modelo grid">
-
-<img src="prova1.jpg">
-<img src="prova2.jpg">
-<img src="prova3.jpg">
-<img src="prova1.jpg">
-
-</div>
-
-</section>
-
-<section>
-
-<h2>MODELO 3 — Pilha</h2>
-
-<div class="modelo stack">
-
-<img src="prova1.jpg">
-<img src="prova2.jpg">
-<img src="prova3.jpg">
-
-</div>
-
-</section>
-
-<section>
-
-<h2>MODELO 4 — Polaroid</h2>
-
-<div class="modelo polaroid">
-
-<div>
-
-<img src="prova1.jpg">
-
-<p>★★★★★</p>
-
-</div>
-
-<div>
-
-<img src="prova2.jpg">
-
-<p>★★★★★</p>
-
-</div>
-
-<div>
-
-<img src="prova3.jpg">
-
-<p>★★★★★</p>
-
-</div>
-
-</div>
-
-</section>
-
-<section>
-
-<h2>MODELO 5 — Dentro de Celular</h2>
-
-<div class="modelo phone">
-
-<div class="mock">
-
-<img src="prova1.jpg">
-
-</div>
-
-<div class="mock">
-
-<img src="prova2.jpg">
-
-</div>
-
-<div class="mock">
-
-<img src="prova3.jpg">
-
-</div>
-
-</div>
-
-</section>
-
-<section>
-
-<h2>MODELO 6 — Carrossel</h2>
-
-<div class="modelo carousel">
-
-<img src="prova1.jpg">
-<img src="prova2.jpg">
-<img src="prova3.jpg">
-<img src="prova1.jpg">
-<img src="prova2.jpg">
-
-</div>
-
-</section>
-
-<section>
-
-<h2>MODELO 7 — Destaque Central</h2>
-
-<div class="modelo hero">
-
-<img src="prova1.jpg">
-
-<img src="prova2.jpg">
-
-<img src="prova3.jpg">
-
-</div>
-
-</section>
-
-<section>
-
-<h2>MODELO 8 — Perspectiva 3D</h2>
-
-<div class="modelo perspective">
-
-<img src="prova1.jpg">
-
-<img src="prova2.jpg">
-
-<img src="prova3.jpg">
-
-</div>
-
-</section>
-
+    <!-- BARRA SUPERIOR -->
+    <div class="top-bar">
+        <span>⚠️</span> ESPERE
+    </div>
+
+    <div class="ambient-bg"><div class="ambient-glow"></div></div>
+    <div class="particles-container">
+        <div class="particle p1">⚥</div>
+        <div class="particle p2">♥</div>
+        <div class="particle p3">♀</div>
+        <div class="particle p4">♂</div>
+        <div class="particle p5">♥</div>
+        <div class="particle p6">⚥</div>
+    </div>
+    <div class="cinematic-grain"></div>
+
+    <div class="wrapper">
+        
+        <section class="hero scroll-reveal active">
+            
+            <!-- SINALIZAÇÃO VERDE DE APROVAÇÃO (CORRIGIDA) -->
+            <div class="purchase-approved">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                Sua compra foi aprovada!
+            </div>
+            
+            <!-- HOOK FORTE -->
+            <h1>
+                <span class="white">ESPERA. NÃO FECHE ESSA PÁGINA.</span>
+                <span class="red">O QUE VOCÊ COMPROU É SÓ O COMEÇO.</span>
+            </h1>
+            <p class="subheadline">Saber se aproximar é só a primeira camada. Sem <strong>conexão emocional real</strong>, toda conversa esfria, todo match vira silêncio e você volta pra estaca zero. O <strong>Método da Conexão Masculina</strong> é a continuação natural — mais avançado, mais completo e feito pra quem já deu o primeiro passo e não quer parar no meio do caminho.</p>
+            
+            <a href="#oferta" class="btn">Quero o Método Completo</a>
+            
+            <!-- DOWNSELL -->
+            <a href="https://homemdepresenca.github.io/conexaomasculina" class="downsell-btn">Não, obrigado. Prefiro travar nas conversas e continuar perdendo interesse antes do primeiro encontro.</a>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <section class="features scroll-reveal">
+            <span class="eyebrow">Conteúdo Avançado • Nível 2 Desbloqueado</span>
+            <h2 class="section-title">O que você vai <span>dominar</span></h2>
+            <p style="font-size: 14px; color: var(--white-sec); text-align: center; margin-top: -18px; margin-bottom: 28px; line-height: 1.6;">Enquanto a maioria trava depois do "oi", você vai saber exatamente como transformar interesse em conexão real — e conexão em relacionamento.</p>
+            
+            <div class="card">
+                <h3>🧠 Módulo 1: Como criar conexão emocional</h3>
+                <ul class="module-list">
+                    <li>O que faz uma mulher se conectar emocionalmente.</li>
+                    <li>Como fazer conversas saírem do superficial.</li>
+                    <li>O poder das histórias e experiências.</li>
+                    <li>Como criar momentos memoráveis.</li>
+                    <li>Os erros que matam a conexão.</li>
+                </ul>
+            </div>
+            
+            <div class="card">
+                <h3>🔥 Módulo 2: Conversas que geram atração</h3>
+                <ul class="module-list">
+                    <li>Como criar mais tensão e mistério.</li>
+                    <li>O equilíbrio entre interesse e desafio.</li>
+                    <li>Como ser mais interessante sem forçar.</li>
+                    <li>Como fazer ela pensar em você.</li>
+                    <li>O que fazer quando a conversa esfriar.</li>
+                </ul>
+            </div>
+            
+            <div class="card">
+                <h3>📈 Módulo 3: Do interesse ao relacionamento</h3>
+                <ul class="module-list">
+                    <li>Como saber se ela está se apegando.</li>
+                    <li>Como evoluir a relação naturalmente.</li>
+                    <li>Os sinais de que ela quer algo mais.</li>
+                    <li>Quando pedir exclusividade.</li>
+                    <li>Como evitar sabotar o relacionamento no início.</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>💬 Módulo 4: Domínio das conversas</h3>
+                <ul class="module-list">
+                    <li>Como nunca ficar sem assunto.</li>
+                    <li>Perguntas que geram conexão.</li>
+                    <li>Como usar humor corretamente.</li>
+                    <li>Como flertar sem parecer forçado.</li>
+                    <li>Os erros que matam uma conversa promissora.</li>
+                </ul>
+            </div>
+            
+            
+
+            
+            <div class="bonus-card">
+                <div class="bonus-top">
+                    <h3 style="margin-bottom:0;">Bônus exclusivos</h3>
+                    <span class="bonus-tag">Bônus</span>
+                </div>
+                <p>Acesso a conteudos complementares que irão acelerar os seus resultados em niveis sem igual.</p>
+                <div class="bonus-value-row">
+                    <span class="bonus-value-free">Modelos que fazem a diferença</span>
+                </div>
+            </div>
+
+            <div class="value-stack-total">
+                <div class="stack-label">Valor total do que você recebe hoje</div>
+                <div class="stack-old">R$ 549,00</div>
+                <div class="stack-arrow">▼ POR APENAS ▼</div>
+                <div class="stack-new"><span>R$</span> 47,90</div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- ==========================================
+             ÁREA DE MEMBROS (IMAGEM ÚNICA)
+             Substitua pelo arquivo real da área de membros
+             mostrando os módulos extras deste upsell.
+             Nome sugerido: area-membros-conexao.jpg
+             Deve estar na MESMA PASTA do arquivo .html
+             ========================================== -->
+        <section class="members-preview scroll-reveal">
+            <span class="eyebrow">Prévia Real • Sua Nova Área de Membros</span>
+            <h2 class="section-title" style="font-size: 30px;">Os Novos <span>Módulos</span></h2>
+            <p style="font-size: 14px; color: var(--white-sec); font-weight: 400; line-height: 1.6;">Tudo liberado na mesma plataforma que você já conhece, organizado ao lado do conteúdo que você já tem.</p>
+            <div class="members-frame">
+                <div class="browser-bar"><span></span><span></span><span></span></div>
+                <img src="aba3eb0f-bec4-4913-b120-c4e4c6e5cff4.jpg" alt="Área de Membros com os módulos do Método da Conexão Masculina" loading="lazy">
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- ==========================================
+             PARA QUEM É ESTE MÉTODO
+             ========================================== -->
+        <section class="audience scroll-reveal">
+            <h2 class="section-title" style="font-size: 30px;">Ideal Pra <span>Quem</span></h2>
+            <ul class="audience-list">
+                <li>
+                    <span class="audience-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+                    Já sabe puxar assunto, mas vê a conversa esfriar depois de alguns dias.
+                </li>
+                <li>
+                    <span class="audience-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+                    Sente que fica "só na amizade" mesmo quando existia clima no início.
+                </li>
+                <li>
+                    <span class="audience-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+                    Quer transformar interesse inicial em algo sério, sem parecer carente.
+                </li>
+                <li>
+                    <span class="audience-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+                    Já aplicou o método principal e quer o próximo nível da conversa.
+                </li>
+            </ul>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- ==========================================
+             DEPOIMENTOS DESTE UPSELL
+             ========================================== -->
+        <section class="social-proof scroll-reveal">
+            <span class="eyebrow">Quem Já Adicionou Este Método</span>
+            <h2 class="section-title" style="font-size: 30px;">O Que Estão <span>Dizendo</span></h2>
+
+            <div class="testimonials-grid">
+
+                <div class="testimonial-card">
+                    <div class="t-header">
+                        <div class="t-user-info">
+                            <div class="t-avatar">
+                                <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.6"/><path d="M4.5 19.5c1.6-3.4 4.4-5 7.5-5s5.9 1.6 7.5 5" stroke-linecap="round"/></svg>
+                            </div>
+                            <span class="t-name">Carlos H.</span>
+                        </div>
+                        <div class="t-stars">
+                            <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                            <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                            <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                            <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                            <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                        </div>
+                    </div>
+                    <p class="t-comment">"Gostei bastante da parte sobre conexão e conversas. É um complemento muito bom para o conteúdo principal."</p>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="t-header">
+                        <div class="t-user-info">
+                            <div class="t-avatar">
+                                <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.6"/><path d="M4.5 19.5c1.6-3.4 4.4-5 7.5-5s5.9 1.6 7.5 5" stroke-linecap="round"/></svg>
+                            </div>
+                            <span class="t-name">André V.</span>
+                        </div>
+                        <div class="t-stars">
+                            <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                            <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                            <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                            <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                            <svg class="empty" viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                        </div>
+                    </div>
+                    <p class="t-comment">"Achei que seria só mais conteúdo repetido, mas trouxe vários pontos que eu nunca tinha parado para pensar."</p>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="t-header">
+                        <div class="t-user-info">
+                            <div class="t-avatar">
+                                <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.6"/><path d="M4.5 19.5c1.6-3.4 4.4-5 7.5-5s5.9 1.6 7.5 5" stroke-linecap="round"/></svg>
+                            </div>
+                            <span class="t-name">Felipe G.</span>
+                        </div>
+                        <div class="t-stars">
+                            <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                            <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                            <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                            <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                            <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                        </div>
+                    </div>
+                    <p class="t-comment">"Valeu muito a pena pegar junto. As aulas são objetivas e ajudam a entender melhor alguns erros que afastam o interesse."</p>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="t-header">
+                        <div class="t-user-info">
+                            <div class="t-avatar">
+                                <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.6"/><path d="M4.5 19.5c1.6-3.4 4.4-5 7.5-5s5.9 1.6 7.5 5" stroke-linecap="round"/></svg>
+                            </div>
+                            <span class="t-name">Bruno L.</span>
+                        </div>
+                        <div class="t-stars">
+                            <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                            <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                            <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                            <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                            <svg class="empty" viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                        </div>
+                    </div>
+                    <p class="t-comment">"Material bem organizado. Gostei principalmente da parte sobre sinais de interesse e comunicação."</p>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="t-header">
+                        <div class="t-user-info">
+                            <div class="t-avatar">
+                                <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.6"/><path d="M4.5 19.5c1.6-3.4 4.4-5 7.5-5s5.9 1.6 7.5 5" stroke-linecap="round"/></svg>
+                            </div>
+                            <span class="t-name">Thiago R.</span>
+                        </div>
+                        <div class="t-stars">
+                            <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                            <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                            <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                            <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                            <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                        </div>
+                    </div>
+                    <p class="t-comment">"Foi o que mais me chamou atenção depois da compra principal. Tem dicas simples, mas que fazem bastante sentido quando você aplica. 👊🔥"</p>
+                </div>
+
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- SEÇÃO DE OFERTA PRINCIPAL CONFIGURADA -->
+        <section class="offer-box scroll-reveal" id="oferta">
+            
+            <h2 style="color: #fff; font-size: 28px; font-family: var(--font-heading);">
+                MÉTODO DA CONEXÃO MASCULINA
+            </h2>
+            <p style="font-size: 13px; color: var(--white-sec); margin-top: 10px; text-transform: uppercase; letter-spacing: 1px;">4 módulos + 3 bônus exclusivos • Valor real R$ 549,00</p>
+
+            <div class="price-container">
+                <p class="price-label">Hoje, por apenas</p>
+                <p class="price-value"><span>R$</span> 47,90</p>
+            </div>
+
+            <a href="https://pay.kirvano.com/ff7f9651-81cf-457c-be1c-572bdaf3db28" class="btn" style="margin-bottom: 15px;">Sim, Quero Completar Meu Método</a>
+            
+            <!-- DOWNSELL NA OFERTA -->
+            <a href="https://homemdepresenca.github.io/conexaomasculina" class="downsell-btn">Não, obrigado. Prefiro travar nas conversas e continuar perdendo interesse antes do primeiro encontro.</a>
+
+            <div class="guarantee">
+                <div class="guarantee-icon">🛡️</div>
+                <h3>Garantia Mantida</h3>
+                <p>Assim como na sua primeira compra, este material adicional está coberto pela nossa garantia incondicional. Se não sentir o valor, basta pedir o reembolso — sem perguntas.</p>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- SEÇÃO DE PERGUNTAS FREQUENTES (FAQ ACCORDION) -->
+        <section class="faq-section scroll-reveal">
+            <h2 class="section-title">Dúvidas <span>Frequentes</span></h2>
+            
+            <div class="faq-item">
+                <button class="faq-trigger">
+                    <span>O que é o Método da Conexão Masculina?</span>
+                    <span class="faq-icon">▼</span>
+                </button>
+                <div class="faq-content">
+                    <p>É um treinamento completo em formato digital focado em inteligência social e dinâmicas de conversação. Ele ensina o passo a passo prático para estruturar conversas atraentes, criar conexões emocionais autênticas e progredir os seus relacionamentos sem parecer forçado.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-trigger">
+                    <span>Como vou receber o acesso ao material?</span>
+                    <span class="faq-icon">▼</span>
+                </button>
+                <div class="faq-content">
+                    <p>O acesso é 100% imediato. Como o seu pagamento principal já foi aprovado, assim que adicionar esta extensão, os dados de login e todos os módulos adicionais serão enviados automaticamente para o seu e-mail cadastrado.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-trigger">
+                    <span>Eu sou muito tímido, isso funciona para mim?</span>
+                    <span class="faq-icon">▼</span>
+                </button>
+                <div class="faq-content">
+                    <p>Sim, com certeza. O método foi desenvolvido justamente para quem sente dificuldades em manter o assunto fluindo ou trava na hora de flertar. As técnicas dão um roteiro mental simples para você nunca mais ficar sem o que falar.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-trigger">
+                    <span>E se eu não gostar do conteúdo?</span>
+                    <span class="faq-icon">▼</span>
+                </button>
+                <div class="faq-content">
+                    <p>Não há risco nenhum. Você conta com a nossa garantia incondicional de reembolso. Se por qualquer motivo achar que o material não gerou valor para você, basta solicitar a devolução dentro do prazo e devolvemos o valor integralmente.</p>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer scroll-reveal">
+            <p><strong>Homem De Presença</strong> © 2024. Todos os direitos reservados.</p>
+            <p>Este site não faz parte do site do Facebook ou da Meta Platforms, Inc. Além disso, este site NÃO é endossado pelo Facebook de nenhuma maneira.</p>
+            <p><a href="https://HomemDePresenca.github.io/TermosdeUso">Termos de Uso</a> | <a href="https://HomemDePresenca.github.io/PoliticadePrivacidade">Política de Privacidade</a></p>
+        </footer>
+
+    </div>
+
+    <script>
+
+        
+        // SCROLL REVEAL
+        const revealElements = document.querySelectorAll('.scroll-reveal');
+        const revealOnScroll = () => {
+            const windowHeight = window.innerHeight;
+            const revealPoint = 50;
+            revealElements.forEach(el => {
+                const revealTop = el.getBoundingClientRect().top;
+                if (revealTop < windowHeight - revealPoint) {
+                    el.classList.add('active');
+                }
+            });
+        };
+
+        // INTERAÇÃO DO FAQ (ACORDEÃO COMPARTILHADO)
+        const faqItems = document.querySelectorAll('.faq-item');
+
+        faqItems.forEach(item => {
+            const trigger = item.querySelector('.faq-trigger');
+            const content = item.querySelector('.faq-content');
+
+            trigger.addEventListener('click', () => {
+                const isOpen = item.classList.contains('active');
+
+                // Fecha todos os itens abertos automaticamente
+                faqItems.forEach(otherItem => {
+                    otherItem.classList.remove('active');
+                    otherItem.querySelector('.faq-content').style.maxHeight = null;
+                });
+
+                // Se o item clicado não estava aberto, ele abre agora
+                if (!isOpen) {
+                    item.classList.add('active');
+                    content.style.maxHeight = content.scrollHeight + "px";
+                }
+            });
+        });
+
+        // INIT
+        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('load', revealOnScroll);
+    </script>
 </body>
 </html>
