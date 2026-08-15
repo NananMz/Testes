@@ -43,7 +43,7 @@
             min-height: 100vh;
             overflow-x: hidden;
             position: relative;
-            padding-top: 40px; 
+            padding-top: 64px; 
         }
 
         /* Bloqueio de rolagem durante a animação */
@@ -60,7 +60,7 @@
             position: fixed; inset: 0; z-index: 99999;
             background: radial-gradient(circle at 50% 40%, #0a0102 0%, var(--bg-deep) 80%);
             display: flex; align-items: center; justify-content: center;
-            transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), visibility 1.2s;
+            transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.7s;
         }
         #intro-overlay.fade-out { opacity: 0; visibility: hidden; pointer-events: none; }
 
@@ -103,7 +103,7 @@
 
         #suit-svg {
             width: 100%; height: 100%; display: block; transform-style: preserve-3d;
-            animation: spinIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+            animation: spinIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
         }
         @keyframes spinIn {
             0% { transform: rotateY(-90deg) scale(0.85); opacity: 0; filter: blur(5px); }
@@ -113,11 +113,11 @@
         .draw {
             fill: none; stroke: rgba(255,255,255,0.15); stroke-width: 1.8;
             stroke-linecap: round; stroke-linejoin: round;
-            transition: stroke-dashoffset 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 1s ease, filter 1s ease, stroke 1s ease;
+            transition: stroke-dashoffset 0.55s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease, filter 0.5s ease, stroke 0.5s ease;
         }
         .draw.accent { stroke: var(--red-main); stroke-width: 2.2; }
 
-        #hBarL, #hBarR { transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1); stroke: var(--white-main); stroke-width: 2.5; }
+        #hBarL, #hBarR { transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1); stroke: var(--white-main); stroke-width: 2.5; }
         #hBarL.split { transform: translateX(-90px); }
         #hBarR.split { transform: translateX(90px); }
         #crossbar { stroke: var(--red-main); stroke-width: 2.5; transition: opacity 0.5s ease; }
@@ -129,7 +129,7 @@
         }
         .reveal-text {
             opacity: 0; transform: scale(0.9);
-            transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1), transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
             color: var(--white-main); font-family: var(--font-heading);
             letter-spacing: 3px; font-size: clamp(22px, 6vw, 32px); text-align: center; white-space: nowrap;
         }
@@ -137,7 +137,7 @@
         .reveal-text .big-h { color: var(--red-main); font-size: 1.6em; }
         .reveal-rule {
             width: 0; height: 1px; background: var(--red-dusk); margin-top: 8px;
-            transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.2s;
+            transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.1s;
         }
         .reveal-rule.show { width: 140px; }
 
@@ -197,7 +197,7 @@
         }
 
         /* LAYOUT GERAL */
-        #main-content { opacity: 0; transition: opacity 0.8s ease; }
+        #main-content { opacity: 0; transition: opacity 0.5s ease; }
         #main-content.visible { opacity: 1; }
         .wrapper { max-width: 500px; margin: 0 auto; padding: 0 24px 120px 24px; position: relative; }
 
@@ -219,11 +219,20 @@
             position: fixed; top: 0; left: 0; width: 100%;
             background: rgba(10, 0, 0, 0.95); backdrop-filter: blur(10px);
             border-bottom: 1px solid rgba(193, 18, 31, 0.2);
-            color: #d1d1d1; text-align: center; font-size: 11px; font-weight: 500;
-            padding: 12px 20px; z-index: 1000; letter-spacing: 1px; text-transform: uppercase;
-            display: flex; justify-content: center; align-items: center; gap: 10px;
+            color: #d1d1d1; text-align: center;
+            padding: 8px 16px; z-index: 1000;
+            display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 3px;
         }
-        .pulse-dot { width: 8px; height: 8px; background-color: var(--red-main); border-radius: 50%; box-shadow: 0 0 8px var(--red-main); animation: pulse-dot 1.5s infinite alternate; }
+        .top-bar-row {
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            font-size: 11px; font-weight: 600; letter-spacing: 0.8px; text-transform: uppercase;
+        }
+        .top-bar-row strong { color: var(--red-main); font-family: var(--font-heading); letter-spacing: 1px; font-size: 13px; font-weight: 400; }
+        .top-bar-sub {
+            font-size: 10px; color: #999; font-weight: 400; letter-spacing: 0.3px;
+        }
+        .top-bar-sub strong { color: var(--red-main); font-weight: 600; }
+        .pulse-dot { width: 8px; height: 8px; background-color: var(--red-main); border-radius: 50%; box-shadow: 0 0 8px var(--red-main); animation: pulse-dot 1.5s infinite alternate; flex-shrink: 0; }
         @keyframes pulse-dot { 0% { opacity: 0.4; transform: scale(0.8); } 100% { opacity: 1; transform: scale(1.2); } }
 
         /* HERO */
@@ -480,7 +489,11 @@
 
     <div id="main-content">
         <div class="top-bar">
-            <div class="pulse-dot"></div> ATENÇÃO: Vagas com desconto liberadas
+            <div class="top-bar-row">
+                <div class="pulse-dot"></div>
+                Vagas com desconto expiram em <strong id="tb-timer">00:27:43</strong>
+            </div>
+            <div class="top-bar-sub" id="tb-exact"></div>
         </div>
 
         <div class="ambient-bg"><div class="ambient-glow"></div></div>
@@ -570,6 +583,16 @@
                     <li>Construa uma presença masculina polarizadora, autêntica e impossível de ler de primeira.</li>
                     <li>Corte investimentos de tempo em interações sem futuro e foque naquelas que já estão ganhas.</li>
                 </ul>
+            </section>
+
+            <div class="section-divider"></div>
+
+            <section class="mid-cta scroll-reveal">
+                <p>Agora você já entende a engenharia por trás do desejo. <strong>A dúvida não é se o método funciona — é se você vai aplicá-lo hoje ou vai continuar refém da sorte.</strong></p>
+                <a href="#oferta" class="btn">
+                    Quero Aplicar o Método
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </a>
             </section>
 
             <div class="section-divider"></div>
@@ -1085,14 +1108,14 @@
             }
             skipBtn.addEventListener('click', skip);
 
-            schedule(function(){ startPct(1400); }, 0);
-            schedule(function(){ skipBtn.classList.add('show'); }, 700);
+            schedule(function(){ startPct(750); }, 0);
+            schedule(function(){ skipBtn.classList.add('show'); }, 350);
 
-            schedule(function(){ drawH(); }, 300);
-            schedule(function(){ stopPct(); }, 1400);
-            schedule(function(){ splitH(); }, 1700);
-            schedule(function(){ showText(); }, 2000);
-            schedule(function(){ fadeOutOverlay(); }, 3800);
+            schedule(function(){ drawH(); }, 150);
+            schedule(function(){ stopPct(); }, 750);
+            schedule(function(){ splitH(); }, 850);
+            schedule(function(){ showText(); }, 1000);
+            schedule(function(){ fadeOutOverlay(); }, 2100);
         })();
 
         /**
@@ -1118,6 +1141,8 @@
             const mBox = document.getElementById('t-minutes');
             const sBox = document.getElementById('t-seconds');
             const exactBox = document.getElementById('timer-exact');
+            const tbTimerBox = document.getElementById('tb-timer');
+            const tbExactBox = document.getElementById('tb-exact');
             const storageKey = 'codigo_atracao_expiration_v2';
             const MIN_MS = 11 * 60 * 1000;
 
@@ -1159,8 +1184,6 @@
             // Calculado uma única vez a partir do targetTime fixo —
             // não muda a cada tick nem em visitas futuras.
             function renderExactTime() {
-                if (!exactBox) return;
-
                 const target = new Date(targetTime);
                 const now = new Date();
 
@@ -1172,9 +1195,13 @@
                                  target.getMonth() === now.getMonth() &&
                                  target.getFullYear() === now.getFullYear();
 
+                // O alvo é sempre no futuro (próximo :00/:30), então só pode
+                // ser "hoje" ou, se cair virando a noite, "amanhã".
                 const dayLabel = sameDay ? 'hoje' : 'amanhã';
+                const text = 'Oferta válida até às <strong>' + timeStr + '</strong> de ' + dayLabel + ' (' + dateStr + ')';
 
-                exactBox.innerHTML = 'Oferta válida até às <strong>' + timeStr + '</strong> de ' + dayLabel + ' (' + dateStr + ')';
+                if (exactBox) exactBox.innerHTML = text;
+                if (tbExactBox) tbExactBox.innerHTML = text;
             }
 
             renderExactTime();
@@ -1189,6 +1216,7 @@
                 if (hBox) hBox.textContent = fmt(hours);
                 if (mBox) mBox.textContent = fmt(minutes);
                 if (sBox) sBox.textContent = fmt(seconds);
+                if (tbTimerBox) tbTimerBox.textContent = fmt(hours) + ':' + fmt(minutes) + ':' + fmt(seconds);
             }
 
             let intervalId = null;
