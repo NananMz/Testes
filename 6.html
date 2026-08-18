@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
+<head> 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Código da Atração | A Ciência do Desejo</title>
@@ -474,11 +474,107 @@
             .sticky-cta { left: 50%; transform: translate(-50%, 100%); max-width: 500px; border-left: 1px solid var(--border-subtle); border-right: 1px solid var(--border-subtle); }
             .sticky-cta.visible { transform: translate(-50%, 0); }
         }
+
+        /* =========================================
+           QUIZ / DIAGNÓSTICO (FUNIL DE ENTRADA)
+           ========================================= */
+        .quiz-overlay {
+            position: fixed; inset: 0; z-index: 999999;
+            background: radial-gradient(circle at 50% 20%, #0a0102 0%, var(--bg-deep) 75%);
+            display: flex; flex-direction: column;
+            opacity: 1; visibility: visible;
+            transition: opacity 0.45s cubic-bezier(0.16,1,0.3,1), visibility 0.45s;
+        }
+        .quiz-overlay.quiz-hide { opacity: 0; visibility: hidden; pointer-events: none; }
+
+        .quiz-top {
+            display: flex; align-items: center; gap: 14px; flex-shrink: 0;
+            padding: max(18px, env(safe-area-inset-top)) 20px 14px;
+        }
+        .quiz-back {
+            width: 34px; height: 34px; border-radius: 50%; flex-shrink: 0;
+            background: rgba(255,255,255,0.04); border: 1px solid var(--border-subtle);
+            display: flex; align-items: center; justify-content: center;
+            color: var(--white-main); cursor: pointer;
+            transition: opacity 0.25s ease, border-color 0.25s ease;
+        }
+        .quiz-back svg { width: 16px; height: 16px; }
+        .quiz-back[data-hidden="true"] { opacity: 0; pointer-events: none; }
+        .quiz-back:active { border-color: var(--border-highlight); }
+
+        .quiz-progress-track { flex: 1; height: 4px; background: rgba(255,255,255,0.06); border-radius: 4px; overflow: hidden; }
+        .quiz-progress-fill { height: 100%; width: 0%; border-radius: 4px; background: linear-gradient(90deg, var(--red-dusk), var(--red-main)); transition: width 0.4s cubic-bezier(0.16,1,0.3,1); }
+
+        .quiz-body {
+            flex: 1; display: flex; flex-direction: column; overflow-y: auto;
+            padding: 10px 24px calc(40px + env(safe-area-inset-bottom));
+            -webkit-overflow-scrolling: touch;
+        }
+        .quiz-step {
+            margin: auto auto; width: 100%; max-width: 440px;
+            opacity: 0; transform: translateY(14px);
+            transition: opacity 0.3s cubic-bezier(0.16,1,0.3,1), transform 0.3s cubic-bezier(0.16,1,0.3,1);
+        }
+        .quiz-step.in { opacity: 1; transform: translateY(0); }
+
+        .quiz-eyebrow { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--red-main); margin-bottom: 14px; font-weight: 600; text-align: center; }
+        .quiz-title { font-family: var(--font-heading); font-size: 28px; line-height: 1.08; letter-spacing: 1px; text-align: center; color: #fff; margin-bottom: 14px; }
+        .quiz-title.left { text-align: left; font-size: 22px; }
+        .quiz-title span { color: var(--red-main); }
+        .quiz-sub { font-size: 14px; color: var(--white-sec); line-height: 1.6; font-weight: 300; text-align: center; margin-bottom: 26px; }
+
+        .quiz-options { display: flex; flex-direction: column; gap: 12px; margin-top: 22px; }
+        .quiz-opt {
+            display: flex; align-items: center; gap: 14px; text-align: left; width: 100%;
+            background: rgba(255,255,255,0.015); border: 1px solid var(--border-subtle); border-radius: 8px;
+            padding: 18px 16px; color: #d1d1d1; font-family: var(--font-body); font-size: 14px; font-weight: 400; line-height: 1.5;
+            cursor: pointer; transition: border-color 0.25s ease, background 0.25s ease, transform 0.15s ease;
+        }
+        .quiz-opt-dot { flex-shrink: 0; width: 18px; height: 18px; border-radius: 50%; border: 1px solid var(--red-main); position: relative; }
+        .quiz-opt.selected .quiz-opt-dot::after { content: ''; position: absolute; inset: 3px; background: var(--red-main); border-radius: 50%; }
+        .quiz-opt.selected { border-color: var(--border-highlight); background: rgba(193,18,31,0.06); }
+        .quiz-opt:active { transform: scale(0.98); }
+
+        .quiz-info-icon { display: flex; justify-content: center; margin-bottom: 18px; }
+        .quiz-info-icon svg { width: 34px; height: 34px; stroke: var(--red-main); fill: none; stroke-width: 1.5; }
+        .quiz-info-box { background: transparent; border-left: 2px solid var(--red-main); padding: 16px 20px; margin: 6px 0 30px; font-style: italic; color: #d1d1d1; font-size: 14.5px; line-height: 1.6; font-weight: 300; }
+
+        .quiz-cta { display: flex; justify-content: center; margin-top: 6px; }
+
+        .quiz-loading { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; flex: 1; }
+        .quiz-loading-ring { width: 74px; height: 74px; border-radius: 50%; border: 2px solid rgba(193,18,31,0.15); border-top-color: var(--red-main); animation: quizspin 0.9s linear infinite; margin-bottom: 28px; }
+        @keyframes quizspin { to { transform: rotate(360deg); } }
+        .quiz-loading-pct { font-family: var(--font-heading); font-size: 40px; color: #fff; letter-spacing: 1px; margin-bottom: 10px; }
+        .quiz-loading-status { font-size: 12px; color: var(--white-sec); text-transform: uppercase; letter-spacing: 1.5px; min-height: 16px; }
+
+        .quiz-result-score { text-align: center; margin: 8px 0 26px; }
+        .qrs-label { font-size: 11px; color: var(--white-sec); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 10px; display: block; }
+        .qrs-bar-track { height: 8px; border-radius: 8px; background: rgba(255,255,255,0.06); overflow: hidden; margin-bottom: 8px; }
+        .qrs-bar-fill { height: 100%; width: 0%; border-radius: 8px; background: linear-gradient(90deg, var(--red-dusk), var(--red-main)); transition: width 1s cubic-bezier(0.16,1,0.3,1); }
+        .qrs-bar-pct { font-family: var(--font-heading); font-size: 22px; color: var(--red-main); }
+
+        .quiz-result-list { list-style: none; padding: 0; margin: 6px 0 30px; display: flex; flex-direction: column; gap: 12px; }
+        .quiz-result-list li { display: flex; gap: 12px; align-items: flex-start; font-size: 13.5px; color: #c9c9c9; line-height: 1.55; font-weight: 300; }
+        .quiz-result-list li svg { flex-shrink: 0; width: 16px; height: 16px; stroke: var(--red-main); fill: none; stroke-width: 2; margin-top: 2px; }
+
+        @media (prefers-reduced-motion: reduce) {
+            .quiz-loading-ring { animation: none; border-top-color: var(--red-main); }
+        }
     </style>
 
     
     </head>
 <body class="lock">
+
+    <div class="quiz-overlay" id="quizOverlay">
+        <div class="quiz-top">
+            <button class="quiz-back" id="quizBack" data-hidden="true" aria-label="Voltar para a etapa anterior">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            </button>
+            <div class="quiz-progress-track"><div class="quiz-progress-fill" id="quizProgressFill"></div></div>
+        </div>
+        <div class="quiz-body" id="quizBody"></div>
+    </div>
 
     <div id="intro-overlay">
         <div class="grid-bg-intro"></div>
@@ -1064,7 +1160,7 @@
     </div>
 
     <script>
-        (function(){
+        function runIntroAnimation(){
             var timers = [];
             function schedule(fn, t){ timers.push(setTimeout(fn, t)); }
 
@@ -1133,6 +1229,360 @@
             schedule(function(){ splitH(); }, 850);
             schedule(function(){ showText(); }, 1000);
             schedule(function(){ fadeOutOverlay(); }, 2100);
+        }
+
+        /* =========================================
+           QUIZ / DIAGNÓSTICO — FUNIL DE ENTRADA
+           ========================================= */
+        var QUIZ_STORAGE_KEY = 'hdp_quiz_completed_v1';
+
+        var quizQuestions = [
+            { q: "Como estão indo suas conversas no WhatsApp/Instagram com garotas que você tem interesse?",
+              opts: [
+                {t:"Eu puxo quase toda conversa e as respostas demoram ou vêm secas", p:"ansioso"},
+                {t:"Converso bem, mas acabo tratando ela mais como amiga do que como alguém que eu quero conquistar", p:"nice"},
+                {t:"A conversa flui numa boa, só que ela me trata como 'aquele amigo legal'", p:"amigo"},
+                {t:"Vai bem no geral, mas eu travo na hora de dar o próximo passo", p:"quase"}
+              ]
+            },
+            { q: "Quando surge uma oportunidade na rua, faculdade ou balada, o que geralmente acontece?",
+              opts: [
+                {t:"Eu travo e deixo a oportunidade passar", p:"ansioso"},
+                {t:"Puxo assunto numa boa, mas fico sem saber se estou 'demonstrando interesse demais'", p:"nice"},
+                {t:"Consigo conversar tranquilo, só que sempre vira 'papo de amigo'", p:"amigo"},
+                {t:"Chamo pra sair, mas não sei calibrar bem o passo seguinte", p:"quase"}
+              ]
+            },
+            { q: "Quando ela demora pra responder uma mensagem, qual é a sua reação mais comum?",
+              opts: [
+                {t:"Fico remoendo se fiz ou disse algo errado", p:"ansioso"},
+                {t:"Mando outra mensagem tentando 'reanimar' a conversa", p:"nice"},
+                {t:"Não muda muito, porque no fundo sei que não sou prioridade pra ela", p:"amigo"},
+                {t:"Espero, mas fico em dúvida se puxo de novo ou deixo quieto", p:"quase"}
+              ]
+            },
+            { q: "O que mais se parece com o que costuma dar errado nas suas interações?",
+              opts: [
+                {t:"Tenho medo de parecer chato e acabo sumindo da conversa", p:"ansioso"},
+                {t:"Concordo com tudo que ela fala só pra agradar", p:"nice"},
+                {t:"Ela me pede conselho sobre outros caras", p:"amigo"},
+                {t:"Sei criar conexão, mas não sei transformar isso em algo a mais", p:"quase"}
+              ]
+            },
+            { q: "Como está a sua frequência de encontros reais nos últimos meses?",
+              opts: [
+                {t:"Faz tempo que não saio com alguém que eu realmente queira", p:"ansioso"},
+                {t:"Saio bastante como amigo, raramente como algo além disso", p:"nice"},
+                {t:"Sempre acabo ouvindo 'você é tipo um irmão pra mim'", p:"amigo"},
+                {t:"Saio de vez em quando, mas sinto que podia estar indo bem melhor", p:"quase"}
+              ]
+            },
+            { q: "O que você sente um segundo antes de puxar assunto com alguém que te interessa?",
+              opts: [
+                {t:"Ansiedade e medo de ser ignorado", p:"ansioso"},
+                {t:"Vontade de agradar e não desagradar de jeito nenhum", p:"nice"},
+                {t:"Tranquilidade, mas já sei que não desperto 'aquele' tipo de interesse", p:"amigo"},
+                {t:"Confiança — só falta saber conduzir o momento certo", p:"quase"}
+              ]
+            },
+            { q: "Qual desses medos mais pesa pra você hoje?",
+              opts: [
+                {t:"Ficar sozinho e não saber nem por onde começar", p:"ansioso"},
+                {t:"Ser visto como carente ou insistente", p:"nice"},
+                {t:"Continuar sendo 'só amigo' pra sempre", p:"amigo"},
+                {t:"Deixar oportunidades boas escaparem por falta de método", p:"quase"}
+              ]
+            },
+            { q: "Se pudesse mudar uma coisa agora, qual seria?",
+              opts: [
+                {t:"Ter mais confiança pra puxar e manter uma conversa", p:"ansioso"},
+                {t:"Aprender a gerar tensão e desejo, não só simpatia", p:"nice"},
+                {t:"Deixar de ser 'só amigo' e virar uma opção real", p:"amigo"},
+                {t:"Ter um método claro pra aplicar, sem depender do achismo", p:"quase"}
+              ]
+            }
+        ];
+
+        var quizInfos = [
+            { title: "Você sabia?",
+              text: "A atração raramente nasce de um discurso bem montado. Na maioria das vezes, ela é uma resposta quase automática à forma como alguém se posiciona — antes mesmo da primeira frase ser dita." },
+            { title: "Um padrão que se repete",
+              text: "A maioria dos homens tenta resolver isso na base da lógica: mais mensagens, mais esforço, mais disponibilidade. O problema é que desejo não se constrói com insistência — se constrói com direção." },
+            { title: "A transformação acontece em fases",
+              text: "Postura interna, depois leitura de sinais, depois tensão. Pular etapas é exatamente o que trava a maioria dos homens no mesmo padrão, mês após mês." },
+            { title: "Antes do seu resultado...",
+              text: "As respostas que você acabou de dar já mostram um padrão bem específico. Estamos prontos para calcular o seu diagnóstico completo." }
+        ];
+
+        var quizProfiles = {
+            ansioso: {
+                name: "O Ansioso Digital",
+                score: 29,
+                text: "Suas respostas mostram um padrão de ansiedade na comunicação — você segue no controle dela, e cada silêncio pesa mais do que devia. Isso faz seu valor emocional cair a cada mensagem sem resposta.",
+                points: [
+                    "Dependência do reconhecimento dela pra se sentir seguro",
+                    "Excesso de mensagens sem retorno proporcional",
+                    "Dificuldade de manter o próprio ritmo dentro da conversa"
+                ]
+            },
+            nice: {
+                name: "O Nice Guy Sem Tensão",
+                score: 41,
+                text: "Você constrói simpatia rápido, mas raramente gera desejo. Concordar demais e evitar qualquer atrito te deixa confortável de se conversar — e fácil de esquecer.",
+                points: [
+                    "Falta de polaridade nas conversas",
+                    "Medo de discordar ou criar tensão saudável",
+                    "Presença agradável, mas pouco magnética"
+                ]
+            },
+            amigo: {
+                name: "Estagnado na Zona de Amizade",
+                score: 53,
+                text: "Você já tem conexão real — o problema é que ela nunca te viu como opção romântica desde o início. Isso não se resolve com mais tempo, se resolve com reposicionamento.",
+                points: [
+                    "Entrada errada na relação desde os primeiros contatos",
+                    "Ausência de sinais claros de interesse romântico",
+                    "Tempo investido em interações que já esfriaram"
+                ]
+            },
+            quase: {
+                name: "Quase Lá — Falta Consistência",
+                score: 68,
+                text: "Sua base já é boa. O que falta não é personalidade, é direção: saber exatamente quando escalar, quando recuar e como não travar no momento decisivo.",
+                points: [
+                    "Falta de leitura precisa do momento certo de agir",
+                    "Inconsistência entre boas conversas e resultados reais",
+                    "Ausência de um método replicável — depende da sorte do dia"
+                ]
+            }
+        };
+
+        function initQuiz(){
+            var overlay = document.getElementById('quizOverlay');
+            var body = document.getElementById('quizBody');
+            var backBtn = document.getElementById('quizBack');
+            var progressFill = document.getElementById('quizProgressFill');
+
+            var seq = [{type:'cover'}];
+            var order = [0,1,'i0',2,3,'i1',4,5,'i2',6,7,'i3'];
+            order.forEach(function(o){
+                if (typeof o === 'number') seq.push({type:'q', idx:o});
+                else seq.push({type:'info', idx:parseInt(o.slice(1),10)});
+            });
+            seq.push({type:'loading'});
+            seq.push({type:'result'});
+
+            var countedTotal = 12;
+            var answers = new Array(quizQuestions.length).fill(null);
+            var stepIndex = 0;
+
+            function countedPosition(idx){
+                var c = 0;
+                for (var i=1; i<=idx; i++){
+                    if (seq[i].type==='q' || seq[i].type==='info') c++;
+                }
+                return c;
+            }
+
+            function updateChrome(){
+                var step = seq[stepIndex];
+                if (step.type==='cover' || step.type==='loading' || step.type==='result'){
+                    backBtn.setAttribute('data-hidden','true');
+                } else {
+                    backBtn.setAttribute('data-hidden', stepIndex<=1 ? 'true':'false');
+                }
+                if (step.type==='q' || step.type==='info'){
+                    var pos = countedPosition(stepIndex);
+                    progressFill.style.width = Math.round((pos/countedTotal)*100)+'%';
+                } else if (step.type==='cover'){
+                    progressFill.style.width = '0%';
+                } else {
+                    progressFill.style.width = '100%';
+                }
+            }
+
+            function computeProfile(){
+                var tally = {ansioso:0, nice:0, amigo:0, quase:0};
+                answers.forEach(function(p){ if(p) tally[p]++; });
+                var priority = ['ansioso','nice','amigo','quase'];
+                var best = priority[0];
+                priority.forEach(function(k){ if (tally[k] > tally[best]) best = k; });
+                return best;
+            }
+
+            function renderCover(){
+                return '' +
+                    '<span class="quiz-eyebrow">Diagnóstico Rápido · 2 minutos</span>' +
+                    '<h2 class="quiz-title">Descubra por que suas <span>conversas não evoluem</span></h2>' +
+                    '<p class="quiz-sub">Responda 8 perguntas rápidas. No final, você recebe um diagnóstico personalizado com os pontos exatos que estão travando você agora.</p>' +
+                    '<div class="quiz-cta"><button class="btn" id="quizStartBtn" type="button">Iniciar Diagnóstico</button></div>';
+            }
+
+            function renderQuestion(idx){
+                var q = quizQuestions[idx];
+                var optsHtml = q.opts.map(function(o){
+                    var sel = answers[idx]===o.p ? ' selected':'';
+                    return '<button class="quiz-opt'+sel+'" data-p="'+o.p+'" type="button"><span class="quiz-opt-dot"></span><span>'+o.t+'</span></button>';
+                }).join('');
+                return '' +
+                    '<span class="quiz-eyebrow">Pergunta '+(idx+1)+' de '+quizQuestions.length+'</span>' +
+                    '<h2 class="quiz-title left">'+q.q+'</h2>' +
+                    '<div class="quiz-options">'+optsHtml+'</div>';
+            }
+
+            function renderInfo(idx){
+                var info = quizInfos[idx];
+                return '' +
+                    '<div class="quiz-info-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 16v-4M12 8h.01"></path></svg></div>' +
+                    '<h2 class="quiz-title">'+info.title+'</h2>' +
+                    '<div class="quiz-info-box">'+info.text+'</div>' +
+                    '<div class="quiz-cta"><button class="btn" id="quizContinueBtn" type="button">Continuar</button></div>';
+            }
+
+            function renderLoading(){
+                return '<div class="quiz-loading">' +
+                    '<div class="quiz-loading-ring"></div>' +
+                    '<div class="quiz-loading-pct" id="quizLoadPct">0%</div>' +
+                    '<div class="quiz-loading-status" id="quizLoadStatus">Cruzando suas respostas...</div>' +
+                    '</div>';
+            }
+
+            function renderResult(){
+                var key = computeProfile();
+                var prof = quizProfiles[key];
+                var pointsHtml = prof.points.map(function(p){
+                    return '<li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg><span>'+p+'</span></li>';
+                }).join('');
+                return '' +
+                    '<span class="quiz-eyebrow">Diagnóstico Concluído</span>' +
+                    '<h2 class="quiz-title">Perfil identificado:<br><span>'+prof.name+'</span></h2>' +
+                    '<p class="quiz-sub">'+prof.text+'</p>' +
+                    '<div class="quiz-result-score">' +
+                        '<span class="qrs-label">Índice de Presença Masculina</span>' +
+                        '<div class="qrs-bar-track"><div class="qrs-bar-fill" id="qrsBarFill" style="width:0%"></div></div>' +
+                        '<span class="qrs-bar-pct" id="qrsBarPct">0%</span>' +
+                    '</div>' +
+                    '<ul class="quiz-result-list">'+pointsHtml+'</ul>' +
+                    '<div class="quiz-cta"><button class="btn" id="quizCtaBtn" type="button">Ver o Método Que Resolve Isso</button></div>';
+            }
+
+            function animateCount(el, target){
+                var t0 = performance.now(); var dur = 900;
+                function step(now){
+                    var p = Math.min(1, (now-t0)/dur);
+                    el.textContent = Math.round(p*target)+'%';
+                    if (p<1) requestAnimationFrame(step);
+                }
+                requestAnimationFrame(step);
+            }
+
+            function runLoading(){
+                var statuses = ["Cruzando suas respostas...", "Identificando pontos de bloqueio...", "Calculando seu Índice de Presença Masculina...", "Montando seu diagnóstico..."];
+                var t0 = performance.now(); var dur = 2600; var si = 0;
+                var statusTimer = setInterval(function(){
+                    si = (si+1) % statuses.length;
+                    var statusEl = document.getElementById('quizLoadStatus');
+                    if (statusEl) statusEl.textContent = statuses[si];
+                }, 650);
+                function tick(now){
+                    var p = Math.min(1, (now-t0)/dur);
+                    var pctEl = document.getElementById('quizLoadPct');
+                    if (pctEl) pctEl.textContent = Math.round(p*100)+'%';
+                    if (p<1) requestAnimationFrame(tick);
+                    else { clearInterval(statusTimer); setTimeout(goNext, 250); }
+                }
+                requestAnimationFrame(tick);
+            }
+
+            function bindStep(step){
+                if (step.type === 'cover'){
+                    var startBtn = document.getElementById('quizStartBtn');
+                    if (startBtn) startBtn.addEventListener('click', goNext);
+                } else if (step.type === 'q'){
+                    var opts = body.querySelectorAll('.quiz-opt');
+                    opts.forEach(function(btn){
+                        btn.addEventListener('click', function(){
+                            answers[step.idx] = btn.getAttribute('data-p');
+                            setTimeout(goNext, 180);
+                        });
+                    });
+                } else if (step.type === 'info'){
+                    var contBtn = document.getElementById('quizContinueBtn');
+                    if (contBtn) contBtn.addEventListener('click', goNext);
+                } else if (step.type === 'result'){
+                    var key = computeProfile();
+                    var prof = quizProfiles[key];
+                    setTimeout(function(){
+                        var fill = document.getElementById('qrsBarFill');
+                        var pct = document.getElementById('qrsBarPct');
+                        if (fill) fill.style.width = prof.score+'%';
+                        if (pct) animateCount(pct, prof.score);
+                    }, 300);
+                    var ctaBtn = document.getElementById('quizCtaBtn');
+                    if (ctaBtn) ctaBtn.addEventListener('click', finishQuiz);
+                }
+            }
+
+            function renderStep(){
+                var step = seq[stepIndex];
+                var html = '';
+                if (step.type === 'cover') html = renderCover();
+                else if (step.type === 'q') html = renderQuestion(step.idx);
+                else if (step.type === 'info') html = renderInfo(step.idx);
+                else if (step.type === 'loading') html = renderLoading();
+                else if (step.type === 'result') html = renderResult();
+
+                body.innerHTML = '<div class="quiz-step" id="quizStepInner">'+html+'</div>';
+                var el = document.getElementById('quizStepInner');
+                requestAnimationFrame(function(){
+                    requestAnimationFrame(function(){ el.classList.add('in'); });
+                });
+                bindStep(step);
+                updateChrome();
+            }
+
+            function goNext(){
+                if (stepIndex < seq.length-1){
+                    stepIndex++;
+                    renderStep();
+                    if (seq[stepIndex].type==='loading') runLoading();
+                }
+            }
+            function goPrev(){
+                if (stepIndex > 0 && seq[stepIndex].type!=='loading' && seq[stepIndex].type!=='result'){
+                    stepIndex--;
+                    renderStep();
+                }
+            }
+            backBtn.addEventListener('click', goPrev);
+
+            function finishQuiz(){
+                try { localStorage.setItem(QUIZ_STORAGE_KEY, '1'); } catch(e){}
+                overlay.classList.add('quiz-hide');
+                var introOverlay = document.getElementById('intro-overlay');
+                introOverlay.style.display = 'flex';
+                setTimeout(function(){
+                    overlay.style.display = 'none';
+                    runIntroAnimation();
+                }, 400);
+            }
+
+            renderStep();
+        }
+
+        (function(){
+            try {
+                if (localStorage.getItem(QUIZ_STORAGE_KEY)) {
+                    document.getElementById('quizOverlay').style.display = 'none';
+                    runIntroAnimation();
+                } else {
+                    document.getElementById('intro-overlay').style.display = 'none';
+                    initQuiz();
+                }
+            } catch(e){
+                document.getElementById('intro-overlay').style.display = 'none';
+                initQuiz();
+            }
         })();
 
         /**
@@ -1184,9 +1634,6 @@
                 return target.getTime();
             }
 
-            // Identifica a visita: só calcula um novo horário se este
-            // dispositivo ainda não tiver um valor salvo. Depois disso,
-            // o horário fica fixo neste dispositivo.
             let targetTime = localStorage.getItem(storageKey);
             if (targetTime === null) {
                 targetTime = computeTarget();
@@ -1195,11 +1642,6 @@
                 targetTime = parseInt(targetTime, 10);
             }
 
-            // Exibe o horário exato de encerramento em um ponto
-            // estratégico da página (logo abaixo do contador),
-            // formatado como "às HH:MM de hoje/amanhã (DD/MM/AAAA)".
-            // Calculado uma única vez a partir do targetTime fixo —
-            // não muda a cada tick nem em visitas futuras.
             function renderExactTime() {
                 const target = new Date(targetTime);
                 const now = new Date();
@@ -1212,8 +1654,6 @@
                                  target.getMonth() === now.getMonth() &&
                                  target.getFullYear() === now.getFullYear();
 
-                // O alvo é sempre no futuro (próximo :00/:30), então só pode
-                // ser "hoje" ou, se cair virando a noite, "amanhã".
                 const dayLabel = sameDay ? 'hoje' : 'amanhã';
                 const text = 'Oferta válida até às <strong>' + timeStr + '</strong> de ' + dayLabel + ' (' + dateStr + ')';
 
@@ -1253,24 +1693,13 @@
             tick();
             intervalId = setInterval(tick, 1000);
 
-            // Ao voltar para a aba, apenas re-sincroniza a exibição com
-            // o horário real — não recalcula nem altera o alvo salvo.
             document.addEventListener('visibilitychange', function () {
                 if (document.visibilityState === 'visible') tick();
             });
         }
 
-        // Reveal ao rolar: em vez de recalcular a posicao de TODOS os
-        // elementos a cada pixel de scroll (getBoundingClientRect em
-        // loop, que forca o navegador a recalcular layout sem parar),
-        // usamos IntersectionObserver — o proprio navegador avisa,
-        // de forma assincrona e barata, quando cada elemento entra na
-        // tela. O resultado visual é identico, mas sem travar o scroll.
         const revealElements = document.querySelectorAll('.scroll-reveal');
         const revealOnScroll = () => {
-            // Mantido por compatibilidade (chamado em alguns pontos do
-            // script de intro) — apenas garante que tudo ja visivel na
-            // primeira renderizacao receba a classe ativa de imediato.
             const windowHeight = window.innerHeight;
             revealElements.forEach(el => {
                 if (el.getBoundingClientRect().top < windowHeight - 50) {
@@ -1290,16 +1719,12 @@
             }, { threshold: 0, rootMargin: '0px 0px -50px 0px' });
             revealElements.forEach(el => revealObserver.observe(el));
         } else {
-            // Fallback bem simples para navegadores muito antigos.
             window.addEventListener('scroll', revealOnScroll, { passive: true });
         }
 
         const stickyCta = document.getElementById('stickyCta');
         const offerSection = document.getElementById('oferta');
 
-        // Em vez de medir a posicao da secao de oferta a cada scroll,
-        // observamos apenas se ela esta visivel ou nao (evento raro),
-        // e usamos isso junto com o scrollY atual — muito mais leve.
         let offerInView = false;
         if ('IntersectionObserver' in window && offerSection) {
             const offerObserver = new IntersectionObserver((entries) => {
