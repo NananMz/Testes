@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Código da Atração | A Ciência do Desejo</title>
+    <title>Método da Conexão Masculina</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -18,16 +18,17 @@
         }
 
         :root {
-            --bg-deep: #030303;
-            --bg-card: #080808;
+            --bg-deep: #050505;
+            --bg-card: #0a0a0a;
             --red-main: #C1121F;
-            --red-dusk: #7A0A12;
+            --red-dusk: #8A1018;
             --red-glow: #E63946;
             --white-main: #F5F5F5;
-            --white-sec: #8A8A8A;
+            --white-sec: #A3A3A3;
+            --border-subtle: rgba(255, 255, 255, 0.05);
+            --border-highlight: rgba(193, 18, 31, 0.35);
             --font-heading: 'Bebas Neue', sans-serif;
             --font-body: 'Inter', sans-serif;
-            --border-subtle: rgba(255, 255, 255, 0.04);
         }
 
         html {
@@ -42,7 +43,7 @@
             min-height: 100vh;
             overflow-x: hidden;
             position: relative;
-            padding-top: 40px; 
+            padding-top: 50px; /* Espaço para a topbar maior */
         }
 
         /* VINHETA & PROFUNDIDADE */
@@ -52,56 +53,56 @@
             inset: 0;
             pointer-events: none;
             z-index: -1;
-            background: radial-gradient(circle at center, transparent 20%, rgba(0,0,0,0.95) 100%);
+            background: radial-gradient(circle at center, transparent 35%, rgba(0,0,0,.85) 100%);
         }
 
-        /* BACKGROUND VIVO MINIMALISTA */
+        /* BACKGROUND VIVO */
         .ambient-bg {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             z-index: -3;
-            background: radial-gradient(circle at 50% 10%, #0d0203 0%, var(--bg-deep) 70%);
+            background: radial-gradient(circle at 50% 30%, #110507 0%, var(--bg-deep) 80%);
         }
 
         .ambient-glow {
             position: absolute;
-            top: -15%; left: 50%;
-            width: 120vw; height: 50vh;
-            background: radial-gradient(ellipse, rgba(193, 18, 31, 0.05) 0%, transparent 70%);
+            top: -10%; left: 50%;
+            width: 150vw; height: 60vh;
+            background: radial-gradient(circle, rgba(193, 18, 31, 0.08) 0%, transparent 60%);
             pointer-events: none;
-            animation: drift 20s ease-in-out infinite alternate;
+            animation: drift 15s ease-in-out infinite alternate;
         }
 
         @keyframes drift {
             0% { transform: translate(-50%, 0) scale(1); }
-            100% { transform: translate(-48%, 2%) scale(1.05); }
+            100% { transform: translate(-48%, 5%) scale(1.15); }
         }
 
-        /* PARTÍCULAS GEOMÉTRICAS MINIMALISTAS */
+        /* PARTÍCULAS TEMÁTICAS */
         .particles-container { position: fixed; inset: 0; z-index: -2; overflow: hidden; pointer-events: none; }
         .particle {
             position: absolute; color: var(--red-main); opacity: 0;
-            font-family: monospace; font-size: 10px;
+            filter: blur(2px) drop-shadow(0 0 8px rgba(193,18,31,0.6));
             animation: floatSymbol infinite linear;
         }
-        .p1 { left: 15%; animation-duration: 25s; font-size: 12px; animation-delay: 0s; }
-        .p2 { left: 85%; animation-duration: 30s; font-size: 14px; animation-delay: 4s; }
-        .p3 { left: 45%; animation-duration: 28s; font-size: 10px; animation-delay: 8s; opacity: 0.05;}
-        .p4 { left: 75%; animation-duration: 35s; font-size: 12px; animation-delay: 2s; }
-        .p5 { left: 20%; animation-duration: 32s; font-size: 14px; animation-delay: 12s; }
-        .p6 { left: 60%; animation-duration: 22s; font-size: 10px; animation-delay: 6s; }
+        .p1 { left: 15%; animation-duration: 18s; font-size: 28px; animation-delay: 0s; }
+        .p2 { left: 85%; animation-duration: 24s; font-size: 22px; animation-delay: 4s; }
+        .p3 { left: 45%; animation-duration: 20s; font-size: 34px; animation-delay: 8s; filter: blur(4px); }
+        .p4 { left: 75%; animation-duration: 22s; font-size: 18px; animation-delay: 2s; }
+        .p5 { left: 20%; animation-duration: 26s; font-size: 26px; animation-delay: 12s; }
+        .p6 { left: 60%; animation-duration: 19s; font-size: 20px; animation-delay: 6s; }
 
         @keyframes floatSymbol {
-            0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }
-            20% { opacity: 0.07; }
-            80% { opacity: 0.07; }
-            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+            0% { transform: translateY(110vh) rotate(0deg) scale(0.8); opacity: 0; }
+            15% { opacity: 0.15; }
+            85% { opacity: 0.15; }
+            100% { transform: translateY(-10vh) rotate(360deg) scale(1.2); opacity: 0; }
         }
 
         .cinematic-grain {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1; opacity: 0.03; pointer-events: none;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            z-index: -1; opacity: 0.05; pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
         }
 
         /* LAYOUT GERAL */
@@ -109,437 +110,972 @@
             max-width: 500px; margin: 0 auto; padding: 0 24px 120px 24px; position: relative;
         }
 
-        h1, h2, h3 { font-family: var(--font-heading); text-transform: uppercase; letter-spacing: 1.5px; }
+        h1, h2, h3 { font-family: var(--font-heading); text-transform: uppercase; letter-spacing: 1px; }
 
         .section-divider {
             width: 100px; height: 1px; margin: 60px auto;
             background: linear-gradient(90deg, transparent, rgba(193,18,31,.5), transparent);
         }
 
-        .section-title { font-size: 38px; text-align: center; margin-bottom: 24px; color: var(--white-main); line-height: 1.1; }
+        .section-title { font-size: 36px; text-align: center; margin-bottom: 32px; color: var(--white-main); text-shadow: 0 4px 12px rgba(0,0,0,0.5); }
         .section-title span { color: var(--red-main); }
         .text-center { text-align: center; }
 
-        /* SVG ICONS */
-        .svg-icon {
-            stroke: var(--red-main);
-            stroke-width: 1.5;
-            fill: none;
-            width: 28px;
-            height: 28px;
-            margin-bottom: 12px;
-        }
-
         /* ANIMAÇÕES */
-        .scroll-reveal { opacity: 0; transform: translateY(25px); transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1); }
+        .scroll-reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
         .scroll-reveal.active { opacity: 1; transform: translateY(0); }
-        .delay-1 { transition-delay: 0.15s; }
+        .delay-1 { transition-delay: 0.1s; } .delay-2 { transition-delay: 0.2s; }
 
         /* === 0. URGENCY BAR === */
         .top-bar {
             position: fixed; top: 0; left: 0; width: 100%;
-            background: rgba(10, 0, 0, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(193, 18, 31, 0.2);
-            color: #d1d1d1; text-align: center; font-size: 11px; font-weight: 500;
-            padding: 12px 20px; z-index: 1000; letter-spacing: 1px; text-transform: uppercase;
-            display: flex; justify-content: center; align-items: center; gap: 10px;
+            text-align: center; font-size: 16px; font-weight: 800;
+            padding: 14px 20px; z-index: 1000; letter-spacing: 1px;
+            display: flex; justify-content: center; align-items: center; gap: 8px;
+            animation: blinkWarning 0.8s infinite alternate;
         }
-        .pulse-dot {
-            width: 8px; height: 8px; background-color: var(--red-main); border-radius: 50%;
-            box-shadow: 0 0 8px var(--red-main);
-            animation: pulse-dot 1.5s infinite alternate;
+        @keyframes blinkWarning {
+            0% { background-color: #FF6600; color: #000; box-shadow: 0 2px 15px rgba(255, 102, 0, 0.6); }
+            100% { background-color: #000; color: #FF6600; box-shadow: 0 2px 15px rgba(0, 0, 0, 0.8); }
         }
-        @keyframes pulse-dot { 0% { opacity: 0.4; transform: scale(0.8); } 100% { opacity: 1; transform: scale(1.2); } }
+
+        /* SINALIZAÇÃO DE APROVAÇÃO */
+        .purchase-approved {
+            background: rgba(34, 197, 94, 0.15);
+            border: 1px solid #22c55e;
+            color: #4ade80;
+            padding: 12px 20px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 15px;
+            margin: 20px auto 30px auto;
+            max-width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 0 20px rgba(34, 197, 94, 0.1);
+        }
 
         /* === 1. HERO SECTION === */
-        .hero { padding: 60px 0 20px; text-align: center; }
-        .hero h1 { font-size: 64px; line-height: 0.85; margin-bottom: 24px; letter-spacing: 2px; }
-        .hero h1 span.white { display: block; color: #fff; }
-        .hero h1 span.red { display: block; color: var(--red-main); }
-        
-        .hero .subheadline { 
-            font-size: 15px; color: var(--white-sec); max-width: 360px; 
-            margin: 0 auto 40px; line-height: 1.6; font-weight: 300;
-        }
+        .hero { padding: 10px 0 20px; text-align: center; }
+        .hero h1 { font-size: 42px; line-height: 1.1; margin-bottom: 16px; }
+        .hero h1 span.white { display: block; background: linear-gradient(180deg, #fff, #999); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero h1 span.red { display: block; color: var(--red-main); text-shadow: 0 0 30px rgba(193, 18, 31, 0.4); font-size: 26px; margin-top: 5px;}
+        .hero .subheadline { font-size: 16px; color: var(--white-sec); max-width: 340px; margin: 0 auto 32px; line-height: 1.5; }
 
-        /* BOTÃO GLOBAL MINIMALISTA E AGRESSIVO */
+        /* BOTÃO GLOBAL */
         .btn {
-            display: flex; justify-content: center; align-items: center; gap: 12px;
-            width: 100%; background: var(--red-main);
-            color: #fff; font-size: 16px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px;
-            padding: 22px; border-radius: 4px; border: none; cursor: pointer; text-decoration: none; text-align: center;
-            box-shadow: 0 10px 30px rgba(193, 18, 31, 0.15); position: relative; overflow: hidden; transition: all 0.4s ease;
+            display: block; width: 100%; background: linear-gradient(135deg, var(--red-main) 0%, var(--red-dusk) 100%);
+            color: #fff; font-size: 18px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+            padding: 22px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); cursor: pointer; text-decoration: none; text-align: center;
+            box-shadow: 0 8px 30px rgba(193, 18, 31, 0.3); position: relative; overflow: hidden; transition: 0.3s;
         }
-        .btn:hover { background: #d61826; box-shadow: 0 15px 40px rgba(193, 18, 31, 0.25); transform: translateY(-2px); }
         .btn::before {
-            content: ''; position: absolute; top: 0; left: -150%; width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transform: skewX(-25deg); animation: shine 4s infinite;
+            content: ''; position: absolute; top: 0; left: -120%; width: 80%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+            transform: skewX(-20deg); animation: shine 3.5s infinite;
         }
-        @keyframes shine { 0% { left: -150%; } 20%, 100% { left: 150%; } }
-        .btn:active { transform: scale(0.98); }
+        @keyframes shine { 0% { left: -120%; } 20%, 100% { left: 120%; } }
+        .btn:active { transform: scale(0.97); box-shadow: 0 4px 15px rgba(193, 18, 31, 0.2); }
 
-        /* === 2. TIMELINE (ARQUITETURA DA TRANSFORMAÇÃO) === */
-        .timeline { position: relative; padding-left: 28px; margin-top: 30px; }
-        .timeline::before {
-            content: ''; position: absolute; left: 7px; top: 10px; bottom: 10px; width: 1px;
-            background: linear-gradient(to bottom, var(--red-main), rgba(193,18,31,0.05));
+        /* === BOTÃO SECUNDÁRIO (DOWNSELL SUAVE) === */
+        .btn-secondary {
+            display: block; width: 100%; background: transparent;
+            color: #bbb; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;
+            padding: 14px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.14); cursor: pointer;
+            text-decoration: none; text-align: center; transition: 0.3s;
         }
-        .timeline-item { position: relative; margin-bottom: 35px; }
-        .timeline-item::before {
-            content: ''; position: absolute; left: -24px; top: 6px; width: 7px; height: 7px;
-            background: var(--bg-deep); border: 1px solid var(--red-main); transform: rotate(45deg);
-            box-shadow: 0 0 10px rgba(193,18,31,0.5);
-        }
-        .timeline-item h4 { font-family: var(--font-body); color: #fff; font-size: 15px; margin-bottom: 8px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
-        .timeline-item p { font-size: 14px; color: var(--white-sec); line-height: 1.6; font-weight: 300; }
+        .btn-secondary:hover { border-color: rgba(255,255,255,0.3); color: #fff; }
+        .downsell-wrap { margin-top: 18px; text-align: center; }
+        .downsell-wrap .downsell-copy { font-size: 12.5px; color: #777; line-height: 1.5; margin-bottom: 10px; }
 
-        /* === 3. COPY AGRESSIVA E PROFUNDA === */
-        .story-section p { font-size: 15px; color: var(--white-sec); margin-bottom: 24px; line-height: 1.7; font-weight: 300; }
-        .story-section p strong { color: #fff; font-weight: 500; }
-        
+        /* === REFORÇO DE OPORTUNIDADE === */
+        .opportunity-tag {
+            display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 1px; color: var(--red-main);
+            background: rgba(193,18,31,0.1); border: 1px solid rgba(193,18,31,0.3);
+            padding: 6px 14px; border-radius: 20px; margin: 0 auto 18px auto;
+        }
+
+        /* === RESULTADO ESPERADO === */
+        .outcomes-list { list-style: none; padding: 0; margin-top: 24px; display: flex; flex-direction: column; gap: 16px; }
+        .outcomes-list li { display: flex; gap: 14px; align-items: flex-start; }
+        .outcomes-num {
+            flex-shrink: 0; width: 26px; height: 26px; border: 1px solid var(--red-main); color: var(--red-main);
+            font-family: var(--font-heading); font-size: 14px; display: flex; align-items: center; justify-content: center;
+            border-radius: 50%; margin-top: 1px;
+        }
+        .outcomes-list p { font-size: 14px; color: #d1d1d1; line-height: 1.6; font-weight: 400; margin: 0; }
+        .outcomes-list p strong { color: #fff; font-weight: 700; }
+
+        /* Selo curto de resultado dentro dos módulos */
+        .card-insight { font-size: 12px; color: #888; border-top: 1px dashed rgba(255,255,255,0.08); padding-top: 12px; margin-top: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+
+        /* Caixa de destaque (refinamento da oferta) */
         .highlight-box {
-            background: transparent; border-left: 2px solid var(--red-main);
-            padding: 20px 24px; margin: 40px 0;
-            font-style: italic; color: #d1d1d1; font-size: 16px; line-height: 1.6; font-weight: 300;
-            position: relative;
+            background: rgba(193,18,31,0.05); border-left: 3px solid var(--red-main); padding: 20px 22px; margin: 30px 0;
+            font-size: 14px; color: #d1d1d1; line-height: 1.65; font-weight: 400; border-radius: 0 8px 8px 0;
         }
+        .highlight-box strong { color: #fff; }
 
-        .target-list { list-style: none; padding: 0; margin-top: 32px; border-top: 1px solid var(--border-subtle); padding-top: 32px; }
-        .target-list li { position: relative; padding-left: 28px; margin-bottom: 20px; font-size: 14px; color: var(--white-sec); line-height: 1.6; font-weight: 300; }
-        .target-list li::before {
-            content: '✖'; position: absolute; left: 0; top: 8px; width: 12px; height: 1px; background: var(--red-main);
-        }
-
-        /* === 4. MÓDULOS MINIMALISTAS === */
+        /* === 4. ROADMAP / MÓDULOS === */
         .card {
-            background: transparent;
-            border: 1px solid var(--border-subtle);
-            padding: 32px 24px; margin-bottom: 16px;
-            position: relative; overflow: hidden; transition: border-color 0.4s ease;
+            background: linear-gradient(180deg, #141414 0%, #0a0a0a 100%);
+            border: 1px solid rgba(255,255,255,0.04);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,.03), 0 10px 30px rgba(0,0,0,.4);
+            padding: 28px 24px; border-radius: 12px; margin-bottom: 20px;
+            position: relative; overflow: hidden; transition: transform 0.3s ease;
         }
-        .card:hover { border-color: rgba(193,18,31,0.4); }
-        .card h3 { font-family: var(--font-body); font-size: 17px; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; margin-bottom: 12px; display: flex; flex-direction: column; align-items: flex-start; color: #fff; }
-        .card p { font-size: 14px; color: var(--white-sec); line-height: 1.6; margin-bottom: 20px; font-weight: 300; }
-        .card-insight { font-size: 12px; color: #777; border-top: 1px solid var(--border-subtle); padding-top: 16px; text-transform: uppercase; letter-spacing: 0.5px; }
-
-        /* === 5. BASE CIENTÍFICA === */
-        .science-box {
-            text-align: center; padding: 50px 24px;
-            background: #060606;
-            border: 1px solid var(--border-subtle); position: relative;
+        .card:hover { transform: translateY(-5px); border-color: rgba(193,18,31,0.3); }
+        .card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px;
+            background: linear-gradient(90deg, transparent, var(--red-main), transparent); opacity: 0.5;
         }
-        .science-box p { font-size: 14px; color: var(--white-sec); line-height: 1.7; font-weight: 300; margin-top: 16px; }
-
-        /* === 6. FRASE DE IMPACTO === */
-        .emotional-quote { text-align: center; padding: 20px 0; margin: 40px 0; }
-        .emotional-quote h2 { font-size: 46px; line-height: 1; color: #fff; margin-bottom: 16px; }
-        .emotional-quote p { font-size: 14px; color: var(--white-sec); font-weight: 400; text-transform: uppercase; letter-spacing: 2px; }
+        .card h3 { font-family: var(--font-body); font-size: 18px; text-transform: none; font-weight: 600; margin-bottom: 16px; display: flex; align-items: center; gap: 10px; color: #fff; }
+        
+        .module-list { list-style: none; padding: 0; }
+        .module-list li { position: relative; padding-left: 24px; margin-bottom: 12px; font-size: 14px; color: var(--white-sec); line-height: 1.5; }
+        .module-list li:last-child { margin-bottom: 0; }
+        .module-list li::before {
+            content: '✓'; position: absolute; left: 0; top: 0; color: var(--red-main); font-weight: bold;
+        }
 
         /* === 7. OFERTA PRINCIPAL === */
         .offer-box {
-            background: #080808; border: 1px solid var(--red-main);
-            padding: 48px 24px; text-align: center; position: relative;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            background: #0a0a0a; border: 2px solid var(--red-main); border-radius: 16px;
+            padding: 40px 24px; text-align: center; position: relative;
+            box-shadow: 0 0 50px rgba(193,18,31,0.15);
         }
         .offer-box::before {
-            content: 'ACESSO RESTRITO LIBERADO'; position: absolute; top: -10px; left: 50%; transform: translateX(-50%);
-            background: var(--bg-deep); border: 1px solid var(--red-main); color: var(--red-main); font-size: 10px; font-weight: 600;
-            padding: 4px 16px; letter-spacing: 2px; text-transform: uppercase;
+            content: 'OFERTA ÚNICA'; position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+            background: var(--red-main); color: #fff; font-size: 12px; font-weight: bold;
+            padding: 4px 16px; border-radius: 20px; letter-spacing: 1px;
         }
-        .price-container { margin-bottom: 32px; display: flex; flex-direction: column; gap: 8px; }
-        .price-old { font-size: 14px; text-decoration: line-through; color: #555; text-transform: uppercase; letter-spacing: 1px;}
-        .price-new { font-size: 56px; color: #fff; font-family: var(--font-heading); line-height: 1; }
+
+        /* PREÇO COMPONENTE */
+        .price-container {
+            margin: 15px 0 25px 0;
+        }
+        .price-label {
+            font-size: 14px;
+            color: var(--white-sec);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .price-value {
+            font-family: var(--font-heading);
+            font-size: 54px;
+            color: var(--white-main);
+            line-height: 1;
+            margin-top: 5px;
+            text-shadow: 0 0 20px rgba(255,255,255,0.1);
+        }
+        .price-value span {
+            color: #22c55e;
+        }
         
-        .timer-wrapper { margin-top: 32px; display: flex; flex-direction: column; align-items: center; gap: 12px; }
-        .timer-label { font-size: 11px; color: #666; text-transform: uppercase; letter-spacing: 2px; }
-        .timer-boxes { display: flex; align-items: center; gap: 12px; }
-        .timer-box {
-            background: transparent; border-bottom: 1px solid var(--red-main);
-            padding: 8px 12px; font-family: var(--font-heading); font-size: 28px; color: #fff;
-        }
-        .timer-sep { color: #444; font-size: 20px; font-weight: 300; }
+        /* GARANTIA DENTRO DA OFERTA */
+        .guarantee { margin-top: 32px; padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.1); }
+        .guarantee-icon { font-size: 32px; margin-bottom: 12px; }
+        .guarantee h3 { font-size: 20px; margin-bottom: 8px; }
+        .guarantee p { font-size: 13px; color: var(--white-sec); line-height: 1.5; }
 
-        /* GARANTIA MINIMALISTA */
-        .guarantee { margin-top: 40px; padding-top: 32px; border-top: 1px solid var(--border-subtle); text-align: left;}
-        .guarantee h3 { font-size: 16px; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
-        .guarantee p { font-size: 13px; color: var(--white-sec); line-height: 1.6; font-weight: 300; }
-
-        /* === 8. FAQ === */
-        .faq-item { border-bottom: 1px solid var(--border-subtle); }
-        .faq-question {
-            width: 100%; text-align: left; background: none; border: none;
-            padding: 24px 0; font-size: 14px; font-family: var(--font-body); text-transform: uppercase; letter-spacing: 0.5px;
-            color: #ccc; font-weight: 500; cursor: pointer;
-            display: flex; justify-content: space-between; align-items: center; outline: none;
+        /* === 8. SEÇÃO FAQ ACORDEÃO === */
+        .faq-section {
+            margin-top: 40px;
         }
-        .faq-icon { color: var(--red-main); font-size: 18px; transition: transform 0.4s ease; font-weight: 300; }
-        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.5s ease; font-size: 14px; color: var(--white-sec); line-height: 1.7; font-weight: 300; }
-        .faq-answer p { padding-bottom: 24px; }
-        .faq-item.active .faq-answer { max-height: 250px; }
-        .faq-item.active .faq-icon { transform: rotate(45deg); }
+        .faq-item {
+            background: #0d0d0d;
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 8px;
+            margin-bottom: 12px;
+            overflow: hidden;
+            transition: border-color 0.3s;
+        }
+        .faq-trigger {
+            width: 100%;
+            padding: 18px 20px;
+            background: none;
+            border: none;
+            color: var(--white-main);
+            font-size: 15px;
+            font-weight: 600;
+            text-align: left;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            font-family: var(--font-body);
+        }
+        .faq-icon {
+            font-size: 12px;
+            color: var(--red-main);
+            transition: transform 0.3s ease;
+        }
+        .faq-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease;
+            padding: 0 20px;
+            color: var(--white-sec);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        /* Estados ativos controlados via JS */
+        .faq-item.active {
+            border-color: rgba(193, 18, 31, 0.4);
+            background: #121212;
+        }
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+        }
+        .faq-item.active .faq-content {
+            padding-bottom: 18px;
+        }
+
+        /* === EYEBROW (rótulo pequeno acima dos títulos) === */
+        .eyebrow {
+            display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 2px;
+            color: var(--red-main); margin-bottom: 10px; text-align: center; font-weight: 700;
+        }
+
+        /* === STACK DE VALOR DOS BÔNUS === */
+        .bonus-card {
+            background: linear-gradient(180deg, #171010 0%, #0a0a0a 100%);
+            border: 1px solid rgba(193,18,31,0.25);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,.03), 0 10px 30px rgba(0,0,0,.4);
+            padding: 24px; border-radius: 12px; margin-bottom: 14px;
+            position: relative; overflow: hidden;
+        }
+        .bonus-card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px;
+            background: linear-gradient(90deg, transparent, var(--red-main), transparent); opacity: 0.6;
+        }
+        .bonus-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 10px; }
+        .bonus-tag {
+            font-size: 10px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase;
+            color: var(--red-main); background: rgba(193,18,31,0.12); border: 1px solid rgba(193,18,31,0.3);
+            padding: 3px 9px; border-radius: 20px; white-space: nowrap;
+        }
+        .bonus-card h3 { font-family: var(--font-body); font-size: 17px; font-weight: 700; text-transform: none; color: #fff; margin-bottom: 8px; letter-spacing: 0; line-height: 1.3; }
+        .bonus-card p { font-size: 13.5px; color: var(--white-sec); line-height: 1.55; margin-bottom: 14px; }
+        .bonus-value-row {
+            display: flex; align-items: center; justify-content: space-between;
+            border-top: 1px dashed rgba(255,255,255,0.08); padding-top: 12px;
+        }
+        .bonus-value-old { font-size: 13px; color: #666; text-decoration: line-through; }
+        .bonus-value-free { font-size: 13px; font-weight: 800; color: #4ade80; text-transform: uppercase; letter-spacing: 0.5px; }
+
+        .value-stack-total {
+            margin-top: 22px; padding: 22px; border-radius: 12px;
+            background: rgba(193,18,31,0.06); border: 1px solid rgba(193,18,31,0.3);
+            text-align: center;
+        }
+        .value-stack-total .stack-label { font-size: 12px; color: var(--white-sec); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 6px; }
+        .value-stack-total .stack-old { font-size: 22px; color: #888; text-decoration: line-through; font-family: var(--font-heading); }
+        .value-stack-total .stack-arrow { color: var(--red-main); font-size: 14px; margin: 4px 0; font-weight: 700; }
+        .value-stack-total .stack-new { font-size: 34px; color: #fff; font-family: var(--font-heading); }
+        .value-stack-total .stack-new span { color: #4ade80; }
+
+        /* === ÁREA DE MEMBROS === */
+        .members-preview { margin-top: 8px; text-align: center; }
+        .members-frame {
+            margin-top: 24px; border-radius: 10px; overflow: hidden; border: 1px solid var(--border-subtle);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5); position: relative; background: #0a0a0a;
+        }
+        .members-frame .browser-bar {
+            display: flex; align-items: center; gap: 6px; padding: 12px 14px; background: #111; border-bottom: 1px solid var(--border-subtle);
+        }
+        .browser-bar span { width: 8px; height: 8px; border-radius: 50%; background: #333; }
+        .browser-bar span:nth-child(1) { background: var(--red-main); }
+        .members-frame img { width: 100%; display: block; }
+
+        /* === PARA QUEM É === */
+        .audience-list { list-style: none; padding: 0; margin-top: 22px; display: flex; flex-direction: column; gap: 12px; }
+        .audience-list li {
+            display: flex; align-items: flex-start; gap: 12px; font-size: 14px; color: #d1d1d1; line-height: 1.55; font-weight: 400;
+            background: rgba(255,255,255,0.015); border: 1px solid var(--border-subtle); padding: 15px 16px; border-radius: 8px;
+        }
+        .audience-check {
+            flex-shrink: 0; width: 20px; height: 20px; border-radius: 50%; background: rgba(193,18,31,0.12);
+            display: flex; align-items: center; justify-content: center; margin-top: 1px;
+        }
+        .audience-check svg { width: 11px; height: 11px; stroke: var(--red-main); stroke-width: 3; fill: none; }
+
+        /* === CARROSSEL DE PRINTS (RESULTADOS) === */
+        .proof-carousel { margin-top: 8px; }
+        .carousel-viewport {
+            position: relative; width: 100%; max-width: 320px; margin: 28px auto 0;
+            overflow: hidden; border-radius: 16px; border: 1px solid var(--border-subtle);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5); aspect-ratio: 4/5; background: #0a0a0a;
+        }
+        .carousel-track { display: flex; height: 100%; transition: transform 0.6s cubic-bezier(0.65, 0, 0.35, 1); }
+        .carousel-slide {
+            min-width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;
+            background: linear-gradient(160deg, #0f0f0f, #050505);
+        }
+        .carousel-slide img { width: 100%; height: 100%; object-fit: contain; object-position: center; display: block; }
+        .carousel-controls { display: flex; align-items: center; justify-content: center; gap: 20px; margin-top: 22px; }
+        .carousel-arrow {
+            width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--border-highlight);
+            background: rgba(193,18,31,0.05); color: var(--red-main); display: flex; align-items: center; justify-content: center;
+            cursor: pointer; transition: background 0.3s ease, transform 0.2s ease;
+        }
+        .carousel-arrow:active { transform: scale(0.92); background: rgba(193,18,31,0.15); }
+        .carousel-arrow svg { width: 18px; height: 18px; }
+        .carousel-dots { display: flex; gap: 8px; }
+        .carousel-dot {
+            width: 6px; height: 6px; border-radius: 50%; background: var(--border-subtle);
+            border: 1px solid rgba(193,18,31,0.2); cursor: pointer; transition: all 0.3s ease;
+        }
+        .carousel-dot.active { background: var(--red-main); width: 18px; border-radius: 3px; border-color: var(--red-main); }
+
+        /* === DEPOIMENTOS === */
+        .testimonials-grid { display: flex; flex-direction: column; gap: 14px; margin-top: 24px; }
+        .testimonial-card {
+            background: rgba(255,255,255,0.02); border: 1px solid var(--border-subtle);
+            padding: 20px; border-radius: 10px;
+        }
+        .t-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+        .t-user-info { display: flex; align-items: center; gap: 10px; }
+        .t-avatar {
+            width: 32px; height: 32px; border-radius: 50%; background: #111;
+            display: flex; align-items: center; justify-content: center;
+            border: 1px solid rgba(193, 18, 31, 0.25); flex-shrink: 0;
+        }
+        .t-avatar svg { width: 18px; height: 18px; stroke: #777; stroke-width: 1.5; }
+        .t-name { font-size: 13.5px; font-weight: 600; color: var(--white-main); font-family: var(--font-body); }
+        .t-stars { display: flex; gap: 2px; }
+        .t-stars svg { width: 13px; height: 13px; fill: var(--red-main); }
+        .t-stars svg.empty { fill: none; stroke: var(--red-main); stroke-width: 1.5; }
+        .t-comment { font-size: 13.5px; color: #a1a1a1; line-height: 1.55; font-style: italic; }
+
+        /* === VER MAIS COMENTÁRIOS === */
+        .testimonials-extra {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: max-height 0.7s cubic-bezier(0.65, 0, 0.35, 1), opacity 0.5s ease;
+        }
+        .testimonials-extra .testimonials-grid { margin-top: 14px; }
+        .testimonials-extra.expanded { opacity: 1; }
+
+        .testimonials-toggle-wrap { margin-top: 22px; text-align: center; }
+        .testimonials-toggle-btn {
+            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+            background: rgba(193,18,31,0.06); color: var(--white-main);
+            font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px;
+            padding: 14px 26px; border-radius: 30px; border: 1px solid rgba(193,18,31,0.35);
+            cursor: pointer; transition: background 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
+            font-family: var(--font-body);
+        }
+        .testimonials-toggle-btn:hover { background: rgba(193,18,31,0.14); border-color: rgba(193,18,31,0.6); }
+        .testimonials-toggle-btn:active { transform: scale(0.97); }
+        .testimonials-toggle-icon { font-size: 10px; color: var(--red-main); transition: transform 0.35s ease; display: inline-flex; }
+        .testimonials-toggle-btn.is-open .testimonials-toggle-icon { transform: rotate(180deg); }
 
         /* === 9. FOOTER INSTITUCIONAL === */
-        .footer { text-align: center; padding: 40px 0 20px; border-top: 1px solid var(--border-subtle); margin-top: 80px; }
-        .footer p { font-size: 11px; color: #444; line-height: 1.6; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
-        .footer a { color: #666; text-decoration: none; transition: color 0.3s; }
-        .footer a:hover { color: var(--white-main); }
-
-        /* === STICKY CTA MINIMALISTA === */
-        .sticky-cta {
-            position: fixed; bottom: 0; left: 0; width: 100%;
-            background: rgba(3, 3, 3, 0.95); backdrop-filter: blur(10px);
-            border-top: 1px solid rgba(193, 18, 31, 0.1); padding: 16px 24px;
-            z-index: 100; transform: translateY(100%); transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .sticky-cta.visible { transform: translateY(0); }
-        .sticky-container { max-width: 450px; margin: 0 auto; }
-
-        @media (min-width: 501px) {
-            .wrapper { max-width: 500px; }
-            .sticky-cta {
-                left: 50%; transform: translate(-50%, 100%); max-width: 500px;
-                border-left: 1px solid var(--border-subtle); border-right: 1px solid var(--border-subtle);
-            }
-            .sticky-cta.visible { transform: translate(-50%, 0); }
-        }
+        .footer { text-align: center; padding: 40px 0 20px; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 60px; }
+        .footer p { font-size: 12px; color: #555; line-height: 1.5; margin-bottom: 10px; }
+        .footer a { color: #888; text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.3s; }
+        .footer a:hover { border-color: #888; }
     </style>
-    <!-- Meta Pixel Code -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '4635192300140692');
-fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=4635192300140692&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel Code -->
+
 </head>
 <body>
 
+    <!-- BARRA SUPERIOR -->
     <div class="top-bar">
-        <div class="pulse-dot"></div> ATENÇÃO: Vagas com desconto liberadas
+        <span>⚠️</span> ESPERE
     </div>
 
     <div class="ambient-bg"><div class="ambient-glow"></div></div>
     <div class="particles-container">
-        <div class="particle p1">◆</div>
-        <div class="particle p2">+</div>
-        <div class="particle p3">▲</div>
-        <div class="particle p4">●</div>
-        <div class="particle p5">◆</div>
-        <div class="particle p6">+</div>
+        <div class="particle p1">⚥</div>
+        <div class="particle p2">♥</div>
+        <div class="particle p3">♀</div>
+        <div class="particle p4">♂</div>
+        <div class="particle p5">♥</div>
+        <div class="particle p6">⚥</div>
     </div>
     <div class="cinematic-grain"></div>
 
     <div class="wrapper">
         
         <section class="hero scroll-reveal active">
+            
+            <!-- SINALIZAÇÃO VERDE DE APROVAÇÃO -->
+            <div class="purchase-approved">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                Sua compra foi aprovada!
+            </div>
+
+            <!-- REFORÇO DE OPORTUNIDADE -->
+            <span class="opportunity-tag">⚡ Oferta Complementar • Disponível Só Agora</span>
+
+            <!-- HOOK FOCADO NO RESULTADO -->
             <h1>
-                <span class="white">Código</span>
-                <span class="red">da Atração</span>
+                <span class="white">ESPERA. NÃO FECHE ESSA PÁGINA.</span>
+                <span class="red">FALTA A PARTE QUE TRANSFORMA A BASE EM RESULTADO.</span>
             </h1>
-            <p class="subheadline">A anatomia silenciosa do desejo. Decodifique os sinais que elas tentam esconder, assuma o controle da dinâmica e torne-se a única opção viável.</p>
+            <p class="subheadline">O que você acabou de comprar te ensina a se aproximar. Mas sem <strong>conexão emocional real</strong>, a conversa esfria, o match vira silêncio e você volta pra estaca zero. O <strong>Método da Conexão Masculina</strong> é o acelerador: pega a base que você já tem em mãos e evita que você trave exatamente onde a maioria trava.</p>
             
-            <a href="#oferta" class="btn">
-                Desbloquear Acesso
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-            </a>
+            <a href="#oferta" class="btn">Quero Acelerar Meus Resultados</a>
+        
         </section>
 
         <div class="section-divider"></div>
 
-        <section class="scroll-reveal delay-1">
-            <h2 class="section-title" style="font-size: 32px; text-align: left;">A Arquitetura da <br><span>Transformação</span></h2>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <h4>Fase 1: Desconstrução</h4>
-                    <p>Você elimina instantaneamente a necessidade de validação. Sua linguagem corporal passa a comunicar alto valor antes mesmo da primeira palavra.</p>
-                </div>
-                <div class="timeline-item">
-                    <h4>Fase 2: Calibração</h4>
-                    <p>O subtexto se torna claro. Você aprende a ler microexpressões e descobre exatamente quando recuar para gerar falta, e quando avançar com precisão cirúrgica.</p>
-                </div>
-                <div class="timeline-item">
-                    <h4>Fase 3: Magnetismo</h4>
-                    <p>O esforço desaparece. A criação de tensão se torna instintiva, gerando conversas profundas e uma química impossível de ser ignorada.</p>
-                </div>
-            </div>
-        </section>
-
-        <div class="section-divider"></div>
-
-        <section class="story-section scroll-reveal">
-            <h2 class="section-title">A verdade brutal: <br><span>O desejo não se negocia</span></h2>
-            <p>A imensa maioria dos homens falha miseravelmente porque tenta <strong>convencer</strong> uma mulher a sentir atração. Eles usam a lógica. Eles sufocam com mensagens. Demonstram interesse e disponibilidade quando deveriam demonstrar mistério.</p>
-            <p>O resultado? Você vira apenas mais um na tela do celular dela, caminhando a passos largos para a zona de amizade.</p>
-            
-            <div class="highlight-box">
-                "A atração não é uma escolha consciente. É uma resposta biológica autônoma a estímulos específicos. Quem domina o estímulo, controla a resposta."
-            </div>
-            
-            <p>O <strong>Código da Atração</strong> não é sobre frases feitas ou joguinhos manipulativos. É sobre entender a engenharia por trás do desejo feminino e alinhar a sua presença para que ela invista na interação.</p>
-
-            <ul class="target-list scroll-reveal">
-                <li>Pare de tentar manter o assunto vivo e aprenda a usar o silêncio a seu favor.</li>
-                <li>Identifique a janela exata de oportunidade antes que ela se feche para sempre.</li>
-                <li>Construa uma presença masculina polarizadora, autêntica e impossível de ler de primeira.</li>
-                <li>Corte investimentos de tempo em interações sem futuro e foque naquelas que já estão ganhas.</li>
+        <!-- ==========================================
+             RESULTADO ESPERADO (nova seção)
+             Objetivo: mostrar de forma simples o que muda
+             na prática, antes de detalhar os módulos.
+             ========================================== -->
+        <section class="expected-result scroll-reveal">
+            <span class="eyebrow">Na Prática</span>
+            <h2 class="section-title" style="font-size: 30px;">O Que Muda <span>Depois Disso</span></h2>
+            <ul class="outcomes-list">
+                <li>
+                    <span class="outcomes-num">1</span>
+                    <p>Você para de <strong>ficar sem assunto</strong> depois dos primeiros minutos e passa a conduzir a conversa com naturalidade.</p>
+                </li>
+                <li>
+                    <span class="outcomes-num">2</span>
+                    <p>As conversas <strong>param de esfriar</strong> — porque você entende o que gera conexão de verdade, não só interesse passageiro.</p>
+                </li>
+                <li>
+                    <span class="outcomes-num">3</span>
+                    <p>Você reconhece os <strong>sinais de que ela quer avançar</strong> antes mesmo de precisar perguntar.</p>
+                </li>
+                <li>
+                    <span class="outcomes-num">4</span>
+                    <p>Você deixa de repetir os <strong>erros que travam relacionamentos no início</strong> e evolui a relação sem parecer carente.</p>
+                </li>
             </ul>
         </section>
 
         <div class="section-divider"></div>
 
         <section class="features scroll-reveal">
-            <h2 class="section-title">O que você vai <br><span>Dominar</span></h2>
+            <span class="eyebrow">Conteúdo Avançado • Nível 2 Desbloqueado</span>
+            <h2 class="section-title">A Base Você Já Tem. <span>Isso Aqui Acelera</span></h2>
+            <p style="font-size: 14px; color: var(--white-sec); text-align: center; margin-top: -18px; margin-bottom: 28px; line-height: 1.6;">O método principal te ensinou a se aproximar. Este aqui aprofunda: transforma interesse em conexão e conexão em relacionamento — evitando os erros que fazem a maioria travar no meio do caminho.</p>
             
             <div class="card">
-                <h3>
-                    <svg class="svg-icon" viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
-                    Módulo 1: Arquitetura de Valor
-                </h3>
-                <p>Como blindar seu jogo interno e eliminar o comportamento carente que sabota suas chances logo nos 5 minutos iniciais da interação.</p>
-                <div class="card-insight">O erro fatal de postura que destrói sua autoridade instantaneamente.</div>
-            </div>
-            
-            <div class="card">
-                <h3>
-                    <svg class="svg-icon" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
-                    Módulo 2: Decodificação
-                </h3>
-                <p>O mapeamento definitivo para ler quando ela está interessada de verdade, quando está jogando e o momento exato de escalar a situação.</p>
-                <div class="card-insight">A "Regra do Contato Visual" que altera todo o balanço de poder.</div>
+                <h3>🧠 Módulo 1: Conexão emocional</h3>
+                <ul class="module-list">
+                    <li>O que realmente faz uma mulher se conectar com você.</li>
+                    <li>Como tirar as conversas do superficial.</li>
+                    <li>Os erros silenciosos que matam a conexão.</li>
+                </ul>
+                <div class="card-insight">Resultado: conversas que evoluem em vez de morrer no "kkk".</div>
             </div>
             
             <div class="card">
-                <h3>
-                    <svg class="svg-icon" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
-                    Módulo 3: Tensão e Polaridade
-                </h3>
-                <p>A transição exata de uma conversa monótona (lógica) para uma interação visceral (emocional), criando uma conexão magnética em minutos.</p>
-                <div class="card-insight">Estruturas precisas para gerar tensão por mensagem sem soar desesperado.</div>
+                <h3>🔥 Módulo 2: Conversas que geram atração</h3>
+                <ul class="module-list">
+                    <li>O equilíbrio entre interesse e desafio.</li>
+                    <li>Como ser mais interessante sem forçar a barra.</li>
+                    <li>O que fazer no exato momento em que a conversa esfria.</li>
+                </ul>
+                <div class="card-insight">Resultado: você nunca mais fica sem saber o que responder.</div>
             </div>
-        </section>
-
-        <div class="section-divider"></div>
-
-        <section class="science-box scroll-reveal">
-            <svg class="svg-icon" style="width:40px; height:40px; margin-bottom: 20px;" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path><path d="M2 12h20"></path></svg>
-            <h2 class="section-title" style="font-size: 32px; margin-bottom: 16px;">Engenharia <br><span>Comportamental</span></h2>
-            <p>O desejo não ocorre por acaso. Ele responde a gatilhos evolutivos enraizados no subconsciente. Ao decifrar esse código, você deixa de "tentar a sorte" e passa a operar com previsibilidade cirúrgica.</p>
-        </section>
-
-        <div class="section-divider"></div>
-
-        <section class="emotional-quote scroll-reveal">
-            <h2>O Jogo é Real.</h2>
-            <p>A única diferença é que a partir de hoje, você dita as regras.</p>
-        </section>
-
-        <section class="offer-box scroll-reveal" id="oferta">
-            <div class="price-container">
-                <span class="price-old">De R$ 47,90 por</span>
-                <span class="price-new">R$ 14,70</span>
+            
+            <div class="card">
+                <h3>📈 Módulo 3: Do interesse ao relacionamento</h3>
+                <ul class="module-list">
+                    <li>Como saber se ela está se apegando de verdade.</li>
+                    <li>Os sinais claros de que ela quer algo mais sério.</li>
+                    <li>Como evitar sabotar o começo do relacionamento.</li>
+                </ul>
+                <div class="card-insight">Resultado: você evolui a relação sem parecer carente ou apressado.</div>
             </div>
 
-            <a href="https://pay.kirvano.com/cd4f62e3-2352-47aa-b0e0-e863d11d05e2" class="btn">
-                Confirmar Minha Vaga
-            </a>
+            <div class="card">
+                <h3>💬 Módulo 4: Domínio das conversas</h3>
+                <ul class="module-list">
+                    <li>Perguntas que geram conexão real, não só respostas curtas.</li>
+                    <li>Como usar humor e flerte sem parecer forçado.</li>
+                    <li>Os erros que matam uma conversa promissora.</li>
+                </ul>
+                <div class="card-insight">Resultado: você nunca mais trava no meio de uma conversa boa.</div>
+            </div>
 
-            <div class="timer-wrapper">
-                <div class="timer-label">Acesso prioritário expira em:</div>
-                <div class="timer-boxes">
-                    <div class="timer-box" id="t-hours">02</div><span class="timer-sep">:</span>
-                    <div class="timer-box" id="t-minutes">14</div><span class="timer-sep">:</span>
-                    <div class="timer-box" id="t-seconds">39</div>
+            <div class="bonus-card">
+                <div class="bonus-top">
+                    <h3 style="margin-bottom:0;">Bônus exclusivos</h3>
+                    <span class="bonus-tag">Bônus</span>
+                </div>
+                <p>Acesso a conteúdos complementares que aceleram os seus resultados em um nível diferente do que você já tem.</p>
+                <div class="bonus-value-row">
+                    <span class="bonus-value-free">Modelos que fazem a diferença</span>
                 </div>
             </div>
 
-            <div class="guarantee">
-                <h3>
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--red-main)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-                    Garantia Blindada
-                </h3>
-                <p>Você tem <strong>7 dias</strong> para colocar o método à prova. Se você aplicar a engenharia ensinada e achar que não transformou a sua dinâmica social, solicite o reembolso. O risco financeiro é integralmente nosso.</p>
+            <div class="value-stack-total">
+                <div class="stack-label">Valor total do que você recebe hoje</div>
+                <div class="stack-old">R$ 549,00</div>
+                <div class="stack-arrow">▼ POR APENAS ▼</div>
+                <div class="stack-new"><span>R$</span> 47,90</div>
             </div>
         </section>
 
         <div class="section-divider"></div>
 
-        <section class="faq scroll-reveal">
-            <h2 class="section-title">Dúvidas <br><span>Frequentes</span></h2>
+        <!-- ==========================================
+             ÁREA DE MEMBROS (IMAGEM ÚNICA)
+             Substitua pelo arquivo real da área de membros
+             mostrando os módulos extras deste upsell.
+             Nome sugerido: area-membros-conexao.jpg
+             Deve estar na MESMA PASTA do arquivo .html
+             ========================================== -->
+        <section class="members-preview scroll-reveal">
+            <span class="eyebrow">Prévia Real • Sua Nova Área de Membros</span>
+            <h2 class="section-title" style="font-size: 30px;">Os Novos <span>Módulos</span></h2>
+            <p style="font-size: 14px; color: var(--white-sec); font-weight: 400; line-height: 1.6;">Tudo liberado na mesma plataforma que você já conhece, organizado ao lado do conteúdo que você já tem.</p>
+            <div class="members-frame">
+                <div class="browser-bar"><span></span><span></span><span></span></div>
+                <img src="aba3eb0f-bec4-4913-b120-c4e4c6e5cff4.jpg" alt="Área de Membros com os módulos do Método da Conexão Masculina" loading="lazy">
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- ==========================================
+             PARA QUEM É ESTE MÉTODO
+             ========================================== -->
+        <section class="audience scroll-reveal">
+            <h2 class="section-title" style="font-size: 30px;">Ideal Pra <span>Quem</span></h2>
+            <ul class="audience-list">
+                <li>
+                    <span class="audience-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+                    Já sabe puxar assunto, mas vê a conversa esfriar depois de alguns dias.
+                </li>
+                <li>
+                    <span class="audience-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+                    Sente que fica "só na amizade" mesmo quando existia clima no início.
+                </li>
+                <li>
+                    <span class="audience-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+                    Quer transformar interesse inicial em algo sério, sem parecer carente.
+                </li>
+                <li>
+                    <span class="audience-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+                    Para homens que querem desenvolver uma comunicação mais atraente e envolvente.
+                </li>
+                <li>
+                    <span class="audience-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+                    Para quem não entende os sinais de interesse e acaba criando expectativas erradas.
+                </li>
+            </ul>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- ==========================================
+             CARROSSEL DE PRINTS / RESULTADOS REAIS
+             As 7 imagens abaixo devem estar na MESMA PASTA
+             do arquivo .html, nomeadas exatamente assim:
+             imagem1.jpg
+             imagem2.jpg
+             imagem3.jpg
+             imagem4.jpg
+             imagem5.jpg
+             imagem6.jpg
+             imagem7.jpg
+             O carrossel usa object-fit: contain, então funciona
+             mesmo com proporções diferentes entre os prints.
+             ========================================== -->
+        <section class="proof-carousel scroll-reveal">
+            <span class="eyebrow">Prints Reais</span>
+            <h2 class="section-title" style="font-size: 30px;">Resultados na <span>Prática</span></h2>
+
+            <div class="carousel-viewport" id="carouselViewport">
+                <div class="carousel-track" id="carouselTrack">
+                    <div class="carousel-slide"><img src="imagem1.jpg" alt="Print 1" loading="lazy"></div>
+                    <div class="carousel-slide"><img src="imagem2.jpg" alt="Print 2" loading="lazy"></div>
+                    <div class="carousel-slide"><img src="imagem3.jpg" alt="Print 3" loading="lazy"></div>
+                    <div class="carousel-slide"><img src="imagem4.jpg" alt="Print 4" loading="lazy"></div>
+                    <div class="carousel-slide"><img src="imagem5.jpg" alt="Print 5" loading="lazy"></div>
+                    <div class="carousel-slide"><img src="imagem6.jpg" alt="Print 6" loading="lazy"></div>
+                    <div class="carousel-slide"><img src="imagem7.jpg" alt="Print 7" loading="lazy"></div>
+                </div>
+            </div>
+
+            <div class="carousel-controls">
+                <button class="carousel-arrow" id="carouselPrev" aria-label="Anterior">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                </button>
+                <div class="carousel-dots" id="carouselDots"></div>
+                <button class="carousel-arrow" id="carouselNext" aria-label="Próximo">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </button>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- ==========================================
+             DEPOIMENTOS DESTE UPSELL
+             ========================================== -->
+        <section class="social-proof scroll-reveal">
+            <span class="eyebrow">Quem Já Adicionou Este Método</span>
+            <h2 class="section-title" style="font-size: 30px;">O Que Estão <span>Dizendo</span></h2>
+
+            <div class="testimonials-grid">
+
+                <div class="testimonial-card">
+                    <div class="t-header">
+                        <div class="t-user-info">
+                            <div class="t-avatar">
+                                <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.6"/><path d="M4.5 19.5c1.6-3.4 4.4-5 7.5-5s5.9 1.6 7.5 5" stroke-linecap="round"/></svg>
+                            </div>
+                            <span class="t-name">Matheus A.</span>
+                        </div>
+                        <div class="t-stars">
+                            <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                            <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                            <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                            <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                            <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                        </div>
+                    </div>
+                    <p class="t-comment">"Tinha comprado só por impulso no começo kkk, mas depois de ver as aulas entendi porque tanta gente fala sobre conexão. Eu focava só em puxar assunto e acabava esquecendo do resto."</p>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="t-header">
+                        <div class="t-user-info">
+                            <div class="t-avatar">
+                                <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.6"/><path d="M4.5 19.5c1.6-3.4 4.4-5 7.5-5s5.9 1.6 7.5 5" stroke-linecap="round"/></svg>
+                            </div>
+                            <span class="t-name">João P.</span>
+                        </div>
+                        <div class="t-stars">
+                            <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                            <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                            <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                            <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                            <svg class="empty" viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                        </div>
+                    </div>
+                    <p class="t-comment">"A parte das conversas foi a que mais gostei. Percebi que eu tentava impressionar demais e acabava deixando tudo forçado sem perceber."</p>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="t-header">
+                        <div class="t-user-info">
+                            <div class="t-avatar">
+                                <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.6"/><path d="M4.5 19.5c1.6-3.4 4.4-5 7.5-5s5.9 1.6 7.5 5" stroke-linecap="round"/></svg>
+                            </div>
+                            <span class="t-name">Lucas R.</span>
+                        </div>
+                        <div class="t-stars">
+                            <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                            <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                            <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                            <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                            <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                        </div>
+                    </div>
+                    <p class="t-comment">"O conteúdo principal já tinha me ajudado bastante, mas esse aqui explicou melhor algumas situações que eu passava e não entendia o motivo."</p>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="t-header">
+                        <div class="t-user-info">
+                            <div class="t-avatar">
+                                <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.6"/><path d="M4.5 19.5c1.6-3.4 4.4-5 7.5-5s5.9 1.6 7.5 5" stroke-linecap="round"/></svg>
+                            </div>
+                            <span class="t-name">Gabriel M.</span>
+                        </div>
+                        <div class="t-stars">
+                            <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                            <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                            <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                            <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                            <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                        </div>
+                    </div>
+                    <p class="t-comment">"Achei que seria mais do mesmo, mas teve várias coisas que eu nunca tinha parado para pensar. Principalmente sobre criar conexão sem parecer carente."</p>
+                </div>
+
+            </div>
+
+            <div class="testimonials-extra" id="testimonialsExtra">
+                <div class="testimonials-grid">
+
+                    <div class="testimonial-card">
+                        <div class="t-header">
+                            <div class="t-user-info">
+                                <div class="t-avatar">
+                                    <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.6"/><path d="M4.5 19.5c1.6-3.4 4.4-5 7.5-5s5.9 1.6 7.5 5" stroke-linecap="round"/></svg>
+                                </div>
+                                <span class="t-name">Felipe S.</span>
+                            </div>
+                            <div class="t-stars">
+                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                                <svg class="empty" viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                            </div>
+                        </div>
+                        <p class="t-comment">"Gostei porque não fica prometendo milagre. É mais sobre entender seus erros e melhorar sua comunicação aos poucos."</p>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <div class="t-header">
+                            <div class="t-user-info">
+                                <div class="t-avatar">
+                                    <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.6"/><path d="M4.5 19.5c1.6-3.4 4.4-5 7.5-5s5.9 1.6 7.5 5" stroke-linecap="round"/></svg>
+                                </div>
+                                <span class="t-name">Rafael C.</span>
+                            </div>
+                            <div class="t-stars">
+                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                            </div>
+                        </div>
+                        <p class="t-comment">"A aula sobre sinais de interesse me ajudou bastante. Eu costumava interpretar tudo errado e acabava criando expectativa onde não existia."</p>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <div class="t-header">
+                            <div class="t-user-info">
+                                <div class="t-avatar">
+                                    <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.6"/><path d="M4.5 19.5c1.6-3.4 4.4-5 7.5-5s5.9 1.6 7.5 5" stroke-linecap="round"/></svg>
+                                </div>
+                                <span class="t-name">Bruno A.</span>
+                            </div>
+                            <div class="t-stars">
+                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                                <svg class="empty" viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                            </div>
+                        </div>
+                        <p class="t-comment">"Linguagem simples e fácil de entender. Vi tudo em uma noite e já anotei algumas coisas para aplicar nas próximas conversas."</p>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <div class="t-header">
+                            <div class="t-user-info">
+                                <div class="t-avatar">
+                                    <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.6"/><path d="M4.5 19.5c1.6-3.4 4.4-5 7.5-5s5.9 1.6 7.5 5" stroke-linecap="round"/></svg>
+                                </div>
+                                <span class="t-name">Carlos V.</span>
+                            </div>
+                            <div class="t-stars">
+                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                            </div>
+                        </div>
+                        <p class="t-comment">"O que mais gostei foi que não ensina personagem ou frase pronta. Faz você enxergar as situações de uma forma diferente."</p>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <div class="t-header">
+                            <div class="t-user-info">
+                                <div class="t-avatar">
+                                    <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.6"/><path d="M4.5 19.5c1.6-3.4 4.4-5 7.5-5s5.9 1.6 7.5 5" stroke-linecap="round"/></svg>
+                                </div>
+                                <span class="t-name">Thiago L.</span>
+                            </div>
+                            <div class="t-stars">
+                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                            </div>
+                        </div>
+                        <p class="t-comment">"Teve uma parte sobre erros masculinos que parecia que estavam falando diretamente comigo kkkkk. Valeu a pena por isso sozinho."</p>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <div class="t-header">
+                            <div class="t-user-info">
+                                <div class="t-avatar">
+                                    <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.6"/><path d="M4.5 19.5c1.6-3.4 4.4-5 7.5-5s5.9 1.6 7.5 5" stroke-linecap="round"/></svg>
+                                </div>
+                                <span class="t-name">André F.</span>
+                            </div>
+                            <div class="t-stars">
+                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                                <svg class="empty" viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                            </div>
+                        </div>
+                        <p class="t-comment">"Não mudou minha vida do dia para a noite, mas me fez perceber várias atitudes que estavam me atrapalhando sem eu perceber."</p>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <div class="t-header">
+                            <div class="t-user-info">
+                                <div class="t-avatar">
+                                    <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.6"/><path d="M4.5 19.5c1.6-3.4 4.4-5 7.5-5s5.9 1.6 7.5 5" stroke-linecap="round"/></svg>
+                                </div>
+                                <span class="t-name">Pedro H.</span>
+                            </div>
+                            <div class="t-stars">
+                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                            </div>
+                        </div>
+                        <p class="t-comment">"Comprei sem muita expectativa e me surpreendi. O conteúdo é mais profundo do que parece na página."</p>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <div class="t-header">
+                            <div class="t-user-info">
+                                <div class="t-avatar">
+                                    <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.6"/><path d="M4.5 19.5c1.6-3.4 4.4-5 7.5-5s5.9 1.6 7.5 5" stroke-linecap="round"/></svg>
+                                </div>
+                                <span class="t-name">Gustavo N.</span>
+                            </div>
+                            <div class="t-stars">
+                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.6 6.8L12 16.9 5.8 20.4l1.6-6.8L2.2 9l6.9-.7L12 2z"/></svg>
+                            </div>
+                        </div>
+                        <p class="t-comment">"O principal me mostrou o caminho. Esse aqui me mostrou onde eu estava errando. Foi essa a sensação que tive quando terminei."</p>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="testimonials-toggle-wrap">
+                <button class="testimonials-toggle-btn" id="testimonialsToggleBtn" type="button" aria-expanded="false" aria-controls="testimonialsExtra">
+                    <span id="testimonialsToggleLabel">Ver mais comentários</span>
+                    <span class="testimonials-toggle-icon" id="testimonialsToggleIcon">▼</span>
+                </button>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- ==========================================
+             REFINAMENTO DA OFERTA (novo)
+             Objetivo: deixar claro que o produto principal
+             ensina a base e este upsell aprofunda/acelera —
+             sensação de complemento, não de repetição.
+             ========================================== -->
+        <div class="highlight-box scroll-reveal">
+            <strong>O método principal te deu a base.</strong> Ele vai te ensinar a se aproximar e criar o primeiro interesse. O Método da Conexão Masculina pega essa base e acelera: evita os erros mais comuns depois do primeiro contato e leva a conversa até onde ela realmente importa — a conexão que vira relacionamento.
+        </div>
+
+        <div class="section-divider"></div>
+
+        <!-- SEÇÃO DE OFERTA PRINCIPAL CONFIGURADA -->
+        <section class="offer-box scroll-reveal" id="oferta">
+            
+            <span class="opportunity-tag" style="margin-bottom:14px;">⚡ Oferta Complementar • Disponível Só Nesta Página</span>
+
+            <h2 style="color: #fff; font-size: 28px; font-family: var(--font-heading);">
+                MÉTODO DA CONEXÃO MASCULINA
+            </h2>
+            <p style="font-size: 13px; color: var(--white-sec); margin-top: 10px; text-transform: uppercase; letter-spacing: 1px;">4 módulos + 3 bônus exclusivos • Valor real R$ 549,00</p>
+
+            <div class="price-container">
+                <p class="price-label">Hoje, por apenas</p>
+                <p class="price-value"><span>R$</span> 47,90</p>
+            </div>
+
+            <a href="https://pay.kirvano.com/ff7f9651-81cf-457c-be1c-572bdaf3db28" class="btn" style="margin-bottom: 15px;">Sim, Quero Completar Meu Método</a>
+            
+            <!-- DOWNSELL NA OFERTA (versão suave) -->
+            <div class="downsell-wrap">
+                <p class="downsell-copy">Achou o preço grande demais? Temos uma oferta mais generosa pra você.</p>
+                <a href="https://homemdepresenca.github.io/conexaomasculina" class="btn-secondary">Ver Oferta →</a>
+            </div>
+
+            <div class="guarantee">
+                <div class="guarantee-icon">🛡️</div>
+                <h3>Garantia Mantida</h3>
+                <p>Assim como na sua primeira compra, este material adicional está coberto pela nossa garantia incondicional. Se não sentir o valor, basta pedir o reembolso — sem perguntas.</p>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- SEÇÃO DE PERGUNTAS FREQUENTES (FAQ ACCORDION) -->
+        <section class="faq-section scroll-reveal">
+            <h2 class="section-title">Dúvidas <span>Frequentes</span></h2>
             
             <div class="faq-item">
-                <button class="faq-question">O acesso é imediato? <span class="faq-icon">+</span></button>
-                <div class="faq-answer"><p>Absolutamente. Após a confirmação do pagamento via Pix ou Cartão, suas credenciais de acesso são enviadas automaticamente para o seu e-mail.</p></div>
+                <button class="faq-trigger">
+                    <span>O que é o Método da Conexão Masculina?</span>
+                    <span class="faq-icon">▼</span>
+                </button>
+                <div class="faq-content">
+                    <p>É um treinamento completo em formato digital focado em inteligência social e dinâmicas de conversação. Ele ensina o passo a passo prático para estruturar conversas atraentes, criar conexões emocionais autênticas e progredir os seus relacionamentos sem parecer forçado.</p>
+                </div>
             </div>
+
             <div class="faq-item">
-                <button class="faq-question">Qual o formato do conteúdo? <span class="faq-icon">+</span></button>
-                <div class="faq-answer"><p>É um guia prático 100% digital. Projetado para consumo anônimo e ágil no seu celular, tablet ou computador.</p></div>
+                <button class="faq-trigger">
+                    <span>Como vou receber o acesso ao material?</span>
+                    <span class="faq-icon">▼</span>
+                </button>
+                <div class="faq-content">
+                    <p>O acesso é 100% imediato. Como o seu pagamento principal já foi aprovado, assim que adicionar esta extensão, os dados de login e todos os módulos adicionais serão enviados automaticamente para o seu e-mail cadastrado.</p>
+                </div>
             </div>
+
             <div class="faq-item">
-                <button class="faq-question">Funciona para perfis introvertidos? <span class="faq-icon">+</span></button>
-                <div class="faq-answer"><p>O método não obriga você a encenar extroversão. Ele ensina a usar a sua natureza observadora para construir mistério e tensão silenciosa — a arma mais forte dos introvertidos.</p></div>
+                <button class="faq-trigger">
+                    <span>Eu sou muito tímido, isso funciona para mim?</span>
+                    <span class="faq-icon">▼</span>
+                </button>
+                <div class="faq-content">
+                    <p>Sim, com certeza. O método foi desenvolvido justamente para quem sente dificuldades em manter o assunto fluindo ou trava na hora de flertar. As técnicas dão um roteiro mental simples para você nunca mais ficar sem o que falar.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-trigger">
+                    <span>E se eu não gostar do conteúdo?</span>
+                    <span class="faq-icon">▼</span>
+                </button>
+                <div class="faq-content">
+                    <p>Não há risco nenhum. Você conta com a nossa garantia incondicional de reembolso. Se por qualquer motivo achar que o material não gerou valor para você, basta solicitar a devolução dentro do prazo e devolvemos o valor integralmente.</p>
+                </div>
             </div>
         </section>
 
         <footer class="footer scroll-reveal">
-            <p>Homem De Presença © 2024. Todos os direitos reservados.</p>
+            <p><strong>Homem De Presença</strong> © 2024. Todos os direitos reservados.</p>
             <p>Este site não faz parte do site do Facebook ou da Meta Platforms, Inc. Além disso, este site NÃO é endossado pelo Facebook de nenhuma maneira.</p>
             <p><a href="https://HomemDePresenca.github.io/TermosdeUso">Termos de Uso</a> | <a href="https://HomemDePresenca.github.io/PoliticadePrivacidade">Política de Privacidade</a></p>
         </footer>
 
     </div>
 
-    <div class="sticky-cta" id="stickyCta">
-        <div class="sticky-container">
-            <a href="#oferta" class="btn" style="padding: 16px; font-size: 14px;">Confirmar Vaga Restrita</a>
-        </div>
-    </div>
-
     <script>
-        // TIMER LOGIC
-        function initCountdown() {
-            const hBox = document.getElementById('t-hours');
-            const mBox = document.getElementById('t-minutes');
-            const sBox = document.getElementById('t-seconds');
-            const storageKey = 'codigo_atracao_timer_pro';
-            const duration = 2 * 60 * 60 * 1000 + 14 * 60 * 1000 + 39 * 1000;
 
-            let targetTime = localStorage.getItem(storageKey);
-            if (!targetTime || new Date().getTime() > parseInt(targetTime, 10)) {
-                targetTime = new Date().getTime() + duration;
-                localStorage.setItem(storageKey, targetTime);
-            } else { targetTime = parseInt(targetTime, 10); }
-
-            function updateTimer() {
-                let diff = targetTime - new Date().getTime();
-                if (diff <= 0) {
-                    targetTime = new Date().getTime() + duration;
-                    localStorage.setItem(storageKey, targetTime);
-                    diff = duration;
-                }
-                const hours = Math.floor(diff / (1000 * 60 * 60));
-                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-                const format = (num) => String(num).padStart(2, '0');
-
-                if(hBox) hBox.textContent = format(hours);
-                if(mBox) mBox.textContent = format(minutes);
-                if(sBox) sBox.textContent = format(seconds);
-            }
-            updateTimer(); setInterval(updateTimer, 1000);
-        }
-
-        // SCROLL REVEAL (Mais responsivo)
+        
+        // SCROLL REVEAL
         const revealElements = document.querySelectorAll('.scroll-reveal');
         const revealOnScroll = () => {
             const windowHeight = window.innerHeight;
@@ -552,32 +1088,164 @@ src="https://www.facebook.com/tr?id=4635192300140692&ev=PageView&noscript=1"
             });
         };
 
-        // STICKY CTA
-        const stickyCta = document.getElementById('stickyCta');
-        const offerSection = document.getElementById('oferta');
-        const handleStickyVisibility = () => {
-            const offerTop = offerSection.getBoundingClientRect().top;
-            if (window.scrollY > 500 && offerTop > window.innerHeight) {
-                stickyCta.classList.add('visible');
-            } else {
-                stickyCta.classList.remove('visible');
-            }
-        };
-
-        // FAQ ACCORDION
+        // INTERAÇÃO DO FAQ (ACORDEÃO COMPARTILHADO)
         const faqItems = document.querySelectorAll('.faq-item');
+
         faqItems.forEach(item => {
-            const btn = item.querySelector('.faq-question');
-            btn.addEventListener('click', () => {
-                const isActive = item.classList.contains('active');
-                faqItems.forEach(i => i.classList.remove('active'));
-                if (!isActive) item.classList.add('active');
+            const trigger = item.querySelector('.faq-trigger');
+            const content = item.querySelector('.faq-content');
+
+            trigger.addEventListener('click', () => {
+                const isOpen = item.classList.contains('active');
+
+                // Fecha todos os itens abertos automaticamente
+                faqItems.forEach(otherItem => {
+                    otherItem.classList.remove('active');
+                    otherItem.querySelector('.faq-content').style.maxHeight = null;
+                });
+
+                // Se o item clicado não estava aberto, ele abre agora
+                if (!isOpen) {
+                    item.classList.add('active');
+                    content.style.maxHeight = content.scrollHeight + "px";
+                }
             });
         });
 
+        // ==========================================
+        // CARROSSEL INFINITO DE PRINTS (7 imagens)
+        // ==========================================
+        function initProofCarousel() {
+            const track = document.getElementById('carouselTrack');
+            const dotsWrap = document.getElementById('carouselDots');
+            const prevBtn = document.getElementById('carouselPrev');
+            const nextBtn = document.getElementById('carouselNext');
+            if (!track) return;
+
+            const slides = Array.prototype.slice.call(track.children);
+            const total = slides.length;
+            let index = 0;
+            let autoTimer = null;
+
+            slides.forEach((_, i) => {
+                const dot = document.createElement('button');
+                dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+                dot.setAttribute('aria-label', 'Ir para print ' + (i + 1));
+                dot.addEventListener('click', () => goTo(i));
+                dotsWrap.appendChild(dot);
+            });
+            const dots = Array.prototype.slice.call(dotsWrap.children);
+
+            function render() {
+                track.style.transform = 'translateX(-' + (index * 100) + '%)';
+                dots.forEach((d, i) => d.classList.toggle('active', i === index));
+            }
+
+            // Carrossel infinito: ao passar da última imagem, retorna suavemente à primeira
+            function goTo(i) {
+                index = (i + total) % total;
+                render();
+                resetAuto();
+            }
+            function next() { goTo(index + 1); }
+            function prev() { goTo(index - 1); }
+
+            nextBtn.addEventListener('click', next);
+            prevBtn.addEventListener('click', prev);
+
+            // Suporte a swipe (touch) no celular
+            let startX = 0, isSwiping = false;
+            const viewport = document.getElementById('carouselViewport');
+            viewport.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; isSwiping = true; }, { passive: true });
+            viewport.addEventListener('touchend', (e) => {
+                if (!isSwiping) return;
+                const diff = e.changedTouches[0].clientX - startX;
+                if (diff > 40) prev();
+                else if (diff < -40) next();
+                isSwiping = false;
+            });
+
+            function resetAuto() {
+                if (autoTimer) clearInterval(autoTimer);
+                autoTimer = setInterval(next, 4500);
+            }
+
+            render();
+            resetAuto();
+        }
+
+        // ==========================================
+        // "VER MAIS COMENTÁRIOS" — expansão suave
+        // com fechamento automático em 15s
+        // ==========================================
+        function initTestimonialsToggle() {
+            const extra = document.getElementById('testimonialsExtra');
+            const btn = document.getElementById('testimonialsToggleBtn');
+            const label = document.getElementById('testimonialsToggleLabel');
+            const icon = document.getElementById('testimonialsToggleIcon');
+            if (!extra || !btn) return;
+
+            const AUTO_COLLAPSE_MS = 15000;
+            let collapseTimer = null;
+            let isOpen = false;
+
+            function expand() {
+                isOpen = true;
+                btn.classList.add('is-open');
+                btn.setAttribute('aria-expanded', 'true');
+                label.textContent = 'Ver menos comentários';
+                extra.classList.add('expanded');
+                // altura real do conteúdo para permitir a transição suave
+                extra.style.maxHeight = extra.scrollHeight + 'px';
+                restartAutoCollapse();
+            }
+
+            function collapse() {
+                isOpen = false;
+                btn.classList.remove('is-open');
+                btn.setAttribute('aria-expanded', 'false');
+                label.textContent = 'Ver mais comentários';
+                extra.style.maxHeight = '0px';
+                extra.classList.remove('expanded');
+                clearAutoCollapse();
+            }
+
+            function restartAutoCollapse() {
+                clearAutoCollapse();
+                collapseTimer = setTimeout(collapse, AUTO_COLLAPSE_MS);
+            }
+
+            function clearAutoCollapse() {
+                if (collapseTimer) {
+                    clearTimeout(collapseTimer);
+                    collapseTimer = null;
+                }
+            }
+
+            btn.addEventListener('click', () => {
+                if (isOpen) {
+                    collapse();
+                } else {
+                    expand();
+                }
+            });
+
+            // Reajusta a altura máxima se a janela for redimensionada
+            // enquanto a lista está aberta (evita corte do conteúdo)
+            window.addEventListener('resize', () => {
+                if (isOpen) {
+                    extra.style.maxHeight = extra.scrollHeight + 'px';
+                }
+            });
+        }
+
         // INIT
-        window.addEventListener('scroll', () => { revealOnScroll(); handleStickyVisibility(); });
-        window.addEventListener('load', () => { initCountdown(); revealOnScroll(); });
+        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('load', () => {
+            revealOnScroll();
+            initProofCarousel();
+            initTestimonialsToggle();
+        });
     </script>
 </body>
 </html>
